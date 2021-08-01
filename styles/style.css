@@ -1,0 +1,127 @@
+:root {
+    --offcanvas-width: 240px;
+    --topNavbarHeight: 57px;
+}
+
+.navbar {
+    padding-right: 0px !important;
+}
+
+.sidebar-nav {
+    width: var(--offcanvas-width);
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-link .right-icon {
+    display: inline-flex;
+    transition: all ease 0.2s;
+}
+
+.sidebar-link[aria-expanded="true"] .right-icon {
+    transform: rotate(90deg);
+}
+
+a, span{    
+        color: rgb(58, 58, 58);
+        text-decoration: none;    
+}
+nav>ul>li>a:hover span {
+    color: #317cec;  
+    transition: 0.20s; 
+    background: #F4F6F9; 
+}
+
+nav>ul>li:hover, nav>ul>li[aria-expanded="true"] {
+    background: #F4F6F9;
+    transition: 0.2s;   
+}
+
+nav>ul>li[aria-expanded="true"] span {
+    color: #317cec;  
+}
+
+
+nav>ul>li[aria-expanded="true"] div li a span {
+    color: rgb(58, 58, 58);
+}
+
+nav>ul>li[aria-expanded="true"] div li:hover a span {
+    color: #317cec;
+}
+
+nav div #thesis {
+    width: 240px;
+    color: #fff;
+}
+
+body {
+    padding-right: 0px !important;
+}
+
+main {
+    background: #eaeef3;
+}
+
+nav .page-title a{
+    float: left;
+    display:block;
+    background: #6673FC;
+    width: 240px;
+    padding: 9.5px 0px !important;
+    padding-left: 40px;
+    color: #fff;
+}
+
+main .page-header {
+    margin-top: 70px;
+}
+
+div .profile-pic img {
+    margin: 0px auto;
+    height: 130px;
+    width: 130px;
+    border: 2px solid #bec1c4;
+    padding: 3px;
+    margin-top: 1rem;
+}
+
+li #sidebar-pic img {
+    height: 95px !important;
+    width: 90px !important;
+    margin-top: 2rem;
+    margin: 0px auto;
+    padding: 5px;
+}
+
+div .card {
+    border-radius: 8px !important;
+    box-shadow: -8px 12px 18px 0 #d4d7df;
+}
+
+
+
+@media (min-width:992px) {
+    body {
+        overflow: auto !important;
+    }
+    .offcanvas-backdrop::before {
+        display: none;
+    }
+    .sidebar-nav {
+        transform: none;
+        visibility: visible !important;
+        top: var(--topNavbarHeight);
+        height: calc(100% - var(--topNavbarHeight));
+    }
+    .navbar-expand-lg {
+        padding: 0px;
+    }
+
+    main {
+        margin-left: var(--offcanvas-width);
+    }    
+}
