@@ -4,14 +4,13 @@ $showAlert = false;
 $showErrors = false;
 if($_SERVER["REQUEST_METHOD"] == "POST") {  
 	include 'partials/_dbconnect.php';
-
 	$username = $_POST['username']; 
 	$password = $_POST['password']; 
 	$cpassword = $_POST['cpassword']; 
 	// $exists = false;
 
 	// Check whether this username exists
-	$existSql = "SELECT * FROM `users` WHERE username = '$username'";
+	$existSql = "SELECT * FROM `admin_user` WHERE username = '$username'";
 	$result = mysqli_query($conn, $existSql);
 	$numExistRows = mysqli_num_rows($result);
 	if ($numExistRows > 0) {
@@ -22,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	// $exists = false;
 		if ($password == $cpassword) {
 			$hash = password_hash($password, PASSWORD_DEFAULT);
-			$sql = "INSERT INTO `users` (`username`, `password`, `date`) VALUES('$username', '$hash', current_timestamp())";
+			$sql = "INSERT INTO `admin_user` (`username`, `password`, `date`) VALUES('$username', '$hash', current_timestamp())";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
 				$showAlert = true;
@@ -57,11 +56,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <body>
-	<!-- Header starts here -->
+    <!-- Header starts here -->
     <?php require 'partials/_nav.php' ?>
-	<!-- Header ends here -->
+    <!-- Header ends here -->
 
-	<!-- Alerts -->
+    <!-- Alerts -->
     <?php
 	if ($showAlert) {
 		echo '
@@ -80,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 	?>
 
-	
+
     <div class="container my-4 col-lg-4 col-md-8 col-12">
         <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
@@ -92,8 +91,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             </li>
         </ul>
 
-		<!-- Signup form starts here -->
-        <form action="/project/signup.php" method="post" class="bg-light p-3 rounded-3">
+        <!-- Signup form starts here -->
+        <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" class="bg-light p-3 rounded-3">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" maxlength="11" class="form-control" id="username" name="username"
@@ -110,12 +109,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <button type="submit" class="btn btn-primary">SignUp</button>
         </form>
-		<!-- Signup form ends here -->
+        <!-- Signup form ends here -->
     </div>
 
-	<!-- Footer starts here -->
+    <!-- Footer starts here -->
     <?php require 'partials/_footer.php'; ?>
-	<!-- Footer end here -->
+    <!-- Footer end here -->
 
 
     <!-- Optional JavaScript; choose one of the two! -->
