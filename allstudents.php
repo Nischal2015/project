@@ -134,16 +134,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                 <table id="student-list" class="table table-striped table-hover" style="width:100%">
                                     <colgroup>
                                         <col span="1" style="width: 12%;">
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 23%;">
-                                        <col span="1" style="width: 32%;">
-                                        <col span="1" style="width: 15%;">
-                                        <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 12%;">
+                                        <col span="1" style="width: 13%;">
                                     </colgroup>
                                     <thead>
                                         <tr>
                                             <th>Roll</th>
                                             <th>Name</th>
-                                            <th>Thesis Title</th>
+                                            <th>Department</th>
+                                            <th>Thesis</th>
                                             <th>Reg. Date</th>
                                             <th>Action</th>
                                         </tr>
@@ -163,6 +165,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <tr>
                                             <td>'. $row['student_roll'] .'</td>
                                             <td>'. $row['student_fname'] . ' ' . $row['student_lname'] . '</td>
+                                            <td>'. $row['student_dep'] .'</td>
                                             <td>'. $row['student_thesis'] .'</td>
                                             <td>'. $row['student_regdate']. '</td>
                                             <td>
@@ -172,7 +175,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <button type="button" class="delete btn btn-danger btn-sm" id=d'. $row['student_id'] .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
                                             </button>
                                             <button type="button" class="information btn btn-warning btn-sm" id='. $row['student_id'] .' title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
-                                            <i class="fa fa-info"></i>
+                                            <i class="fa fa-info-circle"></i>
                                             </button>
                                             </td>
                                             </tr>';
@@ -183,6 +186,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         <tr>
                                             <th>Roll</th>
                                             <th>Name</th>
+                                            <th>Department</th>
                                             <th>Thesis</th>
                                             <th>Reg. Date</th>
                                             <th>Action</th>

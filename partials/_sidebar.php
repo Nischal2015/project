@@ -6,7 +6,7 @@
             <ul class="navbar-nav side-link">
                 <li>
                     <div class="m-2" id="sidebar-pic">
-                        <img src="images/tu.png" alt="tu_image" class="img-fluid rounded-circle d-block">                        
+                        <img src="images/tu.png" alt="tu_image" class="img-fluid rounded-circle d-block">
                     </div>
                 </li>
                 <li class="nav-item main-link">
@@ -104,23 +104,34 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link ">
-                                    <span class="title">
-                                        Edit student
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="addstudent.php" class="nav-link ">
                                     <span class="title">
                                         Add student
                                     </span>
                                 </a>
                             </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="collapsed main-link" data-bs-toggle="collapse" data-bs-target="#department"
+                    aria-expanded="false" aria-controls="department" id="fou">
+                    <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#department" role="button"
+                        aria-expanded="false" aria-controls="department">
+                        <span class="pe-2"><i class="material-icons">
+                                business
+                            </i></span>
+                        <span>Departments</span>
+                        <span class="right-icon ms-auto"><i class="material-icons">
+                                chevron_right
+                            </i></span>
+                    </a>
+                    <div class="collapse sidebar-collapse ps-4" aria-labelledby="fou" data-bs-parent="#sidebar"
+                        id="department">
+                        <ul class="navbar-nav ps-4">
                             <li class="nav-item">
-                                <a href="#" class="nav-link ">
+                                <a href="alldepartments.php" class="nav-link ">
                                     <span class="title">
-                                        Edit student
+                                        All Departments
                                     </span>
                                 </a>
                             </li>
