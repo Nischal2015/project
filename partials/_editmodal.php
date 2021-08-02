@@ -8,30 +8,27 @@
             </div>
             <div class="modal-body">
                 <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
+                <input class="hidden" name="snoEdit" id="snoEdit" style="display: none;">
                     <div class="row">
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="fnameEdit" name="fnameEdit" placeholder="Firstname">
+                                <input type="text" class="form-control" id="fnameEdit" name="fnameEdit"
+                                    placeholder="Firstname">
                                 <label for="fnameEdit">Firstname</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="lnameEdit" name="lnameEdit" placeholder="Lastname">
+                                <input type="text" class="form-control" id="lnameEdit" name="lnameEdit"
+                                    placeholder="Lastname">
                                 <label for="lnameEdit">Lastname</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="rollEdit" name="rollEdit" placeholder="Roll No">
+                                <input type="text" class="form-control" id="rollEdit" name="rollEdit"
+                                    placeholder="Roll No">
                                 <label for="rollEdit">Roll No</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 pt-4">
-                            <div class="form-floating mb-2">
-                                <input type="email" class="form-control" id="emailidEdit" name="emailidEdit"
-                                    placeholder="Email">
-                                <label for="emailidEdit">Email</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
@@ -52,9 +49,16 @@
                                 <label for="regdateEdit">Registration Date</label>
                             </div>
                         </div>
-                        <div class="col-md-12 py-3">
+                        <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="thesisEdit" name="thesisEdit" placeholder="Thesis">
+                                <input type="text" class="form-control" id="yearEdit" name="yearEdit" placeholder="Thesis">
+                                <label for="InputRoll">Year</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 pt-4">
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control" id="thesisEdit" name="thesisEdit"
+                                    placeholder="Thesis">
                                 <label for="thesisEdit">Thesis Title</label>
                             </div>
                         </div>

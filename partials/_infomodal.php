@@ -9,14 +9,8 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-md-9">
-                            <?php
-                            $sql = "SELECT * FROM `students`";
-                            $result = mysqli_query($conn, $sql);
-                            while($row = mysqli_fetch_assoc($result)) {
-                                echo $row['student_fname']. "<br>";
-                            }                            
-                            ?>  
+                        <div class="table-responsive">
+                            
                         </div>
                     </div>
                 </div>
