@@ -175,7 +175,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             </button>
                                             <button type="button" class="delete btn btn-danger btn-sm" id=d'. $row['student_id'] .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
                                             </button>
-                                            <button type="button" class="information btn btn-warning btn-sm" id='. $row['student_id'] .' title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
+                                            <a role="button" href="studentdetails.php?id='. $row['student_id'] .'" class="information btn btn-warning btn-sm" id='. $row['student_id'] .' title="Details">	
                                             <i class="fa fa-info-circle"></i>
                                             </button>
                                             </td>

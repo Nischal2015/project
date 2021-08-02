@@ -56,12 +56,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span class="pe-2"><i class="material-icons d-flex justify-content-center">
                                             people
                                         </i></span>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <strong class="card-title">Total Students</strong>
                                     <p>
                                         <?php
@@ -80,14 +80,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span class="pe-2"><i class="material-icons d-flex justify-content-center">
                                             supervisor_account
                                         </i></span>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <strong class="card-title">Total Professors</strong>
-                                    <p>260</p>
+                                    <p>
+                                        <?php
+                                        $sql = "SELECT `external_id` FROM `ext_teacher`";
+                                        $result = mysqli_query($conn, $sql);
+                                        echo mysqli_num_rows($result);
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -98,13 +104,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span class="pe-2"><i class="material-icons d-flex justify-content-center">
-                                            people
+                                            business
                                         </i></span>
                                 </div>
-                                <div class="col-md-8">
-                                    <strong class="card-title">Total Dep.</strong>
+                                <div class="col-md-9">
+                                    <strong class="card-title">Total Departments</strong>
                                     <p>
                                         <?php
                                         $sql = "SELECT `dep_id` from `department`";
@@ -122,12 +128,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span class="pe-2"><i class="material-icons d-flex justify-content-center">
                                             people
                                         </i></span>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <strong class="card-title">#Title 3</strong>
                                     <p>78945</p>
                                 </div>
