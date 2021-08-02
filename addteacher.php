@@ -23,6 +23,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Welcome - <?php echo $_SESSION['username'] ?></title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
@@ -107,7 +108,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <strong>Add External</strong>
                         </div>
                         <div class="card-body">
-                            <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
+                            <form action="addteacher.php" method="post">
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
