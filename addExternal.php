@@ -236,7 +236,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             element_id = e.currentTarget.id;
 
             if (confirm("Are you sure you want to delete the record?")) {
-                window.location = `./addteacher.php?delete=${element_id}`;
+                window.location = `./addExternal.php?delete=${element_id}`;
             }
         })
     })
