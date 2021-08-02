@@ -1,5 +1,6 @@
 <?php
 $delete = false;
+$update = false;
 
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
@@ -43,6 +44,26 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         $result = mysqli_query($conn, $sql);
         $delete = true;
     }
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {        
+          // Update the record
+            $student_id = $_POST['snoEdit'];
+            $fname = $_POST['fnameEdit'];
+            $lname = $_POST['lnameEdit'];
+            $roll = $_POST['rollEdit'];
+            $gender = $_POST['genderEdit'];
+            $regdate = $_POST['regdateEdit'];
+            $year = $_POST['yearEdit'];
+            $thesis = $_POST['thesisEdit'];
+      
+          $sql = "UPDATE `students` SET `student_fname` = '$fname', `student_lname` = '$lname', `student_roll` = '$roll', `student_gender` = '$gender', `student_regdate` = '$regdate', `student_year` = '$year', `student_thesis` = '$thesis' WHERE `student_id` = $student_id";
+          $result = mysqli_query($conn, $sql);
+
+          if ($result) {
+            $update = true;
+          }
+        }
+       
     ?>
 
     <main class="p-2 mt-1" style="min-height: 800px">
@@ -50,15 +71,28 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             <?php            
             if($delete) {
                 echo '            
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Success!</strong> Record has been deleted successfully.
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
+                <div class="row">
+                <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Record has been deleted successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                </div>
                 </div>';
             }
+
+            if ($update) {
+                echo "
+                <div class='row'>
+                <div class='col-md-12'>
+                <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                      <strong>Success!</strong> Your student has been udpated succesfully.
+                      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                      </div>
+                      </div>
+                      </div>";
+        
+              }
             ?>
             <div class="row">
                 <div class="col-md-6 py-3">
@@ -70,11 +104,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         <ol class="breadcrumb bg-light p-2 px-3 rounded-pill">
                             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                             <li class="breadcrumb-item">Students</li>
-                            <li class="breadcrumb-item active" aria-current="page">All Students</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="allstudents.php">All
+                                    Students</a></li>
                         </ol>
                     </nav>
                 </div>
             </div>
+        </div>
+        <div class="container my-4 col-lg-4 col-md-8 col-12">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a href="/project/allstudents.php?year=2075" role="button" class="nav-link">2075</a>
+                    <a href="/project/allstudents.php?year=2076" role="button" class="nav-link">2076</a>
+                    <a href="/project/allstudents.php?year=2077" role="button" class="nav-link">2077</a>
+                    <a href="/project/allstudents.php?year=2078" role="button" class="nav-link">2078</a>
+                </div>
+            </nav>
         </div>
 
         <div class="container-fluid">
@@ -88,36 +133,45 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <div class="table-responsive">
                                 <table id="student-list" class="table table-striped table-hover" style="width:100%">
                                     <colgroup>
-                                        <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 45%;">
-                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 12%;">
+                                        <col span="1" style="width: 23%;">
+                                        <col span="1" style="width: 32%;">
+                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 15%;">
                                     </colgroup>
                                     <thead>
                                         <tr>
+                                            <th>Roll</th>
                                             <th>Name</th>
                                             <th>Thesis Title</th>
-                                            <th>Registration date</th>
+                                            <th>Reg. Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                        $sql = "SELECT * from `students`";
+                                        if (isset($_GET['year'])) {
+                                            $year = $_GET['year'];
+                                            $sql = "SELECT * from `students` WHERE `student_year`='$year'";
+                                        }
+                                        else{
+                                            $sql = "SELECT * FROM `students`";
+                                        }
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_assoc($result)) {
                                             echo '
                                             <tr>
+                                            <td>'. $row['student_roll'] .'</td>
                                             <td>'. $row['student_fname'] . ' ' . $row['student_lname'] . '</td>
                                             <td>'. $row['student_thesis'] .'</td>
                                             <td>'. $row['student_regdate']. '</td>
                                             <td>
-                                            <button type="button" class="edit btn btn-primary btn-sm" id="'. $row['student_id'] .'"  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
+                                            <button type="button" class="edit btn btn-primary btn-sm" id=e'. $row['student_id'] .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
                                             <i class="fa fa-pencil"></i>
                                             </button>
-                                            <button type="button" class="delete btn btn-danger btn-sm" id="'. $row['student_id'] .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
+                                            <button type="button" class="delete btn btn-danger btn-sm" id=d'. $row['student_id'] .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
                                             </button>
-                                            <button type="button" class="information btn btn-warning btn-sm" id="'. $row['student_id'] .'" title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
+                                            <button type="button" class="information btn btn-warning btn-sm" id='. $row['student_id'] .' title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
                                             <i class="fa fa-info"></i>
                                             </button>
                                             </td>
@@ -127,9 +181,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <th>Roll</th>
                                             <th>Name</th>
                                             <th>Thesis</th>
-                                            <th>Registration date</th>
+                                            <th>Reg. Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -166,34 +221,46 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     </script>
 
     <script>
-        infos = document.getElementsByClassName('information');
-        Array.from(infos).forEach((element) => {
-            element.addEventListener("click", (e) => {
-                tr = e.currentTarget.parentNode.parentNode;
-                console.log(tr);
-                name = tr.getElementsByTagName("td")[0].innerText;
-            })
+    infos = document.getElementsByClassName('information');
+    Array.from(infos).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            tr = e.currentTarget.parentNode.parentNode;
+            console.log(tr);
+            name = tr.getElementsByTagName("td")[0].innerText;
         })
+    })
 
-        deletes = document.getElementsByClassName('delete');
-        Array.from(deletes).forEach((element) => {
-            element.addEventListener("click", (e) => {
-                element_id = e.currentTarget.id;
-
-                if(confirm("Are you sure you want to delete the record?")) {
-                    window.location = `./allstudents.php?delete=${element_id}`;
-                }
-            })
+    deletes = document.getElementsByClassName('delete');
+    Array.from(deletes).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            element_id = e.currentTarget.id.substr(1,);
+            console.log(element_id);
+            if (confirm("Are you sure you want to delete the record?")) {
+                window.location = `./allstudents.php?delete=${element_id}`;
+            }
         })
+    })
 
-        edits = document.getElementsByClassName('edit');
-        Array.from(edits).forEach((element) => {
-            element.addEventListener("click", (e) => {
-                tr = e.currentTarget.parentNode.parentNode;
-                element_id = e.currentTarget.id;
-            })
+    edits = document.getElementsByClassName('edit');
+    Array.from(edits).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            element_id = e.currentTarget.id.substr(1,);
+            tr = e.currentTarget.parentNode.parentNode;
+            item = tr.getElementsByTagName("td");
+            roll = item[0].innerText;
+            fname = item[1].innerText.split(" ")[0];
+            lname = item[1].innerText.split(" ")[1];
+            thesis = item[2].innerText;
+            regdate = item[3].innerText;
+            rollEdit.value = roll;
+            fnameEdit.value = fname;
+            lnameEdit.value = lname;
+            thesisEdit.value = thesis;
+            regdateEdit.value = regdate;
+            snoEdit.value = element_id;
+            console.log(element_id);
         })
-
+    })
     </script>
 
 

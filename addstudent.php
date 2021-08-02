@@ -48,11 +48,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 $fname = $_POST['fname'];
                 $lname = $_POST['lname'];
                 $roll = $_POST['roll'];
-                $emailid = $_POST['emailid'];
                 $gender = $_POST['gender'];
                 $regdate = $_POST['regdate'];
+                $year = $_POST['year'];
                 $thesis = $_POST['thesis'];
-                $sql = "INSERT INTO `students` (`student_fname`, `student_lname`, `student_roll`, `student_email`, `student_gender`, `student_regdate`, `student_thesis`) VALUES ('$fname', '$lname', '$roll', '$emailid', '$gender', '$regdate', '$thesis')";
+                $sql = "INSERT INTO `students` (`student_fname`, `student_lname`, `student_roll`, `student_gender`, `student_regdate`, `student_year`, `student_thesis`) VALUES ('$fname', '$lname', '$roll', '$gender', '$regdate', '$year', '$thesis')";
                 $result = mysqli_query($conn, $sql);
                 $showAlert = true;
             }

@@ -20,12 +20,6 @@
         </div>
         <div class="col-md-6 pt-4">
             <div class="form-floating mb-2">
-                <input type="email" class="form-control" id="emailid" name="emailid" placeholder="Email">
-                <label for="InputEmail">Email</label>
-            </div>
-        </div>
-        <div class="col-md-6 pt-4">
-            <div class="form-floating mb-2">
                 <select name="gender" class="form-select" aria-label="Default select example">
                     <option selected>Choose..</option>
                     <option value="Male">Male</option>
@@ -41,7 +35,13 @@
                 <label for="InputDate">Registration Date</label>
             </div>
         </div>
-        <div class="col-md-12 py-3">
+        <div class="col-md-6 pt-4">
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" id="year" name="year" placeholder="Thesis">
+                <label for="InputRoll">Year</label>
+            </div>
+        </div>
+        <div class="col-md-12 pt-4">
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="thesis" name="thesis" placeholder="Thesis">
                 <label for="InputRoll">Thesis Title</label>
