@@ -104,8 +104,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         </i></span>
                                 </div>
                                 <div class="col-md-8">
-                                    <strong class="card-title">#Title 3</strong>
-                                    <p>78945</p>
+                                    <strong class="card-title">Total Dep.</strong>
+                                    <p>
+                                        <?php
+                                        $sql = "SELECT `dep_id` from `department`";
+                                        $result = mysqli_query($conn, $sql);
+                                        echo mysqli_num_rows($result);
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -221,10 +227,44 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class="col-md-4">
                     <div class="card mb-4 mt-1">
                         <div class="card-header py-3 pb-2">
-                            <strong>Professors List</strong>
+                            <strong>Department List</strong>
                         </div>
                         <div class="card-body">
-
+                            <div class="table-responsive">
+                                <table id="department-list" class="table table-striped table-hover" style="width:100%">
+                                    <colgroup>
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 80%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Dep. Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $sql = "SELECT * FROM `department`";                                        
+                                        $result = mysqli_query($conn, $sql);
+                                        $sno = 1;
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '
+                                        <tr>
+                                            <td>'. $sno .'</td>
+                                            <td>'. $row['dep_name'] .'</td>
+                                        </tr>';
+                                        $sno += 1;
+                                        }
+                                        ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Dep. Name</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -269,9 +309,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
 
     <script>
-    $(document).ready(function() {
+    $(document).ready(function() {      
         $('#student-marks').DataTable();
-    });
+    }); 
     </script>
 
 
