@@ -24,10 +24,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Welcome - <?php echo $_SESSION['username'] ?></title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Welcome - <?php echo $_SESSION['username'] ?></title>
 </head>
 
 <body>
@@ -52,11 +52,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             $lname = $_POST['lnameEdit'];
             $roll = $_POST['rollEdit'];
             $gender = $_POST['genderEdit'];
+            $dep = $_POST['departmentEdit'];
             $regdate = $_POST['regdateEdit'];
             $year = $_POST['yearEdit'];
             $thesis = $_POST['thesisEdit'];
       
-          $sql = "UPDATE `students` SET `student_fname` = '$fname', `student_lname` = '$lname', `student_roll` = '$roll', `student_gender` = '$gender', `student_regdate` = '$regdate', `student_year` = '$year', `student_thesis` = '$thesis' WHERE `student_id` = $student_id";
+          $sql = "UPDATE `students` SET `student_fname` = '$fname', `student_lname` = '$lname', `student_roll` = '$roll', `student_gender` = '$gender', `student_regdate` = '$regdate', `student_year` = '$year', `student_dep` = '$dep', `student_thesis` = '$thesis' WHERE `student_id` = $student_id";
           $result = mysqli_query($conn, $sql);
 
           if ($result) {
@@ -237,7 +238,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     deletes = document.getElementsByClassName('delete');
     Array.from(deletes).forEach((element) => {
         element.addEventListener("click", (e) => {
-            element_id = e.currentTarget.id.substr(1,);
+            element_id = e.currentTarget.id.substr(1, );
             console.log(element_id);
             if (confirm("Are you sure you want to delete the record?")) {
                 window.location = `./allstudents.php?delete=${element_id}`;
@@ -248,21 +249,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     edits = document.getElementsByClassName('edit');
     Array.from(edits).forEach((element) => {
         element.addEventListener("click", (e) => {
-            element_id = e.currentTarget.id.substr(1,);
+            element_id = e.currentTarget.id.substr(1, );
             tr = e.currentTarget.parentNode.parentNode;
             item = tr.getElementsByTagName("td");
             roll = item[0].innerText;
             fname = item[1].innerText.split(" ")[0];
             lname = item[1].innerText.split(" ")[1];
-            thesis = item[2].innerText;
-            regdate = item[3].innerText;
+            department = item[2].innerText;
+            thesis = item[3].innerText;
+            regdate = item[4].innerText;
             rollEdit.value = roll;
             fnameEdit.value = fname;
             lnameEdit.value = lname;
             thesisEdit.value = thesis;
             regdateEdit.value = regdate;
+            document.getElementById("departmentEdit").value = department;
             snoEdit.value = element_id;
-            console.log(element_id);
         })
     })
     </script>

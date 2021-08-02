@@ -29,6 +29,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <header>
         <?php include 'partials/_nav2.php'; ?>
         <?php include 'partials/_sidebar.php'; ?>
+        <?php include 'partials/_dbconnect.php'; ?>
     </header>
 
     <main class="p-2 mt-1" style="min-height: 800px">
@@ -55,47 +56,33 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class="col-md-12">
                     <div class="card mb-4 mt-1">
                         <div class="card-header py-3 pb-2">
-                            <strong>All Students</strong>
+                            <strong>Department List</strong>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="student-list" class="table table-striped table-hover" style="width:100%">
+                                <table id="department-list" class="table table-striped table-hover" style="width:100%">
                                     <colgroup>
-                                        <col span="1" style="width: 12%;">
+                                        <col span="1" style="width: 40%;">
+                                        <col span="1" style="width: 40%;">
                                         <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 23%;">
-                                        <col span="1" style="width: 12%;">
-                                        <col span="1" style="width: 13%;">
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th>Roll</th>
-                                            <th>Name</th>
-                                            <th>Department</th>
-                                            <th>Thesis</th>
-                                            <th>Reg. Date</th>
-                                            <th>Action</th>
+                                            <th>S.N.</th>
+                                            <th>Dept. Name</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
-                                        if (isset($_GET['year'])) {
-                                            $year = $_GET['year'];
-                                            $sql = "SELECT * from `students` WHERE `student_year`='$year'";
-                                        }
-                                        else{
-                                            $sql = "SELECT * FROM `students`";
-                                        }
+                                        <?php                                         
+                                        $sql = "SELECT * FROM `department`";                                        
                                         $result = mysqli_query($conn, $sql);
+                                        $sno = 1;
                                         while($row = mysqli_fetch_assoc($result)) {
                                             echo '
                                             <tr>
-                                            <td>'. $row['student_roll'] .'</td>
-                                            <td>'. $row['student_fname'] . ' ' . $row['student_lname'] . '</td>
-                                            <td>'. $row['student_dep'] .'</td>
-                                            <td>'. $row['student_thesis'] .'</td>
-                                            <td>'. $row['student_regdate']. '</td>
+                                            <td>'. $sno .'</td>
+                                            <td>'. $row['dep_name'] . '</td>
                                             <td>
                                             <button type="button" class="edit btn btn-primary btn-sm" id=e'. $row['student_id'] .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
                                             <i class="fa fa-pencil"></i>
@@ -107,17 +94,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             </button>
                                             </td>
                                             </tr>';
+                                            $sno += 1;
                                         }
                                         ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>Roll</th>
-                                            <th>Name</th>
-                                            <th>Department</th>
-                                            <th>Thesis</th>
-                                            <th>Reg. Date</th>
-                                            <th>Action</th>
+                                            <th>S.N.</th>
+                                            <th>Dept. Name</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </tfoot>
                                 </table>

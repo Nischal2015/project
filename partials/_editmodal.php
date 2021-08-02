@@ -8,22 +8,26 @@
             </div>
             <div class="modal-body">
                 <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
+                    <input class="hidden" name="snoEdit" id="snoEdit" style="display: none;">
                     <div class="row">
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="fnameEdit" name="fnameEdit" placeholder="Firstname">
+                                <input type="text" class="form-control" id="fnameEdit" name="fnameEdit"
+                                    placeholder="Firstname">
                                 <label for="InputFirstname">Firstname</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="lnameEdit" name="lnameEdit" placeholder="Lastname">
+                                <input type="text" class="form-control" id="lnameEdit" name="lnameEdit"
+                                    placeholder="Lastname">
                                 <label for="InputLastname">Lastname</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="rollEdit" name="rollEdit" placeholder="Roll No">
+                                <input type="text" class="form-control" id="rollEdit" name="rollEdit"
+                                    placeholder="Roll No">
                                 <label for="InputRoll">Roll No</label>
                             </div>
                         </div>
@@ -40,29 +44,32 @@
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <select name="departmentEdit" class="form-select" aria-label="Default select example">
+                                <select id="departmentEdit" name="departmentEdit" class="form-select"
+                                    aria-label="Default select example">
                                     <option selected>Choose..</option>
                                     <?php
-                    $sql = "SELECT * FROM `department`";
-                    $result = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $field = $row['dep_name'];
-                        echo '<option value=". $field .">'. $field .'</option>';   
-                    }
-                    ?>
+                                    $sql = "SELECT * FROM `department`";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $field = $row['dep_name'];
+                                        echo '<option value="'. $field . '">'. $field .'</option>';   
+                                    }
+                                    ?>
                                 </select>
                                 <label for="department">Department</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="yearEdit" name="yearEdit" placeholder="Thesis">
+                                <input type="text" class="form-control" id="yearEdit" name="yearEdit"
+                                    placeholder="Thesis">
                                 <label for="InputRoll">Year</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="thesisEdit" name="thesisEdit" placeholder="Thesis">
+                                <input type="text" class="form-control" id="thesisEdit" name="thesisEdit"
+                                    placeholder="Thesis">
                                 <label for="InputRoll">Thesis Title</label>
                             </div>
                         </div>

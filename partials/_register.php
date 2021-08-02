@@ -39,7 +39,7 @@
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result)) {
                         $field = $row['dep_name'];
-                        echo '<option value=". $field .">'. $field .'</option>';   
+                        echo '<option value="'. $field .'">'. $field .'</option>';   
                     }
                     ?>                 
                 </select>
