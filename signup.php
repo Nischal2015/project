@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	// $exists = false;
 
 	// Check whether this username exists
-	$existSql = "SELECT * FROM `users` WHERE username = '$username'";
+	$existSql = "SELECT * FROM `admin_user` WHERE username = '$username'";
 	$result = mysqli_query($conn, $existSql);
 	$numExistRows = mysqli_num_rows($result);
 	if ($numExistRows > 0) {
@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	// $exists = false;
 		if ($password == $cpassword) {
 			$hash = password_hash($password, PASSWORD_DEFAULT);
-			$sql = "INSERT INTO `users` (`username`, `password`, `date`) VALUES('$username', '$hash', current_timestamp())";
+			$sql = "INSERT INTO `admin_user` (`username`, `password`, `date`) VALUES('$username', '$hash', current_timestamp())";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
 				$showAlert = true;
