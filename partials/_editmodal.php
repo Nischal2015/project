@@ -33,13 +33,6 @@
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
-                                <input type="email" class="form-control" id="emailidEdit" name="emailidEdit"
-                                    placeholder="Email">
-                                <label for="emailidEdit">Email</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 pt-4">
-                            <div class="form-floating mb-2">
                                 <select name="genderEdit" class="form-select" aria-label="Default select example">
                                     <option selected>Choose..</option>
                                     <option value="Male">Male</option>

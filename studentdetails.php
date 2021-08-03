@@ -34,15 +34,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <main class="p-2 mt-1" style="min-height: 800px">
         <?php
             if($_SERVER['REQUEST_METHOD']=='POST') {
-               if(!empty($_POST['checklist'])) {
+               if(!empty($_POST['committee'])) {
                    $student_id = $_GET['id'];
-                   foreach($_POST['checklist'] as $selected) {
+                   foreach($_POST['committee'] as $selected) {
                        $sql= "INSERT INTO `teacher_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
                        $result = mysqli_query($conn, $sql);
                    }
-                   
+                   echo "sucess";
                }
-               echo "sucess";
+               
             }
             ?>
         <div class="container-fluid page-header">
@@ -109,8 +109,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <th>What did</th>
                                         </tr>
                                     </thead>
-                                    <tbody>                                        
-                                    <?php
+                                    <tbody>
+                                        <?php
                                     $student_id = $_GET['id'];
                                     $sql = "SELECT teacher_post, teacher_fname, teacher_mname, teacher_lname 
                                     FROM teacher t
@@ -125,7 +125,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         <tr>
                                         <td>'.$sno.'</td>
                                         <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
-                                        <td><button class="btn btn-primary">Add</button></td>
+                                        <td><button class="btn btn-primary">&plus;</button></td>
                                         <td>not given</td>
                                         </tr>
                                         ';
@@ -139,20 +139,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <th>Committee Member</th>
                                             <th>Actions</th>
                                             <th>What did</th>
-                                            
                                         </tr>
                                     </tfoot>
                                 </table>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-
-        </div>
-        </div>
-        </div>
     </main>
 
     <?php include 'partials/_footer.php'; ?>
@@ -225,21 +221,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         <div class="container">
                             <div class="row row-cols-2">
                                 <?php
-                            $sql = "SELECT * FROM `teacher`";
-                            $result = mysqli_query($conn, $sql);
-                            while($row = mysqli_fetch_assoc($result)) {
-                                $id = $row['teacher_id'];
-                                $post = $row['teacher_post'];
-                                $fname = $row['teacher_fname'];
-                                $mname = $row['teacher_mname'];
-                                $lname = $row['teacher_lname'];
-                            echo '
-                            <div class="col">
-                                <label for='.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
-                                <input type="checkbox" name="checklist[]" id='.$id.' value='.$id.'>
-                            </div>';
-                            }
-                            ?>
+                                $sql = "SELECT * FROM `teacher`";
+                                $result = mysqli_query($conn, $sql);
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    $id = $row['teacher_id'];
+                                    $post = $row['teacher_post'];
+                                    $fname = $row['teacher_fname'];
+                                    $mname = $row['teacher_mname'];
+                                    $lname = $row['teacher_lname'];
+                                echo '
+                                <div class="col">
+                                    <label for='.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
+                                    <input type="checkbox" name="committee" id='.$id.'>
+                                </div>';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -254,19 +250,38 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
     <!-- External Modal -->
     <div class="modal fade" id="externalModal" tabindex="-1" aria-labelledby="externalModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="externalModalLabel">Add external</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row row-cols-2">
+                                <?php
+                                $sql = "SELECT * FROM `ext_teacher`";
+                                $result = mysqli_query($conn, $sql);
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    $id = $row['external_id'];
+                                    $fname = $row['external_fname'];
+                                    $lname = $row['external_lname'];
+                                echo '
+                                <div class="col">
+                                    <label for='.$id.'>'.$fname.' '.$lname.'</label>
+                                    <input type="radio" name="external[]" id='.$id.' value='.$id.'>
+                                </div>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
