@@ -29,6 +29,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <header>
         <?php include 'partials/_nav2.php'; ?>
         <?php include 'partials/_sidebar.php'; ?>
+        <?php include 'partials/_dbconnect.php'; ?>
     </header>
 
     <main class="p-2 mt-1" style="min-height: 800px">
@@ -51,29 +52,230 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
-                            <h5 class="card-title">#Title 1</h5>
-                            <p class="card-text">The contents of the required title are be kept here</p>
-                        </div>
-                    </div>
-
-                    <div class="card mb-4 mt-1">
-                        <div class="card-body">
-                            <h5 class="card-title">#Title 2</h5>
-                            <p class="card-text">The contents of the required title are be kept here</p>
-                        </div>
-                    </div>
-
-                    <div class="card mb-4 mt-1">
-                        <div class="card-body">
-                            <h5 class="card-title">#Title 3</h5>
-                            <p class="card-text">The contents of the required title are be kept here</p>
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <span class="pe-2"><i class="material-icons d-flex justify-content-center">
+                                            people
+                                        </i></span>
+                                </div>
+                                <div class="col-md-9">
+                                    <strong class="card-title">Total Students</strong>
+                                    <p>
+                                        <?php
+                                        $sql = "SELECT `student_id` from `students`";
+                                        $result = mysqli_query($conn, $sql);
+                                        echo mysqli_num_rows($result);
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8 profile-content">
+
+                <div class="col-md-3">
+                    <div class="card mb-4 mt-1">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <span class="pe-2"><i class="material-icons d-flex justify-content-center">
+                                            supervisor_account
+                                        </i></span>
+                                </div>
+                                <div class="col-md-9">
+                                    <strong class="card-title">Total Teachers</strong>
+                                    <p>
+                                        <?php
+                                        $sql = "SELECT `teacher_id` FROM `teacher`";
+                                        $result = mysqli_query($conn, $sql);
+                                        echo mysqli_num_rows($result);
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card mb-4 mt-1">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <span class="pe-2"><i class="material-icons d-flex justify-content-center">
+                                            business
+                                        </i></span>
+                                </div>
+                                <div class="col-md-9">
+                                    <strong class="card-title">Total Departments</strong>
+                                    <p>
+                                        <?php
+                                        $sql = "SELECT `dep_id` from `department`";
+                                        $result = mysqli_query($conn, $sql);
+                                        echo mysqli_num_rows($result);
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card mb-4 mt-1">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <span class="pe-2"><i class="material-icons d-flex justify-content-center">
+                                            people
+                                        </i></span>
+                                </div>
+                                <div class="col-md-9">
+                                    <strong class="card-title">#Title 3</strong>
+                                    <p>78945</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-4 mt-1">
+                        <div class="card-header py-3 pb-2">
+                            <strong>Student Marks</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="student-marks" class="table table-striped table-hover" style="width:100%">
+                                    <colgroup>
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 35%;">
+                                        <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 15%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>Roll No.</th>
+                                            <th>Name</th>
+                                            <th>Internal</th>
+                                            <th>External</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>075BCT999</td>
+                                            <td>Lorem, ipsum dolor.</td>
+                                            <td>12</td>
+                                            <td>48</td>
+                                            <td>60</td>
+                                        </tr>
+                                        <tr>
+                                            <td>075BCT174</td>
+                                            <td>Lorem, ipsum dolor.</td>
+                                            <td>96</td>
+                                            <td>78</td>
+                                            <td>174</td>
+                                        </tr>
+                                        <tr>
+                                            <td>075BCT785</td>
+                                            <td>Lorem, ipsum.</td>
+                                            <td>45</td>
+                                            <td>12</td>
+                                            <td>57</td>
+                                        </tr>
+                                        <tr>
+                                            <td>075BCT785</td>
+                                            <td>Lorem, ipsum.</td>
+                                            <td>45</td>
+                                            <td>12</td>
+                                            <td>57</td>
+                                        </tr>
+                                        <tr>
+                                            <td>075BCT785</td>
+                                            <td>Lorem, ipsum.</td>
+                                            <td>45</td>
+                                            <td>12</td>
+                                            <td>57</td>
+                                        </tr>
+                                        <tr>
+                                            <td>075BCT785</td>
+                                            <td>Lorem, ipsum.</td>
+                                            <td>45</td>
+                                            <td>12</td>
+                                            <td>57</td>
+                                        </tr>
+                                        <tr>
+                                            <td>075BCT785</td>
+                                            <td>Lorem, ipsum.</td>
+                                            <td>45</td>
+                                            <td>12</td>
+                                            <td>57</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Roll No.</th>
+                                            <th>Name</th>
+                                            <th>Internal</th>
+                                            <th>External</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 mt-1">
+                        <div class="card-header py-3 pb-2">
+                            <strong>Department List</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="department-list" class="table table-striped table-hover" style="width:100%">
+                                    <colgroup>
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 80%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Dep. Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $sql = "SELECT * FROM `department`";                                        
+                                        $result = mysqli_query($conn, $sql);
+                                        $sno = 1;
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '
+                                        <tr>
+                                            <td>'. $sno .'</td>
+                                            <td>'. $row['dep_name'] .'</td>
+                                        </tr>';
+                                        $sno += 1;
+                                        }
+                                        ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Dep. Name</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-8 profile-content">
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <h5 class="card-title">#Title 4</h5>
@@ -88,65 +290,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4 mt-1">
-                        <div class="card-header py-3 pb-2">
-                            <strong>Student Marks</strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="student-marks" class="table table-striped table-hover" style="width:100%">
-                                    <colgroup>
-                                        <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 45%;">
-                                        <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 15%;">
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Thesis Title</th>
-                                            <th>Registration date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Nischal Shakya</td>
-                                            <td>gogle</td>
-                                            <td>2075-05-06</td>
-                                            <td>delte this buton</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Genius shakuya</td>
-                                            <td>facebook</td>
-                                            <td>2075-05-08</td>
-                                            <td>hamro desh</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mark lauy</td>
-                                            <td>palu dog</td>
-                                            <td>2075-05-08</td>
-                                            <td>mathi</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Thesis</th>
-                                            <th>Registration date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </div> -->
+        </div>
+
+
         </div>
     </main>
 
@@ -168,14 +315,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
 
     <script>
-    $(document).ready(function() {
+    $(document).ready(function() {      
         $('#student-marks').DataTable();
-    });
+    }); 
     </script>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
     const labels = [
         'January',
@@ -212,7 +359,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         document.getElementById('myChart'),
         config
     );
-    </script>
+    </script> -->
 
 
 

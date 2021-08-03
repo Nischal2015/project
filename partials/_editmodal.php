@@ -1,4 +1,4 @@
-<!-- Information Modal -->
+<!-- Edit Information Modal -->
 <div class="modal fade" id="studentEditModal" aria-labelledby="studentEditModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -46,31 +46,49 @@
                                     <option value="Female">Female</option>
                                     <option value="Prefer not to answer">Prefer not to answer</option>
                                 </select>
-                                <label for="genderEdit">Gender</label>
+                                <label for="Gender">Gender</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-4">
+                            <div class="form-floating mb-2">
+                                <select id="departmentEdit" name="departmentEdit" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected>Choose..</option>
+                                    <?php
+                                    $sql = "SELECT * FROM `department`";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $field = $row['dep_name'];
+                                        echo '<option value="'. $field . '">'. $field .'</option>';   
+                                    }
+                                    ?>
+                                </select>
+                                <label for="department">Department</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-4">
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control" id="yearEdit" name="yearEdit"
+                                    placeholder="Thesis">
+                                <label for="InputRoll">Year</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-4">
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control" id="thesisEdit" name="thesisEdit"
+                                    placeholder="Thesis">
+                                <label for="InputRoll">Thesis Title</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
                                 <input type="date" class="form-control" id="regdateEdit" name="regdateEdit"
                                     placeholder="Registration Date">
-                                <label for="regdateEdit">Registration Date</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 py-3">
-                            <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="yearEdit" name="yearEdit" placeholder="Thesis">
-                                <label for="InputRoll">Year</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6 py-3">
-                            <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="thesisEdit" name="thesisEdit"
-                                    placeholder="Thesis">
-                                <label for="thesisEdit">Thesis Title</label>
+                                <label for="InputDate">Registration Date</label>
                             </div>
                         </div>
                         <div class="col-md-12 py-3">
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </div>
                 </form>
