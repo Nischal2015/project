@@ -65,14 +65,14 @@
                         id="external">
                         <ul class="navbar-nav ps-4">
                             <li class="nav-item">
-                                <a href="addteacher.php" class="nav-link ">
+                                <a href="addExternal.php" class="nav-link ">
                                     <span class="title">
                                         Add Professor
                                     </span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link ">
+                                <a href="committeeMarks.php" class="nav-link ">
                                     <span class="title">
                                         Edit Professor
                                     </span>
