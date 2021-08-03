@@ -8,27 +8,34 @@
             </div>
             <div class="modal-body">
                 <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
-                    <input class="hidden" name="snoEdit" id="snoEdit" style="display: none;">
+                <input class="hidden" name="snoEdit" id="snoEdit" style="display: none;">
                     <div class="row">
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
                                 <input type="text" class="form-control" id="fnameEdit" name="fnameEdit"
                                     placeholder="Firstname">
-                                <label for="InputFirstname">Firstname</label>
+                                <label for="fnameEdit">Firstname</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
                                 <input type="text" class="form-control" id="lnameEdit" name="lnameEdit"
                                     placeholder="Lastname">
-                                <label for="InputLastname">Lastname</label>
+                                <label for="lnameEdit">Lastname</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2">
                                 <input type="text" class="form-control" id="rollEdit" name="rollEdit"
                                     placeholder="Roll No">
-                                <label for="InputRoll">Roll No</label>
+                                <label for="rollEdit">Roll No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-4">
+                            <div class="form-floating mb-2">
+                                <input type="email" class="form-control" id="emailidEdit" name="emailidEdit"
+                                    placeholder="Email">
+                                <label for="emailidEdit">Email</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
