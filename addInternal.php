@@ -34,9 +34,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         <?php include 'partials/_dbconnect.php'; ?>
         <?php
     if (isset($_GET['delete'])) {
-        $external_id = $_GET['delete'];
-        echo $external_id;
-        $sql = "DELETE FROM `ext_teacher` WHERE `external_id` = '$external_id'";
+        $teacher_id = $_GET['delete'];
+        echo $teacher_id;
+        $sql = "DELETE FROM `teacher` WHERE `teacher_id` = '$teacher_id'";
         $result = mysqli_query($conn, $sql);
         $delete = true;
     }
@@ -48,10 +48,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             <?php
             $showAlert = false;
             if($_SERVER['REQUEST_METHOD']=='POST') {
-                $Etfname = $_POST['Etfname'];
-                $Etlname = $_POST['Etlname'];
-                if($Etfname != "" && $Etlname != ""){
-                    $sql = "INSERT INTO `ext_teacher` (`external_fname`, `external_lname`) VALUES ('$Etfname', '$Etlname')";
+                $tpost = $_POST['tpost'];
+                $tfname = $_POST['tfname'];
+                $tmname = $_POST['tmname'];
+                $tlname = $_POST['tlname'];
+                if($tfname != "" && $tlname != ""){
+                    $sql = "INSERT INTO `teacher` (`teacher_post`, `teacher_fname`, `teacher_mname`, `teacher_lname`) VALUES ('$tpost', '$tfname', '$tmname', '$tlname')";
                     $result = mysqli_query($conn, $sql);
                     $showAlert = true;
                 }
@@ -109,21 +111,41 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                         <div class="card-body">
 
-                            <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
-
-                            
-
+                            <form action="addInternal.php" method="post">
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <input type="text" class="form-control" id="Etfname" name="Etfname"
+                                            <select class="form-select" aria-label="Default select example" id="tpost" name="tpost">
+                                                <option selected value="">Designation</option>
+                                                <option value="Dr.">Dr.</option>
+                                                <option value="Mr.">Mr.</option>
+                                                <option value="Mrs.">Mrs.</option>
+                                            </select>
+                                            <!--<input type="text" class="form-control" id="Etpost" name="Etpost"
+                                                placeholder="Designation">
+                                            <label for="InputDesignation">Designation</label>-->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 pt-2">
+                                        <div class="form-floating mb-2">
+                                            <input type="text" class="form-control" id="tfname" name="tfname"
                                                 placeholder="Firstname">
                                             <label for="InputFirstname">Firstname</label>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <input type="text" class="form-control" id="Etlname" name="Etlname"
+                                            <input type="text" class="form-control" id="tmname" name="tmname"
+                                                placeholder="Middlename">
+                                            <label for="InputMiddlename">Middlename</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 pt-2">
+                                        <div class="form-floating mb-2">
+                                            <input type="text" class="form-control" id="tlname" name="tlname"
                                                 placeholder="Lastname">
                                             <label for="InputLastname">Lastname</label>
                                         </div>
@@ -149,7 +171,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="external-list" class="table table-striped table-hover" style="width:100%">
+                                <table id="internal-list" class="table table-striped table-hover" style="width:100%">
                                     <colgroup>
                                         <col span="1" style="width: 85%;">
                                         <col span="1" style="width: 15%;">
@@ -162,21 +184,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     </thead>
                                     <tbody>
                                         <?php 
-                                        $sql = "SELECT * from `ext_teacher`";
+                                        $sql = "SELECT * from `teacher`";
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_assoc($result)) {
                                             echo '
                                             <tr>
-                                            <td>'. $row['external_fname'] . ' ' . $row['external_lname'] . '</td>
+                                            <td>'. $row['teacher_post'] . ' '. $row['teacher_fname'] . ' '. $row['teacher_mname'] . ' ' . $row['teacher_lname'] . '</td>
                                             <td>
-                                            <!--<button type="button" class="edit btn btn-primary btn-sm" id="'. $row['external_id'] .'"  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
+                                            <!--<button type="button" class="edit btn btn-primary btn-sm" id="'. $row['teacher_id'] .'"  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
                                             <i class="fa fa-pencil"></i>
                                             </button>-->
 
-                                            <button type="button" class="delete btn btn-danger btn-sm" id="'. $row['external_id'] .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
+                                            <button type="button" class="delete btn btn-danger btn-sm" id="'. $row['teacher_id'] .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
                                             </button>
 
-                                            <!--<button type="button" class="information btn btn-warning btn-sm" id="'. $row['external_id'] .'" title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
+                                            <!--<button type="button" class="information btn btn-warning btn-sm" id="'. $row['teacher_id'] .'" title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
                                             <i class="fa fa-info"></i>
                                             </button>-->
 
@@ -220,7 +242,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 -->
     <script>
     $(document).ready(function() {
-        $('#external-list').DataTable();
+        $('#internal-list').DataTable();
     });
     </script>
 
@@ -241,8 +263,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
             if (confirm("Are you sure you want to delete the record?")) {
 
-                
-                window.location = `./addExternal.php?delete=${element_id}`;
+
+                window.location = `./addInternal.php?delete=${element_id}`;
 
             }
         })

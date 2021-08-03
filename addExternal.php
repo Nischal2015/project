@@ -115,9 +115,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <input type="text" class="form-control" id="Etpost" name="Etpost"
+                                            <select class="form-select" aria-label="Default select example" id="Etpost" name="Etpost">
+                                                <option selected value="">Designation</option>
+                                                <option value="Dr.">Dr.</option>
+                                                <option value="Mr.">Mr.</option>
+                                                <option value="Mrs.">Mrs.</option>
+                                            </select>
+                                            <!--<input type="text" class="form-control" id="Etpost" name="Etpost"
                                                 placeholder="Designation">
-                                            <label for="InputDesignation">Designation</label>
+                                            <label for="InputDesignation">Designation</label>-->
                                         </div>
                                     </div>
 
