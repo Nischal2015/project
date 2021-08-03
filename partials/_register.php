@@ -46,21 +46,13 @@
                 <label for="department">Department</label>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="col-md-6 py-3">
-=======
         <div class="col-md-6 pt-4">
->>>>>>> update2
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="year" name="year" placeholder="Thesis">
                 <label for="InputRoll">Year</label>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="col-md-6 py-3">
-=======
         <div class="col-md-6 pt-4">
->>>>>>> update2
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="thesis" name="thesis" placeholder="Thesis">
                 <label for="InputRoll">Thesis Title</label>

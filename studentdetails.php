@@ -37,7 +37,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                if(!empty($_POST['checklist'])) {
                    $student_id = $_GET['id'];
                    foreach($_POST['checklist'] as $selected) {
-                       $sql= "INSERT INTO `teacher_assigned` (`assigned_fname`, `assigned_lname`, `assigned_teacher_id`) SELECT student_fname, student_lname , (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
+                       $sql= "INSERT INTO `teacher_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
                        $result = mysqli_query($conn, $sql);
                    }
                    
@@ -78,7 +78,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         Committee &plus;</button>
                 </div>
                 <div class="col-md-6">
-                    <div class="card">
+                    <div class="card mb-4 mt-1">
                         <div class="card-header">
                             <strong>Supervisor</strong>
                         </div>
@@ -88,12 +88,62 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card">
+                    <div class="card mb-4 mt-1">
                         <div class="card-header">
-                            <strong>Add Supervisor</strong>
+                            <strong>Committees</strong>
                         </div>
                         <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="student-marks" class="table table-striped table-hover" style="width:100%">
+                                    <colgroup>
+                                        <col span="1" style="width: 5%;">
+                                        <col span="1" style="width: 50%;">
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 25%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Committee Member</th>
+                                            <th>Actions</th>
+                                            <th>What did</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                                        
+                                    <?php
+                                    $student_id = $_GET['id'];
+                                    $sql = "SELECT teacher_post, teacher_fname, teacher_mname, teacher_lname 
+                                    FROM teacher t
+                                    INNER JOIN teacher_assigned ta
+                                    ON t.teacher_id = ta.assigned_teacher_id
+                                    WHERE ta.assigned_s_id = '$student_id'";
 
+                                    $result = mysqli_query($conn, $sql);
+                                    $sno = 1;
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        echo'
+                                        <tr>
+                                        <td>'.$sno.'</td>
+                                        <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
+                                        <td><button class="btn btn-primary">Add</button></td>
+                                        <td>not given</td>
+                                        </tr>
+                                        ';
+                                        $sno += 1;
+                                    }
+                                    ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Committee Member</th>
+                                            <th>Actions</th>
+                                            <th>What did</th>
+                                            
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>                           
                         </div>
                     </div>
                 </div>
