@@ -99,10 +99,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mb-4 mt-1">
-                        <div class="col-md-7 d-flex justify-content-end text-muted">
-                            <strong>Milan shrestha</strong>
-                            <button class="btn btn-primary" type="button" id="button-addon1">Delete</button>
+                        <div class="card-header pb-1">
+                            <div class="col-md-7 d-flex justify-content-end text-muted">
+                                <strong>Milan shrestha</strong>
+                                <button class="btn btn-primary" type="button" id="button-addon1">Delete</button>
+                            </div>
                         </div>
+
                         <div class="card-body">
                             <div class="row">
                                 <table class="table table-striped">
@@ -135,31 +138,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <td>....</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">3</th>
+                                            <th scope="row">4</th>
                                             <td>Literature review</td>
                                             <td>....</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">3</th>
+                                            <th scope="row">5</th>
                                             <td>Understanding of thesis work and related theory</td>
                                             <td>....</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">3</th>
+                                            <th scope="row">6</th>
                                             <td>Answering to questions</td>
                                             <td>....</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">3</th>
+                                            <th scope="row">7</th>
                                             <td>Completeness of thesis work</td>
                                             <td>....</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">3</th>
+                                            <th scope="row">8</th>
                                             <td>Planning of organization of thesis work</td>
                                             <td>....</td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>
