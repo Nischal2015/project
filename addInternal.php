@@ -85,15 +85,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             ?>
             <div class="row">
                 <div class="col-md-6 py-3">
-                    <h4 class="text-muted fw-bold">Add External</h4>
+                    <h4 class="text-muted fw-bold">Add Internal</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end text-muted">
                     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
                         aria-label="breadcrumb">
                         <ol class="breadcrumb bg-light p-2 px-3 rounded-pill">
                             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                            <li class="breadcrumb-item">External</li>
-                            <li class="breadcrumb-item active" aria-current="page">Add External</li>
+                            <li class="breadcrumb-item">Teacher</li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Internal</li>
                         </ol>
                     </nav>
                 </div>
@@ -105,7 +105,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class="col-md-12">
                     <div class="card mb-4 mt-1">
                         <div class="card-header pb-2">
-                            <strong>Add External</strong>
+                            <strong>Add Internal</strong>
                         </div>
                         <div class="card-body">
 
@@ -145,7 +145,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class="col-md-12">
                     <div class="card mb-4 mt-1">
                         <div class="card-header py-3 pb-2">
-                            <strong>External Teachers: </strong>
+                            <strong>Internal Teachers: </strong>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
