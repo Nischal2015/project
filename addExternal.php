@@ -48,10 +48,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             <?php
             $showAlert = false;
             if($_SERVER['REQUEST_METHOD']=='POST') {
+                $Etpost = $_POST['Etpost'];
                 $Etfname = $_POST['Etfname'];
+                $Etmname = $_POST['Etmname'];
                 $Etlname = $_POST['Etlname'];
                 if($Etfname != "" && $Etlname != ""){
-                    $sql = "INSERT INTO `ext_teacher` (`external_fname`, `external_lname`) VALUES ('$Etfname', '$Etlname')";
+                    $sql = "INSERT INTO `ext_teacher` (`external_post`, `external_fname`, `external_mname`, `external_lname`) VALUES ('$Etpost', '$Etfname', '$Etmname', '$Etlname')";
                     $result = mysqli_query($conn, $sql);
                     $showAlert = true;
                 }
@@ -92,7 +94,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         aria-label="breadcrumb">
                         <ol class="breadcrumb bg-light p-2 px-3 rounded-pill">
                             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                            <li class="breadcrumb-item">External</li>
+                            <li class="breadcrumb-item">Teacher</li>
                             <li class="breadcrumb-item active" aria-current="page">Add External</li>
                         </ol>
                     </nav>
@@ -109,11 +111,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                         <div class="card-body">
 
-                            <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
-
-                            
-
+                            <form action="addExternal.php" method="post">
                                 <div class="row">
+                                    <div class="col-md-6 pt-2">
+                                        <div class="form-floating mb-2">
+                                            <input type="text" class="form-control" id="Etpost" name="Etpost"
+                                                placeholder="Designation">
+                                            <label for="InputDesignation">Designation</label>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
                                             <input type="text" class="form-control" id="Etfname" name="Etfname"
@@ -121,6 +128,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <label for="InputFirstname">Firstname</label>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6 pt-2">
+                                        <div class="form-floating mb-2">
+                                            <input type="text" class="form-control" id="Etmname" name="Etmname"
+                                                placeholder="Middlename">
+                                            <label for="InputMiddlename">Middlename</label>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
                                             <input type="text" class="form-control" id="Etlname" name="Etlname"
@@ -167,7 +183,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         while($row = mysqli_fetch_assoc($result)) {
                                             echo '
                                             <tr>
-                                            <td>'. $row['external_fname'] . ' ' . $row['external_lname'] . '</td>
+                                            <td>'. $row['external_post'] . ' '. $row['external_fname'] . ' '. $row['external_mname'] . ' ' . $row['external_lname'] . '</td>
                                             <td>
                                             <!--<button type="button" class="edit btn btn-primary btn-sm" id="'. $row['external_id'] .'"  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
                                             <i class="fa fa-pencil"></i>
@@ -241,7 +257,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
             if (confirm("Are you sure you want to delete the record?")) {
 
-                
+
                 window.location = `./addExternal.php?delete=${element_id}`;
 
             }
