@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 03, 2021 at 08:49 AM
+-- Generation Time: Aug 03, 2021 at 08:57 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -111,11 +111,9 @@ INSERT INTO `students` (`student_id`, `student_fname`, `student_lname`, `student
 (46, 'Milan', 'Shrestha', '075BCT050', 'Male', '2021-07-07', 2075, 'Science & Humanities', 'Dom Manipulation using jQuery', NULL),
 (47, 'Nitesh', 'Swarnakar', '076BCT058', 'Male', '2021-05-03', 2076, 'Electronics & Communi­cation', 'Understanding Blender objects', NULL),
 (48, 'Roshan', 'Subedi', '078BCT068', 'Male', '2021-08-01', 2078, 'Science & Humanities', 'How teachers are chosen in college', NULL),
-(50, 'Rita', 'Shah', '077BCD98', 'Female', '2021-08-10', 2077, 'Architecture', 'Arch', NULL),
 (51, 'Nabina', 'Thapa', '076ARC456', 'Female', '2020-06-02', 2076, 'Science & Humanities', 'Welfaring society', NULL),
 (52, 'Sita', 'Gautam', '078BCE159', 'Female', '2021-08-31', 2078, 'Civil', 'Building blocks', NULL),
-(53, 'Akash', 'Joshi', '075bct489', 'Male', '2021-08-23', 2075, 'Electrical', 'Testing the thesis', NULL),
-(54, 'Suresh', 'Magar', '078BCE554', 'Male', '2021-08-03', 2078, 'Electrical', 'Electrical resistance decrease', NULL);
+(53, 'Akash', 'Joshi', '075bct489', 'Male', '2021-08-23', 2075, 'Electrical', 'Testing the thesis', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,7 +237,7 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `teacher_assigned`
 --
 ALTER TABLE `teacher_assigned`
-  MODIFY `assigned_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `assigned_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -255,8 +253,8 @@ ALTER TABLE `students`
 -- Constraints for table `teacher_assigned`
 --
 ALTER TABLE `teacher_assigned`
-  ADD CONSTRAINT `student id foreign` FOREIGN KEY (`assigned_s_id`) REFERENCES `students` (`student_id`) ON DELETE SET NULL ON UPDATE SET NULL,
-  ADD CONSTRAINT `teacher id foreign` FOREIGN KEY (`assigned_teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+  ADD CONSTRAINT `student id foreign` FOREIGN KEY (`assigned_s_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher id foreign` FOREIGN KEY (`assigned_teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
