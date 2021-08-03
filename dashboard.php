@@ -56,12 +56,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span class="pe-2"><i class="material-icons d-flex justify-content-center">
                                             people
                                         </i></span>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <strong class="card-title">Total Students</strong>
                                     <p>
                                         <?php
@@ -80,14 +80,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span class="pe-2"><i class="material-icons d-flex justify-content-center">
                                             supervisor_account
                                         </i></span>
                                 </div>
-                                <div class="col-md-8">
-                                    <strong class="card-title">Total Professors</strong>
-                                    <p>260</p>
+                                <div class="col-md-9">
+                                    <strong class="card-title">Total Teachers</strong>
+                                    <p>
+                                        <?php
+                                        $sql = "SELECT `teacher_id` FROM `teacher`";
+                                        $result = mysqli_query($conn, $sql);
+                                        echo mysqli_num_rows($result);
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -98,13 +104,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span class="pe-2"><i class="material-icons d-flex justify-content-center">
-                                            people
+                                            business
                                         </i></span>
                                 </div>
-                                <div class="col-md-8">
-                                    <strong class="card-title">Total Dep.</strong>
+                                <div class="col-md-9">
+                                    <strong class="card-title">Total Departments</strong>
                                     <p>
                                         <?php
                                         $sql = "SELECT `dep_id` from `department`";
@@ -122,12 +128,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <span class="pe-2"><i class="material-icons d-flex justify-content-center">
                                             people
                                         </i></span>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <strong class="card-title">#Title 3</strong>
                                     <p>78945</p>
                                 </div>
@@ -162,49 +168,49 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     <tbody>
                                         <tr>
                                             <td>075BCT999</td>
-                                            <td>Ram lal</td>
+                                            <td>Lorem, ipsum dolor.</td>
                                             <td>12</td>
                                             <td>48</td>
                                             <td>60</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT174</td>
-                                            <td>Facebook Google</td>
+                                            <td>Lorem, ipsum dolor.</td>
                                             <td>96</td>
                                             <td>78</td>
                                             <td>174</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>

@@ -108,7 +108,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <strong>Add External</strong>
                         </div>
                         <div class="card-body">
-                            <form action="addteacher.php" method="post">
+
+                            <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
+
+                            
+
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
@@ -236,7 +240,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             element_id = e.currentTarget.id;
 
             if (confirm("Are you sure you want to delete the record?")) {
+
+                
                 window.location = `./addExternal.php?delete=${element_id}`;
+
             }
         })
     })
