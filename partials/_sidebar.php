@@ -33,7 +33,7 @@
                         id="professor">
                         <ul class="navbar-nav ps-4">
                             <li class="nav-item">
-                                <a href="welcome.php" class="nav-link ">
+                                <a href="#" class="nav-link ">
                                     <span class="title">
                                         Add Professor
                                     </span>

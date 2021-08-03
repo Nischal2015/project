@@ -34,9 +34,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <main class="p-2 mt-1" style="min-height: 800px">
         <?php
             if($_SERVER['REQUEST_METHOD']=='POST') {
-               if(!empty($_POST['committee'])) {
+               if(!empty($_POST['checklist'])) {
                    $student_id = $_GET['id'];
-                   foreach($_POST['committee'] as $selected) {
+                   foreach($_POST['checklist'] as $selected) {
                        $sql= "INSERT INTO `teacher_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
                        $result = mysqli_query($conn, $sql);
                    }
@@ -48,7 +48,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         <div class="container-fluid page-header">
             <div class="row">
                 <div class="col-md-6 py-3">
-                    <h4 class="text-muted fw-bold">Dashboard</h4>
+                    <h4 class="text-muted fw-bold">Student Details</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end text-muted">
                     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
@@ -125,7 +125,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         <tr>
                                         <td>'.$sno.'</td>
                                         <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
-                                        <td><button class="btn btn-primary">&plus;</button></td>
+                                        <td><button class="btn btn-primary">Add</button></td>
                                         <td>not given</td>
                                         </tr>
                                         ';
@@ -232,7 +232,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                 echo '
                                 <div class="col">
                                     <label for='.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
-                                    <input type="checkbox" name="committee" id='.$id.'>
+                                    <input type="checkbox" name="checklist[]" id='.$id.' value='.$id.'>
                                 </div>';
                                 }
                                 ?>
@@ -250,7 +250,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
     <!-- External Modal -->
     <div class="modal fade" id="externalModal" tabindex="-1" aria-labelledby="externalModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="externalModalLabel">Add external</h5>
@@ -270,7 +270,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                 echo '
                                 <div class="col">
                                     <label for='.$id.'>'.$fname.' '.$lname.'</label>
-                                    <input type="radio" name="external[]" id='.$id.' value='.$id.'>
+                                    <input type="radio" name="checklist[]" id='.$id.' value='.$id.'>
                                 </div>';
                                 }
                                 ?>
