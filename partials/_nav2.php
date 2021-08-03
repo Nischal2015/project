@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
     </button>
     <div class="page-title">
-        <a class="navbar-brand fw-bold text-uppercase me-auto" href="#">
+        <a class="navbar-brand fw-bold text-uppercase me-auto" id="thesis" href="#">
             <span>
                 <i class="fa fa-graduation-cap fa-lg"></i>
             </span>

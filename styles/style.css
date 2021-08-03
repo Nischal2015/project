@@ -61,6 +61,7 @@ nav>ul>li[aria-expanded="true"] div li:hover a span {
 nav div #thesis {
     width: 240px;
     color: #fff;
+    padding: 10px 0;
 }
 
 body {

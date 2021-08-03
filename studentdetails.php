@@ -32,6 +32,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     </header>
 
     <main class="p-2 mt-1" style="min-height: 800px">
+        <?php
+            if($_SERVER['REQUEST_METHOD']=='POST') {
+               if(!empty($_POST['checklist'])) {
+                   $student_id = $_GET['id'];
+                   foreach($_POST['checklist'] as $selected) {
+                       $sql= "INSERT INTO `teacher_assigned` (`assigned_fname`, `assigned_lname`, `assigned_teacher_id`) SELECT student_fname, student_lname , (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
+                       $result = mysqli_query($conn, $sql);
+                   }
+                   
+               }
+               echo "sucess";
+            }
+            ?>
         <div class="container-fluid page-header">
             <div class="row">
                 <div class="col-md-6 py-3">
@@ -57,7 +70,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <?php include 'partials/_studentinfo.php'; ?>
                 </div>
                 <div class="col-md-12 mb-4">
-                    <button class="btn btn-primary">Add Supervisor &plus;</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#supervisorModal">Add
+                        Supervisor &plus;</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#externalModal">Add External
+                        &plus;</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#committeeModal">Add
+                        Committee &plus;</button>
                 </div>
                 <div class="col-md-6">
                     <div class="card">
@@ -102,6 +120,106 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 -->
+    <!-- Supervisor Modal -->
+    <div class="modal fade" id="supervisorModal" tabindex="-1" aria-labelledby="supervisorModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="supervisorModalLabel">Add Supervisor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container">
+                        <div class="row row-cols-2">
+                            <?php
+                            $sql = "SELECT * FROM `teacher`";
+                            $result = mysqli_query($conn, $sql);
+                            while($row = mysqli_fetch_assoc($result)) {
+                                $id = $row['teacher_id'];
+                                $post = $row['teacher_post'];
+                                $fname = $row['teacher_fname'];
+                                $mname = $row['teacher_mname'];
+                                $lname = $row['teacher_lname'];
+                            echo '
+                            <div class="col">
+                                <label for='.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
+                                <input type="radio" name="supervisor" id='.$id.'>
+                            </div>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Committe Modal -->
+    <div class="modal fade" id="committeeModal" tabindex="-1" aria-labelledby="committeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="committeeModalLabel">Add committee Teachers</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row row-cols-2">
+                                <?php
+                            $sql = "SELECT * FROM `teacher`";
+                            $result = mysqli_query($conn, $sql);
+                            while($row = mysqli_fetch_assoc($result)) {
+                                $id = $row['teacher_id'];
+                                $post = $row['teacher_post'];
+                                $fname = $row['teacher_fname'];
+                                $mname = $row['teacher_mname'];
+                                $lname = $row['teacher_lname'];
+                            echo '
+                            <div class="col">
+                                <label for='.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
+                                <input type="checkbox" name="checklist[]" id='.$id.' value='.$id.'>
+                            </div>';
+                            }
+                            ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Modal -->
+    <div class="modal fade" id="externalModal" tabindex="-1" aria-labelledby="externalModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="externalModalLabel">Add external</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </body>

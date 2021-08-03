@@ -86,10 +86,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         </i></span>
                                 </div>
                                 <div class="col-md-9">
-                                    <strong class="card-title">Total Professors</strong>
+                                    <strong class="card-title">Total Teachers</strong>
                                     <p>
                                         <?php
-                                        $sql = "SELECT `external_id` FROM `ext_teacher`";
+                                        $sql = "SELECT `teacher_id` FROM `teacher`";
                                         $result = mysqli_query($conn, $sql);
                                         echo mysqli_num_rows($result);
                                         ?>
@@ -168,49 +168,49 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     <tbody>
                                         <tr>
                                             <td>075BCT999</td>
-                                            <td>Ram lal</td>
+                                            <td>Lorem, ipsum dolor.</td>
                                             <td>12</td>
                                             <td>48</td>
                                             <td>60</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT174</td>
-                                            <td>Facebook Google</td>
+                                            <td>Lorem, ipsum dolor.</td>
                                             <td>96</td>
                                             <td>78</td>
                                             <td>174</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
                                         <tr>
                                             <td>075BCT785</td>
-                                            <td>alu padhe jhyaple</td>
+                                            <td>Lorem, ipsum.</td>
                                             <td>45</td>
                                             <td>12</td>
                                             <td>57</td>
