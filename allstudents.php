@@ -34,7 +34,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <?php include 'partials/_nav2.php'; ?>
     <?php include 'partials/_sidebar.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
-    <?php include 'partials/_infomodal.php'; ?>
     <?php include 'partials/_editmodal.php'; ?>
     <?php
     if (isset($_GET['delete'])) {
