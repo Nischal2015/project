@@ -34,9 +34,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         <?php include 'partials/_dbconnect.php'; ?>
         <?php
     if (isset($_GET['delete'])) {
-        $external_id = $_GET['delete'];
-        echo $external_id;
-        $sql = "DELETE FROM `ext_teacher` WHERE `external_id` = '$external_id'";
+        $teacher_id = $_GET['delete'];
+        echo $teacher_id;
+        $sql = "DELETE FROM `teacher` WHERE `teacher_id` = '$teacher_id'";
         $result = mysqli_query($conn, $sql);
         $delete = true;
     }
@@ -48,12 +48,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             <?php
             $showAlert = false;
             if($_SERVER['REQUEST_METHOD']=='POST') {
-                $Etpost = $_POST['Etpost'];
-                $Etfname = $_POST['Etfname'];
-                $Etmname = $_POST['Etmname'];
-                $Etlname = $_POST['Etlname'];
-                if($Etfname != "" && $Etlname != ""){
-                    $sql = "INSERT INTO `ext_teacher` (`external_post`, `external_fname`, `external_mname`, `external_lname`) VALUES ('$Etpost', '$Etfname', '$Etmname', '$Etlname')";
+                $tpost = $_POST['tpost'];
+                $tfname = $_POST['tfname'];
+                $tmname = $_POST['tmname'];
+                $tlname = $_POST['tlname'];
+                if($tfname != "" && $tlname != ""){
+                    $sql = "INSERT INTO `teacher` (`teacher_post`, `teacher_fname`, `teacher_mname`, `teacher_lname`) VALUES ('$tpost', '$tfname', '$tmname', '$tlname')";
                     $result = mysqli_query($conn, $sql);
                     $showAlert = true;
                 }
@@ -87,7 +87,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             ?>
             <div class="row">
                 <div class="col-md-6 py-3">
-                    <h4 class="text-muted fw-bold">Add External</h4>
+                    <h4 class="text-muted fw-bold">Add Internal</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end text-muted">
                     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
@@ -95,7 +95,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         <ol class="breadcrumb bg-light p-2 px-3 rounded-pill">
                             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                             <li class="breadcrumb-item">Teacher</li>
-                            <li class="breadcrumb-item active" aria-current="page">Add External</li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Internal</li>
                         </ol>
                     </nav>
                 </div>
@@ -107,15 +107,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class="col-md-12">
                     <div class="card mb-4 mt-1">
                         <div class="card-header pb-2">
-                            <strong>Add External</strong>
+                            <strong>Add Internal</strong>
                         </div>
                         <div class="card-body">
 
-                            <form action="addExternal.php" method="post">
+                            <form action="addInternal.php" method="post">
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <select class="form-select" aria-label="Default select example" id="Etpost" name="Etpost">
+                                            <select class="form-select" aria-label="Default select example" id="tpost" name="tpost">
                                                 <option selected value="">Designation</option>
                                                 <option value="Dr.">Dr.</option>
                                                 <option value="Mr.">Mr.</option>
@@ -129,7 +129,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <input type="text" class="form-control" id="Etfname" name="Etfname"
+                                            <input type="text" class="form-control" id="tfname" name="tfname"
                                                 placeholder="Firstname">
                                             <label for="InputFirstname">Firstname</label>
                                         </div>
@@ -137,7 +137,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <input type="text" class="form-control" id="Etmname" name="Etmname"
+                                            <input type="text" class="form-control" id="tmname" name="tmname"
                                                 placeholder="Middlename">
                                             <label for="InputMiddlename">Middlename</label>
                                         </div>
@@ -145,7 +145,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <input type="text" class="form-control" id="Etlname" name="Etlname"
+                                            <input type="text" class="form-control" id="tlname" name="tlname"
                                                 placeholder="Lastname">
                                             <label for="InputLastname">Lastname</label>
                                         </div>
@@ -167,11 +167,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class="col-md-12">
                     <div class="card mb-4 mt-1">
                         <div class="card-header py-3 pb-2">
-                            <strong>External Teachers: </strong>
+                            <strong>Internal Teachers: </strong>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="external-list" class="table table-striped table-hover" style="width:100%">
+                                <table id="internal-list" class="table table-striped table-hover" style="width:100%">
                                     <colgroup>
                                         <col span="1" style="width: 85%;">
                                         <col span="1" style="width: 15%;">
@@ -184,21 +184,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     </thead>
                                     <tbody>
                                         <?php 
-                                        $sql = "SELECT * from `ext_teacher`";
+                                        $sql = "SELECT * from `teacher`";
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_assoc($result)) {
                                             echo '
                                             <tr>
-                                            <td>'. $row['external_post'] . ' '. $row['external_fname'] . ' '. $row['external_mname'] . ' ' . $row['external_lname'] . '</td>
+                                            <td>'. $row['teacher_post'] . ' '. $row['teacher_fname'] . ' '. $row['teacher_mname'] . ' ' . $row['teacher_lname'] . '</td>
                                             <td>
-                                            <!--<button type="button" class="edit btn btn-primary btn-sm" id="'. $row['external_id'] .'"  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
+                                            <!--<button type="button" class="edit btn btn-primary btn-sm" id="'. $row['teacher_id'] .'"  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
                                             <i class="fa fa-pencil"></i>
                                             </button>-->
 
-                                            <button type="button" class="delete btn btn-danger btn-sm" id="'. $row['external_id'] .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
+                                            <button type="button" class="delete btn btn-danger btn-sm" id="'. $row['teacher_id'] .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
                                             </button>
 
-                                            <!--<button type="button" class="information btn btn-warning btn-sm" id="'. $row['external_id'] .'" title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
+                                            <!--<button type="button" class="information btn btn-warning btn-sm" id="'. $row['teacher_id'] .'" title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
                                             <i class="fa fa-info"></i>
                                             </button>-->
 
@@ -242,7 +242,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 -->
     <script>
     $(document).ready(function() {
-        $('#external-list').DataTable();
+        $('#internal-list').DataTable();
     });
     </script>
 
@@ -264,7 +264,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             if (confirm("Are you sure you want to delete the record?")) {
 
 
-                window.location = `./addExternal.php?delete=${element_id}`;
+                window.location = `./addInternal.php?delete=${element_id}`;
 
             }
         })
