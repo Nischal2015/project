@@ -99,6 +99,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="card mb-4 mt-1">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <span class="pe-2"><i class="material-icons d-flex justify-content-center">
+                                            people
+                                        </i></span>
+                                </div>
+                                <div class="col-md-9">
+                                    <strong class="card-title">Total Externals</strong>
+                                    <p>
+                                        <?php
+                                        $sql = "SELECT `external_id` FROM `ext_teacher`";
+                                        $result = mysqli_query($conn, $sql);
+                                        echo mysqli_num_rows($result);
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-md-3">
                     <div class="card mb-4 mt-1">
@@ -124,23 +147,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <div class="card mb-4 mt-1">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-3">
-                                    <span class="pe-2"><i class="material-icons d-flex justify-content-center">
-                                            people
-                                        </i></span>
-                                </div>
-                                <div class="col-md-9">
-                                    <strong class="card-title">#Title 3</strong>
-                                    <p>78945</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-8">
                     <div class="card mb-4 mt-1">
                         <div class="card-header py-3 pb-2">
