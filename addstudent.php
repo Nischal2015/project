@@ -38,21 +38,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
     <!-- Main content starts here -->
     <main class="p-2 mt-1" style="min-height: 800px">
-
-
         <!-- Page indicator starts here -->
         <div class="container-fluid page-header">
             <?php
             $showAlert = false;
+            function test_input($data) {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+              }
             if($_SERVER['REQUEST_METHOD']=='POST') {
-                $fname = $_POST['fname'];
-                $lname = $_POST['lname'];
-                $roll = $_POST['roll'];
-                $dep = $_POST['department'];
-                $gender = $_POST['gender'];
-                $regdate = $_POST['regdate'];
-                $year = $_POST['year'];
-                $thesis = $_POST['thesis'];
+                $fname = test_input($_POST['fname']);
+                $lname = test_input($_POST['lname']);
+                $roll = test_input($_POST['roll']);
+                $dep = test_input($_POST['department']);
+                $gender = test_input($_POST['gender']);
+                $regdate = test_input($_POST['regdate']);
+                $year = test_input($_POST['year']);
+                $thesis = test_input($_POST['thesis']);
                 $sql = "INSERT INTO `students` (`student_fname`, `student_lname`, `student_roll`, `student_dep`, `student_gender`, `student_regdate`, `student_year`, `student_thesis`) VALUES ('$fname', '$lname', '$roll', '$dep', '$gender', '$regdate', '$year', '$thesis')";
                 $result = mysqli_query($conn, $sql);
                 $showAlert = true;

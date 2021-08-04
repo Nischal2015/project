@@ -37,12 +37,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                if(!empty($_POST['checklist'])) {
                    $student_id = $_GET['id'];
                    foreach($_POST['checklist'] as $selected) {
-                       $sql= "INSERT INTO `teacher_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
+                       $sql= "INSERT INTO `mid_committee_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
                        $result = mysqli_query($conn, $sql);
                    }
-                   echo "sucess";
-               }
-               
+               }               
             }
             ?>
         <div class="container-fluid page-header">
@@ -111,27 +109,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                    $student_id = $_GET['id'];
-                                    $sql = "SELECT teacher_post, teacher_fname, teacher_mname, teacher_lname 
-                                    FROM teacher t
-                                    INNER JOIN teacher_assigned ta
-                                    ON t.teacher_id = ta.assigned_teacher_id
-                                    WHERE ta.assigned_s_id = '$student_id'";
+                                            $student_id = $_GET['id'];
+                                            $sql = "SELECT teacher_id, teacher_post, teacher_fname, teacher_mname, teacher_lname 
+                                            FROM teacher t
+                                            INNER JOIN mid_committee_assigned ta
+                                            ON t.teacher_id = ta.assigned_teacher_id
+                                            WHERE ta.assigned_s_id = '$student_id'";
 
-                                    $result = mysqli_query($conn, $sql);
-                                    $sno = 1;
-                                    while($row = mysqli_fetch_assoc($result)) {
-                                        echo'
-                                        <tr>
-                                        <td>'.$sno.'</td>
-                                        <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
-                                        <td><button class="btn btn-primary">Add</button></td>
-                                        <td>not given</td>
-                                        </tr>
-                                        ';
-                                        $sno += 1;
-                                    }
-                                    ?>
+                                            $result = mysqli_query($conn, $sql);
+                                            $sno = 1;
+                                            while($row = mysqli_fetch_assoc($result)) {
+                                                echo'
+                                                <tr>
+                                                    <td>'.$sno.'</td>
+                                                    <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
+                                                    <td>
+                                                        <button class="btn btn-primary addEd" data-bs-toggle="modal" data-bs-target="#committee_marking">Add</button>
+                                                    </td>
+                                                    <td>not given</td>
+                                                </tr>
+                                                ';
+                                                $sno += 1;
+                                            }
+                                            ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -148,7 +148,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 </div>
             </div>
         </div>
-
     </main>
 
     <?php include 'partials/_footer.php'; ?>
@@ -166,6 +165,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 -->
+
+    <?php include 'partials/_marks_modal.php'; ?>
     <!-- Supervisor Modal -->
     <div class="modal fade" id="supervisorModal" tabindex="-1" aria-labelledby="supervisorModalLabel"
         aria-hidden="true">
@@ -191,7 +192,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             echo '
                             <div class="col">
                                 <label for='.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
-                                <input type="radio" name="supervisor" id='.$id.'>
+                                <input type="radio" name="supervisor" id=s'.$id.'>
                             </div>';
                             }
                             ?>
@@ -229,11 +230,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     $fname = $row['teacher_fname'];
                                     $mname = $row['teacher_mname'];
                                     $lname = $row['teacher_lname'];
-                                echo '
-                                <div class="col">
-                                    <label for='.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
-                                    <input type="checkbox" name="checklist[]" id='.$id.' value='.$id.'>
-                                </div>';
+                                    echo '
+                                    <div class="col">
+                                        <label for='.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
+                                        <input type="checkbox" name="checklist[]" id=c'.$id.' value='.$id.'>
+                                    </div>';
                                 }
                                 ?>
                             </div>
@@ -267,12 +268,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     $id = $row['external_id'];
                                     $fname = $row['external_fname'];
                                     $lname = $row['external_lname'];
-                                echo '
-                                <div class="col">
-                                    <label for='.$id.'>'.$fname.' '.$lname.'</label>
-                                    <input type="radio" name="checklist[]" id='.$id.' value='.$id.'>
-                                </div>';
-                                }
+                                    echo '
+                                    <div class="col">
+                                        <label for='.$id.'>'.$fname.' '.$lname.'</label>
+                                        <input type="radio" name="checklist[]" id=e'.$id.' value='.$id.'>
+                                    </div>';
+                                    }
                                 ?>
                             </div>
                         </div>
@@ -286,7 +287,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         </div>
     </div>
 
-
+    <script>
+        addEdits = document.getElementsByClassName("addEd");
+        Array.from(addEdits).forEach((element) => {
+            element.addEventListener("click", (e) => {
+                tr = e.currentTarget.parentNode.parentNode;
+                name = tr.getElementsByTagName("td")[1].innerText;
+                document.getElementById("committee_markingLabel").innerText = name;
+            })
+        })
+        
+    </script>
 </body>
 
 </html>

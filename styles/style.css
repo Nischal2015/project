@@ -108,6 +108,17 @@ div .card {
     box-shadow: -8px 12px 18px 0 #d4d7df;
 }
 
+carouselExampleFade {
+    background-image: url("images/pulchowk1.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 
 @media (min-width:992px) {

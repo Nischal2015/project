@@ -52,7 +52,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 $tfname = $_POST['tfname'];
                 $tmname = $_POST['tmname'];
                 $tlname = $_POST['tlname'];
-                if($tfname != "" && $tlname != ""){
+                if($tfname != "" && $tlname != "" && $tpost != ""){
                     $sql = "INSERT INTO `teacher` (`teacher_post`, `teacher_fname`, `teacher_mname`, `teacher_lname`) VALUES ('$tpost', '$tfname', '$tmname', '$tlname')";
                     $result = mysqli_query($conn, $sql);
                     $showAlert = true;
@@ -116,14 +116,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
                                             <select class="form-select" aria-label="Default select example" id="tpost" name="tpost">
-                                                <option selected value="">Designation</option>
+                                                <option selected value="">Choose..</option>
                                                 <option value="Dr.">Dr.</option>
                                                 <option value="Mr.">Mr.</option>
                                                 <option value="Mrs.">Mrs.</option>
                                             </select>
-                                            <!--<input type="text" class="form-control" id="Etpost" name="Etpost"
-                                                placeholder="Designation">
-                                            <label for="InputDesignation">Designation</label>-->
+                                            <label for="tpost">Designation</label>
                                         </div>
                                     </div>
 

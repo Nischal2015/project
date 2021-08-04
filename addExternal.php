@@ -52,7 +52,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 $Etfname = $_POST['Etfname'];
                 $Etmname = $_POST['Etmname'];
                 $Etlname = $_POST['Etlname'];
-                if($Etfname != "" && $Etlname != ""){
+                if($Etfname != "" && $Etlname != "" && $Etpost != ""){
                     $sql = "INSERT INTO `ext_teacher` (`external_post`, `external_fname`, `external_mname`, `external_lname`) VALUES ('$Etpost', '$Etfname', '$Etmname', '$Etlname')";
                     $result = mysqli_query($conn, $sql);
                     $showAlert = true;
@@ -69,7 +69,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                     </div>
                 </div>';
-            }    
+            }
             ?>
 
             <?php            
@@ -110,20 +110,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <strong>Add External</strong>
                         </div>
                         <div class="card-body">
-
                             <form action="addExternal.php" method="post">
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <select class="form-select" aria-label="Default select example" id="Etpost" name="Etpost">
-                                                <option selected value="">Designation</option>
+                                            <select name="Etpost" class="form-select" aria-label="Default select example" id="Etpost">
+                                                <option selected value="">Choose..</option>
                                                 <option value="Dr.">Dr.</option>
                                                 <option value="Mr.">Mr.</option>
                                                 <option value="Mrs.">Mrs.</option>
                                             </select>
-                                            <!--<input type="text" class="form-control" id="Etpost" name="Etpost"
-                                                placeholder="Designation">
-                                            <label for="InputDesignation">Designation</label>-->
+                                            <label for="Etpost">Designation</label>
                                         </div>
                                     </div>
 
