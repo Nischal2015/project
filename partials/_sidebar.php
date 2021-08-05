@@ -104,16 +104,16 @@
                         id="student">
                         <ul class="navbar-nav ps-4">
                             <li class="nav-item">
-                                <a href="allstudents.php" class="nav-link ">
+                                <a href="addstudent.php" class="nav-link ">
                                     <span class="title">
-                                        All Students
+                                        Add student
                                     </span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="addstudent.php" class="nav-link ">
+                                <a href="allstudents.php" class="nav-link ">
                                     <span class="title">
-                                        Add student
+                                        All Students
                                     </span>
                                 </a>
                             </li>

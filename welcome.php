@@ -66,8 +66,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     <p class="text-center m-0">dummy_email@gmail.com</p>
                                 </small>
                             </div>
-
-
                         </div>
                         <div class="card-body">
                             <em>This is the body of the profesor's modal.</em>
