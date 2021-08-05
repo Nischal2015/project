@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 04, 2021 at 10:40 AM
+-- Generation Time: Aug 05, 2021 at 09:51 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -212,8 +212,8 @@ CREATE TABLE `mid_committee` (
 
 CREATE TABLE `mid_committee_assigned` (
   `assigned_id` int(10) NOT NULL,
-  `assigned_s_id` int(10) DEFAULT NULL,
-  `assigned_teacher_id` int(10) DEFAULT NULL
+  `assigned_s_id` int(10) NOT NULL,
+  `assigned_teacher_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -221,20 +221,16 @@ CREATE TABLE `mid_committee_assigned` (
 --
 
 INSERT INTO `mid_committee_assigned` (`assigned_id`, `assigned_s_id`, `assigned_teacher_id`) VALUES
-(11, 53, 2),
-(12, 53, 4),
-(13, 53, 6),
-(24, 46, 6),
-(25, 46, 7),
-(26, 48, 4),
-(27, 48, 9),
-(28, 52, 2),
-(29, 52, 5),
-(30, 52, 8),
-(31, 45, 2),
-(32, 45, 4),
-(36, 46, 9),
-(37, 46, 8);
+(5, 46, 2),
+(13, 46, 4),
+(14, 46, 6),
+(18, 46, 7),
+(1, 48, 2),
+(2, 48, 4),
+(10, 52, 3),
+(11, 52, 5),
+(6, 55, 2),
+(9, 55, 8);
 
 -- --------------------------------------------------------
 
@@ -297,6 +293,15 @@ CREATE TABLE `mid_supervisor_assigned` (
   `assigned_teacher_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `mid_supervisor_assigned`
+--
+
+INSERT INTO `mid_supervisor_assigned` (`assigned_id`, `assigned_s_id`, `assigned_teacher_id`) VALUES
+(7, 46, 7),
+(6, 52, 4),
+(1, 55, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -326,7 +331,6 @@ INSERT INTO `students` (`student_id`, `student_fname`, `student_lname`, `student
 (47, 'Nitesh', 'Swarnakar', '076BCT058', 'Male', '2021-05-03', 2076, 'Electronics & Communi­cation', 'Understanding Blender objects'),
 (48, 'Roshan', 'Subedi', '078BCT068', 'Male', '2021-08-01', 2078, 'Science & Humanities', 'My Thesis'),
 (52, 'Sita', 'Gautam', '078BCE159', 'Female', '2021-08-31', 2078, 'Civil', 'Building blocks'),
-(53, 'Akash', 'Joshi', '075bct489', 'Male', '2021-08-23', 2075, 'Electrical', 'Testing the thesis'),
 (55, 'Nischal', 'Shakya', '075BCT055', 'Male', '2021-05-04', 2075, 'Electronics & Communi­cation', 'Electrical Instruments'),
 (58, 'rakesh', 'roshan', '078bct456', 'Male', '2021-08-20', 2078, 'Architecture', 'test title');
 
@@ -373,7 +377,8 @@ ALTER TABLE `admin_user`
 -- Indexes for table `department`
 --
 ALTER TABLE `department`
-  ADD PRIMARY KEY (`dep_id`);
+  ADD PRIMARY KEY (`dep_id`),
+  ADD UNIQUE KEY `dep_name` (`dep_name`) USING HASH;
 
 --
 -- Indexes for table `ext_teacher`
@@ -393,7 +398,7 @@ ALTER TABLE `final_committee`
 --
 ALTER TABLE `final_committee_assigned`
   ADD PRIMARY KEY (`assigned_id`),
-  ADD KEY `assigned_s_id` (`assigned_s_id`),
+  ADD UNIQUE KEY `uq_final_committee_assigned` (`assigned_s_id`,`assigned_teacher_id`),
   ADD KEY `assigned_teacher_id` (`assigned_teacher_id`);
 
 --
@@ -408,7 +413,7 @@ ALTER TABLE `final_external`
 --
 ALTER TABLE `final_external_assigned`
   ADD PRIMARY KEY (`assigned_id`),
-  ADD KEY `assigned_s_id` (`assigned_s_id`),
+  ADD UNIQUE KEY `uq_final_external_assigned` (`assigned_s_id`,`assigned_ext_id`),
   ADD KEY `assigned_ext_id` (`assigned_ext_id`);
 
 --
@@ -423,7 +428,7 @@ ALTER TABLE `final_supervisor`
 --
 ALTER TABLE `final_supervisor_assigned`
   ADD PRIMARY KEY (`assigned_id`),
-  ADD KEY `supervisor_assigned_final_ibfk_1` (`assigned_s_id`),
+  ADD UNIQUE KEY `uq_final_supervisor_assigned` (`assigned_s_id`,`assigned_teacher_id`),
   ADD KEY `assigned_teacher_id` (`assigned_teacher_id`);
 
 --
@@ -438,8 +443,8 @@ ALTER TABLE `mid_committee`
 --
 ALTER TABLE `mid_committee_assigned`
   ADD PRIMARY KEY (`assigned_id`),
-  ADD KEY `student id foreign` (`assigned_s_id`),
-  ADD KEY `teacher id foreign` (`assigned_teacher_id`);
+  ADD UNIQUE KEY `uq_mid_committee_assigned` (`assigned_s_id`,`assigned_teacher_id`),
+  ADD KEY `assigned_teacher_id` (`assigned_teacher_id`);
 
 --
 -- Indexes for table `mid_external`
@@ -453,7 +458,7 @@ ALTER TABLE `mid_external`
 --
 ALTER TABLE `mid_external_assigned`
   ADD PRIMARY KEY (`assigned_id`),
-  ADD KEY `assigned_s_id` (`assigned_s_id`),
+  ADD UNIQUE KEY `uq_mid_external_assigned` (`assigned_s_id`,`assigned_ext_id`),
   ADD KEY `assigned_ext_id` (`assigned_ext_id`);
 
 --
@@ -468,7 +473,8 @@ ALTER TABLE `mid_supervisor`
 --
 ALTER TABLE `mid_supervisor_assigned`
   ADD PRIMARY KEY (`assigned_id`),
-  ADD KEY `student_id_foreign` (`assigned_s_id`),
+  ADD UNIQUE KEY `uq_mid_supervisor_assigned` (`assigned_s_id`,`assigned_teacher_id`),
+  ADD UNIQUE KEY `assigned_s_id` (`assigned_s_id`),
   ADD KEY `teacher_id_foreign` (`assigned_teacher_id`);
 
 --
@@ -497,7 +503,7 @@ ALTER TABLE `admin_user`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `dep_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `dep_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ext_teacher`
@@ -551,7 +557,7 @@ ALTER TABLE `mid_committee`
 -- AUTO_INCREMENT for table `mid_committee_assigned`
 --
 ALTER TABLE `mid_committee_assigned`
-  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `mid_external`
@@ -575,7 +581,7 @@ ALTER TABLE `mid_supervisor`
 -- AUTO_INCREMENT for table `mid_supervisor_assigned`
 --
 ALTER TABLE `mid_supervisor_assigned`
-  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -642,8 +648,8 @@ ALTER TABLE `mid_committee`
 -- Constraints for table `mid_committee_assigned`
 --
 ALTER TABLE `mid_committee_assigned`
-  ADD CONSTRAINT `student id foreign` FOREIGN KEY (`assigned_s_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `teacher id foreign` FOREIGN KEY (`assigned_teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `mid_committee_assigned_ibfk_1` FOREIGN KEY (`assigned_s_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `mid_committee_assigned_ibfk_2` FOREIGN KEY (`assigned_teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `mid_external`
