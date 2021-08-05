@@ -1,6 +1,7 @@
 <?php
 $showAlert = false;
 $delete = false;
+$showError = false;
 
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
@@ -54,13 +55,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             </div>
         </div>
 
-        <?php
-       
+        <?php       
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $depname = $_POST['depname'];
-            if (!empty($depname)) {
-                $sql = "INSERT INTO `department` (`dep_name`) VALUES ('$depname')";
-                $showAlert = true;
+            $existSql = "SELECT `dep_name` FROM `department` where `dep_name` = '$depname'";
+            $result1 = mysqli_query($conn, $existSql);
+            if(mysqli_num_rows($result1) > 0) {
+                $showErrors = "Department already exists";
+            }
+
+            else {
+                if (!empty($depname)) {
+                    $sql = "INSERT INTO `department` (`dep_name`) VALUES ('$depname')";
+                    $result = mysqli_query($conn, $sql);
+                    $showAlert = true;
+                }
             }
         }
         if (isset($_GET['delete'])) {
@@ -93,7 +102,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 </div>
             </div>';
         }
-        
+
+        if ($showErrors) {
+            echo '
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Sorry! </strong>' . $showErrors.'
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+        }        
         ?>
 
         <div class="container-fluid">
@@ -104,7 +120,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <strong>Add Department</strong>
                         </div>
                         <div class="card-body">
-                            <form action="#" method="post">
+                            <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
                                 <div class="row">                            
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
@@ -135,8 +151,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <div class="table-responsive">
                                 <table id="department-list" class="table table-striped table-hover" style="width:100%">
                                     <colgroup>
-                                        <col span="1" style="width: 40%;">
-                                        <col span="1" style="width: 40%;">
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 60%;">
                                         <col span="1" style="width: 20%;">
                                     </colgroup>
                                     <thead>

@@ -120,19 +120,13 @@
         </div>
     </div>
 
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#supervisor_marking">
-        Update for Supervisor
-    </button>
-
     <!--Supervisor Modal -->
     <div class="modal fade" id="supervisor_marking" aria-labelledby="supervisor_markingLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="supervisor_markingLabel">Teacher's Name</h5>
+                    <h5 class="modal-title" id="supervisor_markingLabel"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

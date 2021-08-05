@@ -69,7 +69,7 @@ body {
 }
 
 main {
-    background: #eaeef3;
+    background: #eceff3;
 }
 
 nav .page-title a{
@@ -77,9 +77,10 @@ nav .page-title a{
     display:block;
     background: #6673FC;
     width: 240px;
-    padding: 9.5px 0px !important;
+    padding: 13.5px 0px !important;
     padding-left: 40px;
     color: #fff;
+    box-sizing: border-box;
 }
 
 main .page-header {
@@ -105,19 +106,7 @@ li #sidebar-pic img {
 
 div .card {
     border-radius: 4px !important;
-    box-shadow: -4px px 18px 0 #d4d7df;
-}
-
-carouselExampleFade {
-    background-image: url("images/pulchowk1.jpg");
-
-  /* Full height */
-  height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    box-shadow: 4px 8px 10px 0 #dfe1e7;
 }
 
 
