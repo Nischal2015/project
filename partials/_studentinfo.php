@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class="profile-pic">
-            <img src="images/user.png" alt="img" class="img-fluid rounded-circle d-block">
+            <img src="images/profile.png" alt="img" class="img-fluid rounded-circle d-block">
         </div>
         <div class="container mt-4">
             <div class="row">

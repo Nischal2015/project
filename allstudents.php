@@ -7,12 +7,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 	header("location: login.php");
 	exit;
 }
-
 ?>
 
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -25,6 +23,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Welcome - <?php echo $_SESSION['username'] ?></title>
+    <!-- Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="styles/style.css">
@@ -34,36 +33,36 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <?php include 'partials/_nav2.php'; ?>
     <?php include 'partials/_sidebar.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
-    <?php include 'partials/_editmodal.php'; ?>
     <?php
     if (isset($_GET['delete'])) {
         $student_id = $_GET['delete'];
         echo $student_id;
         $sql = "DELETE FROM `students` WHERE `student_id` = '$student_id'";
         $result = mysqli_query($conn, $sql);
-        $delete = true;
+        if ($result) {
+            $delete = true;
+        }
     }
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {        
           // Update the record
-            $student_id = $_POST['snoEdit'];
-            $fname = $_POST['fnameEdit'];
-            $lname = $_POST['lnameEdit'];
-            $roll = $_POST['rollEdit'];
-            $gender = $_POST['genderEdit'];
-            $dep = $_POST['departmentEdit'];
-            $regdate = $_POST['regdateEdit'];
-            $year = $_POST['yearEdit'];
-            $thesis = $_POST['thesisEdit'];
+        $student_id = $_POST['snoEdit'];
+        $fname = $_POST['fnameEdit'];
+        $lname = $_POST['lnameEdit'];
+        $roll = $_POST['rollEdit'];
+        $gender = $_POST['genderEdit'];
+        $dep = $_POST['departmentEdit'];
+        $regdate = $_POST['regdateEdit'];
+        $year = $_POST['yearEdit'];
+        $thesis = $_POST['thesisEdit'];
       
-          $sql = "UPDATE `students` SET `student_fname` = '$fname', `student_lname` = '$lname', `student_roll` = '$roll', `student_gender` = '$gender', `student_regdate` = '$regdate', `student_year` = '$year', `student_dep` = '$dep', `student_thesis` = '$thesis' WHERE `student_id` = $student_id";
-          $result = mysqli_query($conn, $sql);
+        $sql = "UPDATE `students` SET `student_fname` = '$fname', `student_lname` = '$lname', `student_roll` = '$roll', `student_gender` = '$gender', `student_regdate` = '$regdate', `student_year` = '$year', `student_dep` = '$dep', `student_thesis` = '$thesis' WHERE `student_id` = $student_id";
 
-          if ($result) {
-            $update = true;
-          }
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+        $update = true;
         }
-       
+    }       
     ?>
 
     <main class="p-2 mt-1" style="min-height: 800px">
@@ -72,27 +71,26 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             if($delete) {
                 echo '            
                 <div class="row">
-                <div class="col-md-12">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> Record has been deleted successfully.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                </div>
+                    <div class="col-md-12">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Success!</strong> Record has been deleted successfully.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
                 </div>';
             }
 
             if ($update) {
                 echo "
                 <div class='row'>
-                <div class='col-md-12'>
-                <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                      <strong>Success!</strong> Your student has been udpated succesfully.
-                      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    <div class='col-md-12'>
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            <strong>Success!</strong> Your student has been udpated succesfully.
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                       </div>
-                      </div>
-                      </div>";
-        
-              }
+                    </div>
+                </div>";        
+            }
             ?>
             <div class="row">
                 <div class="col-md-6 py-3">
@@ -104,8 +102,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         <ol class="breadcrumb bg-light p-2 px-3 rounded-pill">
                             <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                             <li class="breadcrumb-item">Students</li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href="allstudents.php">All
-                                    Students</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <a href="allstudents.php">All Students</a>
+                            </li>
                         </ol>
                     </nav>
                 </div>
@@ -163,21 +162,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         while($row = mysqli_fetch_assoc($result)) {
                                             echo '
                                             <tr>
-                                            <td>'. $row['student_roll'] .'</td>
-                                            <td>'. $row['student_fname'] . ' ' . $row['student_lname'] . '</td>
-                                            <td>'. $row['student_dep'] .'</td>
-                                            <td>'. $row['student_thesis'] .'</td>
-                                            <td>'. $row['student_regdate']. '</td>
-                                            <td>
-                                            <button type="button" class="edit btn btn-primary btn-sm" id=e'. $row['student_id'] .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
-                                            <i class="fa fa-pencil"></i>
-                                            </button>
-                                            <button type="button" class="delete btn btn-danger btn-sm" id=d'. $row['student_id'] .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
-                                            </button>
-                                            <a role="button" href="studentdetails.php?id='. $row['student_id'] .'" class="information btn btn-warning btn-sm" id='. $row['student_id'] .' title="Details">	
-                                            <i class="fa fa-info-circle"></i>
-                                            </button>
-                                            </td>
+                                                <td>'. $row['student_roll'] .'</td>
+                                                <td>'. $row['student_fname'] . ' ' . $row['student_lname'] . '</td>
+                                                <td>'. $row['student_dep'] .'</td>
+                                                <td>'. $row['student_thesis'] .'</td>
+                                                <td>'. $row['student_regdate']. '</td>
+                                                <td>
+                                                    <button type="button" class="edit btn btn-primary btn-sm" id=e'. $row['student_id'] .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
+                                                    <i class="fa fa-pencil"></i>
+                                                    </button>
+                                                    <button type="button" class="delete btn btn-danger btn-sm" id=d'. $row['student_id'] .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                    <a role="button" href="studentdetails.php?id='. $row['student_id'] .'" class="information btn btn-warning btn-sm" id='. $row['student_id'] .' title="Details">	
+                                                    <i class="fa fa-info-circle"></i>
+                                                    </button>
+                                                </td>
                                             </tr>';
                                         }
                                         ?>
@@ -201,7 +200,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         </div>
     </main>
     <?php include 'partials/_footer.php'; ?>
-
+    <?php include 'partials/_editmodal.php'; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
@@ -222,9 +221,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     $(document).ready(function() {
         $('#student-list').DataTable();
     });
-    </script>
-
-    <script>
+    
     infos = document.getElementsByClassName('information');
     Array.from(infos).forEach((element) => {
         element.addEventListener("click", (e) => {
@@ -267,8 +264,5 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         })
     })
     </script>
-
-
 </body>
-
 </html>

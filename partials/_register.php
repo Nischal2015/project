@@ -27,7 +27,7 @@
                     <option value="Female">Female</option>
                     <option value="Prefer not to answer">Prefer not to answer</option>
                 </select>
-                <label for="Gender">Gender</label>
+                <label for="gender">Gender</label>
             </div>
         </div>
         <div class="col-md-6 pt-4">

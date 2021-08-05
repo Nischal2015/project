@@ -321,9 +321,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
 
     <script>
-    $(document).ready(function() {      
+    $(document).ready(function() {
         $('#student-marks').DataTable();
-    }); 
+    });
     </script>
 
 
