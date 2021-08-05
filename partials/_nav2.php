@@ -7,7 +7,7 @@
     <div class="page-title">
         <a class="navbar-brand fw-bold text-uppercase me-auto" id="thesis" href="#">
             <span>
-                <i class="fa fa-graduation-cap fa-lg"></i>
+                <i class="fa fa-graduation-cap fa-lg" style="padding:0 5px 0 55px; color: #ffffff !important;"></i>
             </span>
             Thesis
         </a>
