@@ -33,14 +33,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         <?php include 'partials/_sidebar.php'; ?>
         <?php include 'partials/_dbconnect.php'; ?>
         <?php
-    if (isset($_GET['delete'])) {
-        $teacher_id = $_GET['delete'];
-        echo $teacher_id;
-        $sql = "DELETE FROM `teacher` WHERE `teacher_id` = '$teacher_id'";
-        $result = mysqli_query($conn, $sql);
-        $delete = true;
-    }
-    ?>
+            if (isset($_GET['delete'])) {
+                $teacher_id = $_GET['delete'];
+                echo $teacher_id;
+                $sql = "DELETE FROM `teacher` WHERE `teacher_id` = '$teacher_id'";
+                $result = mysqli_query($conn, $sql);
+                $delete = true;
+            }
+        ?>
     </header>
 
     <main class="p-2 mt-1" style="min-height: 800px">
@@ -110,12 +110,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <strong>Add Internal</strong>
                         </div>
                         <div class="card-body">
-
                             <form action="addInternal.php" method="post">
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <select class="form-select" aria-label="Default select example" id="tpost" name="tpost">
+                                            <select class="form-select" aria-label="Default select example" id="tpost"
+                                                name="tpost">
                                                 <option selected value="">Choose..</option>
                                                 <option value="Dr.">Dr.</option>
                                                 <option value="Mr.">Mr.</option>
@@ -158,14 +158,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 </div>
             </div>
         </div>
-        </div>
-        </div>
+        
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mb-4 mt-1">
                         <div class="card-header py-3 pb-2">
-                            <strong>Internal Teachers: </strong>
+                            <strong>Internal Teachers</strong>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -258,12 +257,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     Array.from(deletes).forEach((element) => {
         element.addEventListener("click", (e) => {
             element_id = e.currentTarget.id;
-
             if (confirm("Are you sure you want to delete the record?")) {
-
-
                 window.location = `./addInternal.php?delete=${element_id}`;
-
             }
         })
     })

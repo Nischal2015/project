@@ -1,4 +1,7 @@
 <?php
+$showAlert = false;
+$delete = false;
+
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 	header("location: login.php");
@@ -51,6 +54,76 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             </div>
         </div>
 
+        <?php
+       
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $depname = $_POST['depname'];
+            if (!empty($depname)) {
+                $sql = "INSERT INTO `department` (`dep_name`) VALUES ('$depname')";
+                $showAlert = true;
+            }
+        }
+        if (isset($_GET['delete'])) {
+            $dep_id = $_GET['delete'];
+            $sql = "DELETE FROM `department` WHERE `dep_id` = '$dep_id'";
+            $result = mysqli_query($conn, $sql);
+            $delete = true;
+        }  
+        
+        if ($showAlert) {
+            echo '            
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> You have successfully added a department.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>';
+        }  
+        
+        if($delete) {
+            echo '            
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> Record has been deleted successfully.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>';
+        }
+        
+        ?>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4 mt-1">
+                        <div class="card-header pb-2">
+                            <strong>Add Department</strong>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" method="post">
+                                <div class="row">                            
+                                    <div class="col-md-6 pt-2">
+                                        <div class="form-floating mb-2">
+                                            <input type="text" class="form-control" id="depname" name="depname"
+                                                placeholder="Department">
+                                            <label for="depname">Department</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -84,7 +157,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <td>'. $sno .'</td>
                                             <td>'. $row['dep_name'] . '</td>
                                             <td>
-                                            
+                                            <!--<button type="button" class="edit btn btn-primary btn-sm" id="'. $row['teacher_id'] .'"  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
+                                            <i class="fa fa-pencil"></i>
+                                            </button>-->
+
+                                            <button type="button" class="delete btn btn-danger btn-sm" id="'. $row['dep_id'] .'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
+                                            </button>
+
+                                            <!--<button type="button" class="information btn btn-warning btn-sm" id="'. $row['teacher_id'] .'" title="Details" data-bs-toggle="modal" data-bs-target="#studentInfoModal">	
+                                            <i class="fa fa-info"></i>
+                                            </button>-->
                                             </td>
                                             </tr>';
                                             $sno += 1;
@@ -129,6 +211,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     $(document).ready(function() {
         $('#department-list').DataTable();
     });
+
+    deletes = document.getElementsByClassName("delete");
+    Array.from(deletes).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            element_id = e.currentTarget.id;
+            if (confirm("Are you sure you want to delete the record?")) {
+                window.location = `./alldepartments.php?delete=${element_id}`;
+            } 
+        })
+    })
+
     </script>
 
 </body>
