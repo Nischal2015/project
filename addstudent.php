@@ -38,8 +38,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
     <!-- Main content starts here -->
     <main class="p-2 mt-1" style="min-height: 800px">
-
-
         <!-- Page indicator starts here -->
         <div class="container-fluid page-header">
             <?php

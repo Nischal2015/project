@@ -138,7 +138,7 @@
                             <li class="nav-item">
                                 <a href="alldepartments.php" class="nav-link ">
                                     <span class="title">
-                                        All Departments
+                                        Add Departments
                                     </span>
                                 </a>
                             </li>

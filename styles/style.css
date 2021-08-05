@@ -69,7 +69,7 @@ body {
 }
 
 main {
-    background: #eaeef3;
+    background: #eceff3;
 }
 
 nav .page-title a{
@@ -77,9 +77,10 @@ nav .page-title a{
     display:block;
     background: #6673FC;
     width: 240px;
-    padding: 9.5px 0px !important;
+    padding: 13.5px 0px !important;
     padding-left: 40px;
     color: #fff;
+    box-sizing: border-box;
 }
 
 main .page-header {
@@ -104,10 +105,9 @@ li #sidebar-pic img {
 }
 
 div .card {
-    border-radius: 8px !important;
-    box-shadow: -8px 12px 18px 0 #d4d7df;
+    border-radius: 4px !important;
+    box-shadow: 4px 8px 10px 0 #dfe1e7;
 }
-
 
 
 @media (min-width:992px) {
