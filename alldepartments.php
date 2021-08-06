@@ -1,7 +1,7 @@
 <?php
 $showAlert = false;
 $delete = false;
-$showError = false;
+$showErrors = false;
 
 session_start();
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {

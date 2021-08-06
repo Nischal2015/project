@@ -99,7 +99,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-3">
                     <div class="card mb-4 mt-1">
                         <div class="card-body">
@@ -147,6 +146,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-8">
                     <div class="card mb-4 mt-1">
                         <div class="card-header py-3 pb-2">

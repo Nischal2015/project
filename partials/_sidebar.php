@@ -17,45 +17,13 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="collapsed main-link" data-bs-toggle="collapse" data-bs-target="#professor"
-                    aria-expanded="false" aria-controls="professor" id="first">
-                    <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#professor" role="button"
-                        aria-expanded="false" aria-controls="professor">
-                        <span class="pe-2"><i class="material-icons">
-                                supervisor_account
-                            </i></span>
-                        <span>Professor</span>
-                        <span class="right-icon ms-auto"><i class="material-icons">
-                                chevron_right
-                            </i></span>
-                    </a>
-                    <div class="collapse sidebar-collapse ps-4" aria-labelledby="first" data-bs-parent="#sidebar"
-                        id="professor">
-                        <ul class="navbar-nav ps-4">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link ">
-                                    <span class="title">
-                                        Add Professor
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link ">
-                                    <span class="title">
-                                        Edit Professor
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
                 <li class="collapsed main-link" data-bs-toggle="collapse" data-bs-target="#Teacher"
                     aria-expanded="false" aria-controls="Teacher" id="second">
                     <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#Teacher" role="button"
                         aria-expanded="false" aria-controls="Teacher">
                         <span class="pe-2"><i class="material-icons">
-                                person</i>
-                        </span>
+                                supervisor_account
+                            </i></span>
                         <span>Teacher</span>
                         <span class="right-icon ms-auto"><i class="material-icons">
                                 chevron_right
@@ -75,13 +43,6 @@
                                 <a href="addInternal.php" class="nav-link ">
                                     <span class="title">
                                         Add Internal
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="committeeMarks.php" class="nav-link ">
-                                    <span class="title">
-                                        Edit Professor
                                     </span>
                                 </a>
                             </li>
