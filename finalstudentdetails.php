@@ -248,25 +248,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = $row['assigned_id'];
-                                                $sql1 = "SELECT `total` FROM `final_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
-                                                $result1=mysqli_query($conn, $sql1);
-                                                $row1=mysqli_fetch_assoc($result1);
+                                                $sql4 = "SELECT `total` FROM `final_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $result4=mysqli_query($conn, $sql4);
+                                                $row4=mysqli_fetch_assoc($result4);
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
-                                                    <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' ' .$row['teacher_lname'] . '</td>
-                                                    <td>';
-                                                    if (mysqli_num_rows($result1) > 0) {
-                                                        echo '<button type="button" class="btn btn-primary btn-sm" disabled><i class="fa fa-plus fa-xs"></i></button>
-                                                        <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-                                                    </td>
-                                                    <td><strong>'.$row1['total'].'</strong></td>';
+                                                    <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
+                                                    <td>
+                                                        <button type="button" id=sa'.$assigned_id.' class="btn btn-primary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-plus fa-xs"></i></button>
+                                                        <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>';
+                                                    if (mysqli_num_rows($result4) > 0) {
+                                                        echo '<td><strong>'.$row4['total'].'</strong></td>';
                                                     }
                                                     else {
-                                                        echo '<button type="button" id=ca'.$assigned_id.' class="btn btn-primary btn-sm comaddEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
-                                                        <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-                                                    </td>
-                                                    <td>---</td>';
+                                                        echo '<td>---</td>';
                                                     }
                                                 echo '</tr>
                                                 ';
