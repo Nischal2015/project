@@ -82,7 +82,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">7</th>
-                                        <td>Completeness of thesis work Planning of organization of thesis work</td>
+                                        <td>Completeness of thesis work</td>
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" id="completeness" name="completeness"

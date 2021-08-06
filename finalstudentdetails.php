@@ -37,20 +37,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 $student_id = $_GET['id'];
                 if(!empty($_POST['committee'])) {
                    foreach($_POST['committee'] as $selected) {
-                       $sql= "INSERT INTO `mid_committee_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
+                       $sql= "INSERT INTO `final_committee_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
                        $result = mysqli_query($conn, $sql);
                    }
                 }
 
                 if (isset($_POST['supervisor'])) {
                     $supervisor_id = $_POST['supervisor'];
-                    $sql= "INSERT INTO `mid_supervisor_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$supervisor_id') FROM students WHERE student_id='$student_id'";
+                    $sql= "INSERT INTO `final_supervisor_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$supervisor_id') FROM students WHERE student_id='$student_id'";
                     $result = mysqli_query($conn, $sql);
                 }
 
                 if (isset($_POST['external'])) {
                     $external_id = $_POST['external'];
-                    $sql= "INSERT INTO `mid_external_assigned` (`assigned_s_id`, `assigned_ext_id`) SELECT student_id, (SELECT external_id FROM ext_teacher WHERE external_id = '$external_id') FROM students WHERE student_id='$student_id'";
+                    $sql= "INSERT INTO `final_external_assigned` (`assigned_s_id`, `assigned_ext_id`) SELECT student_id, (SELECT external_id FROM ext_teacher WHERE external_id = '$external_id') FROM students WHERE student_id='$student_id'";
                     $result = mysqli_query($conn, $sql);
                 }
                 if (isset($_POST['supervisor_assigned_id'])) {
@@ -61,7 +61,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $par4 = $_POST['effort'];
                     $par5 = $_POST['organization'];
                     $sum = $par1+$par2+$par3+$par4+$par5;
-                    $sql = "INSERT INTO `mid_supervisor` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$sum')";
+                    $sql = "INSERT INTO `final_supervisor` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$sum')";
                     $marks = mysqli_query($conn, $sql);
                 }
 
@@ -76,7 +76,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $par7 = $_POST['completeness'];
                     $par8 = $_POST['planning'];
                     $sum = $par1+$par2+$par3+$par4+$par5+$par6+$par7+$par8;
-                    $sql = "INSERT INTO `mid_committee` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
+                    $sql = "INSERT INTO `final_committee` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
                     $marks = mysqli_query($conn, $sql);
                 }
 
@@ -91,7 +91,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $par7 = $_POST['completeness'];
                     $par8 = $_POST['planning'];
                     $sum = $par1+$par2+$par3+$par4+$par5+$par6+$par7+$par8;
-                    $sql = "INSERT INTO `mid_external` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
+                    $sql = "INSERT INTO `final_external` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
                     $marks = mysqli_query($conn, $sql);
                 }
             }
@@ -125,8 +125,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             <div class="row mb-4">
                 <div class="col-md-7 d-flex justify-content-end text-muted">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a role="button" href="studentdetails.php?id=<?php echo $id;?>" class="btn btn-primary" active>MidTerm</a>
-                        <a role="button" href="finalstudentdetails.php?id=<?php echo $id;?>" class="btn btn-outline-primary border border-primary border-1">FinalTerm</a>
+                        <a role="button" href="studentdetails.php?id=<?php echo $id;?>" class="btn btn-outline-primary border border-primary border-1">MidTerm</a>
+                        <a role="button" href="finalstudentdetails.php?id=<?php echo $id;?>" class="btn btn-primary" active>FinalTerm</a>
                     </div>
                 </div>
             </div>
@@ -240,7 +240,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $student_id = $_GET['id'];
                                             $sql = "SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
                                             FROM teacher t
-                                            INNER JOIN mid_supervisor_assigned ta
+                                            INNER JOIN final_supervisor_assigned ta
                                             ON t.teacher_id = ta.assigned_teacher_id
                                             WHERE ta.assigned_s_id = '$student_id'";
 
@@ -248,22 +248,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = $row['assigned_id'];
-                                                $sql1 = "SELECT `total` FROM `mid_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $sql1 = "SELECT `total` FROM `final_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result1=mysqli_query($conn, $sql1);
                                                 $row1=mysqli_fetch_assoc($result1);
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
-                                                    <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
-                                                    <td>
-                                                        <button type="button" id=sa'.$assigned_id.' class="btn btn-primary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-plus fa-xs"></i></button>
-                                                        <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-                                                    </td>';
+                                                    <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' ' .$row['teacher_lname'] . '</td>
+                                                    <td>';
                                                     if (mysqli_num_rows($result1) > 0) {
-                                                        echo '<td><strong>'.$row1['total'].'</strong></td>';
+                                                        echo '<button type="button" class="btn btn-primary btn-sm" disabled><i class="fa fa-plus fa-xs"></i></button>
+                                                        <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td><strong>'.$row1['total'].'</strong></td>';
                                                     }
                                                     else {
-                                                        echo '<td>---</td>';
+                                                        echo '<button type="button" id=ca'.$assigned_id.' class="btn btn-primary btn-sm comaddEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
+                                                        <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td>---</td>';
                                                     }
                                                 echo '</tr>
                                                 ';
@@ -303,7 +306,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $student_id = $_GET['id'];
                                             $sql = "SELECT ta.assigned_id, t.external_id, t.external_post, t.external_fname, t.external_mname, t.external_lname
                                             FROM ext_teacher t
-                                            INNER JOIN mid_external_assigned ta
+                                            INNER JOIN final_external_assigned ta
                                             ON t.external_id = ta.assigned_ext_id
                                             WHERE ta.assigned_s_id = '$student_id'";
 
@@ -311,7 +314,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = $row['assigned_id'];
-                                                $sql2 = "SELECT `total` FROM `mid_external` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $sql2 = "SELECT `total` FROM `final_external` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result2=mysqli_query($conn, $sql2);
                                                 $row2=mysqli_fetch_assoc($result2);
                                                 echo'
@@ -368,7 +371,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $student_id = $_GET['id'];
                                             $sql = "SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
                                             FROM teacher t
-                                            INNER JOIN mid_committee_assigned ta
+                                            INNER JOIN final_committee_assigned ta
                                             ON t.teacher_id = ta.assigned_teacher_id
                                             WHERE ta.assigned_s_id = '$student_id'";
 
@@ -376,7 +379,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = $row['assigned_id'];
-                                                $sql1 = "SELECT `total` FROM `mid_committee` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $sql1 = "SELECT `total` FROM `final_committee` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result1=mysqli_query($conn, $sql1);
                                                 $row1=mysqli_fetch_assoc($result1);
                                                 echo'
