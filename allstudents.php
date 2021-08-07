@@ -168,7 +168,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                                 <td>'. $row['student_thesis'] .'</td>
                                                 <td>'. $row['student_regdate']. '</td>
                                                 <td>
-                                                    <button type="button" class="edit btn btn-primary btn-sm" id=e'. $row['student_id'] .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
+                                                    <button type="button" class="edit btn btn-secondary btn-sm" id=e'. $row['student_id'] .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
                                                     <i class="fa fa-pencil"></i>
                                                     </button>
                                                     <button type="button" class="delete btn btn-danger btn-sm" id=d'. $row['student_id'] .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
