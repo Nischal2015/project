@@ -1,4 +1,5 @@
-    <!-- Committee Modal -->
+    <!-- This is the modal for mid term -->
+    <!-- Committee and External Modal -->
     <div class="modal fade" id="committee_marking" aria-labelledby="committee_markingLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
             <div class="modal-content">
