@@ -23,11 +23,11 @@ echo'<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 // Show this if the user is not logged in
 if (!$loggedin) {
 	echo '<li class="nav-item">
-	<a class="nav-link" href="/project/login.php">Login</a>
+	<a class="nav-link"  href="#" data-bs-toggle="modal"  data-bs-target="#loginModal">Login</a>
 	</li>
 
 	<li class="nav-item">
-	<a class="nav-link" href="/project/signup.php">Signup</a>
+	<a class="nav-link" href="#" data-bs-toggle="modal"  data-bs-target="#signupModal">Signup</a>
 	</li>';
 }
 
