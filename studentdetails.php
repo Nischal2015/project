@@ -159,7 +159,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="col-md-4 mb-4">
                         <!-- Select committee members -->
                         <div class="dropdown">
-                            <div class="btn-group">
+                            <div class="btn-group" style="width:100%;">
                                 <button class="btn dropdown-toggle border border-secondary border-1"
                                     id="dropdownMenuClickableInside" data-bs-toggle="dropdown"
                                     data-bs-auto-close="outside" aria-expanded="false"
@@ -427,10 +427,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             </div>
         </div>
     </main>
-
+    <footer>
     <?php include 'partials/_footer.php'; ?>
+        <?php include 'partials/_marks_modal.php'; ?>
+    </footer>
 
-
+    
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -443,10 +445,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 -->
-    <footer>
-        <?php include 'partials/_marks_modal.php'; ?>
-    </footer>
-
 
     <script>
     addEdits = document.getElementsByClassName("addEd");
@@ -470,7 +468,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
-            document.getElementById("supervisor_markingLabel").innerText = name;
+            document.getElementById("supervisor_markingLabel").innerText =  name;
             element_id = e.currentTarget.id;
             supervisor_assigned_id.value = element_id;
         })
