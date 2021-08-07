@@ -84,17 +84,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	?>
 
 
-    <div class="container my-4 col-lg-4 col-md-8 col-12">
-        <ul class="nav nav-tabs nav-fill">
-            <li class="nav-item">
-                <a class="nav-link text-secondary" aria-current="page" href="/project/login.php">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active border-light border-bottom-0 border-2 text-primary"
-                    href="/project/signup.php">SignUp</a>
-            </li>
-        </ul>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
+  Signup
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
         <!-- Signup form starts here -->
         <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" class="bg-light p-3 rounded-3">
             <div class="mb-3">
@@ -114,7 +118,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="btn btn-primary">SignUp</button>
         </form>
         <!-- Signup form ends here -->
+      </div>
     </div>
+  </div>
+</div>
 
     <!-- Footer starts here -->
     <?php require 'partials/_footer.php'; ?>
