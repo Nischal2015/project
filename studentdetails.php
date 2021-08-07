@@ -54,19 +54,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $result = mysqli_query($conn, $sql);
                 }
                 if (isset($_POST['supervisor_assigned_id'])) {
-                    $sno = $_POST['supervisor_assigned_id'];
+                    $identity = $_POST['supervisor_assigned_id'];
+                    $action=substr($identity, 0,2);
+                    $sno = substr($identity,2);
                     $par1 = $_POST['regularity']; 
                     $par2 = $_POST['completeness_degree'];
                     $par3 = $_POST['understanding_thesis'];
                     $par4 = $_POST['effort'];
                     $par5 = $_POST['organization'];
                     $sum = $par1+$par2+$par3+$par4+$par5;
+                    if($action=="sa") {
                     $sql = "INSERT INTO `mid_supervisor` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$sum')";
+                    }
+
+                    elseif($action=="se") {
+                        $sql="UPDATE `mid_supervisor` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
+                    }
                     $marks = mysqli_query($conn, $sql);
                 }
 
-                if (isset($_POST['committee_assigned_id'])) {
-                    $sno = $_POST['committee_assigned_id'];
+                if (isset($_POST['assigned_id'])) {
+                    $identity = $_POST['assigned_id'];
+                    $action=substr($identity, 0,2);
+                    $sno = substr($identity,2);
                     $par1 = $_POST['quality_of_presentation']; 
                     $par2 = $_POST['problem_identification'];
                     $par3 = $_POST['methodology'];
@@ -76,22 +86,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $par7 = $_POST['completeness'];
                     $par8 = $_POST['planning'];
                     $sum = $par1+$par2+$par3+$par4+$par5+$par6+$par7+$par8;
-                    $sql = "INSERT INTO `mid_committee` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
-                    $marks = mysqli_query($conn, $sql);
-                }
-
-                if (isset($_POST['external_assigned_id'])) {
-                    $sno = $_POST['external_assigned_id'];
-                    $par1 = $_POST['quality_of_presentation']; 
-                    $par2 = $_POST['problem_identification'];
-                    $par3 = $_POST['methodology'];
-                    $par4 = $_POST['literature_review'];
-                    $par5 = $_POST['understanding'];
-                    $par6 = $_POST['answers'];
-                    $par7 = $_POST['completeness'];
-                    $par8 = $_POST['planning'];
-                    $sum = $par1+$par2+$par3+$par4+$par5+$par6+$par7+$par8;
+                    if($action=="ea") {
                     $sql = "INSERT INTO `mid_external` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
+                    }
+                    elseif($action=="ca") {
+                        $sql = "INSERT INTO `mid_committee` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
+                    }
+                    elseif($action=="ee") {
+                        $sql="UPDATE `mid_external` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `par6` = '$par6', `par7` = '$par7', `par8` = '$par8', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
+                    }
+                    elseif($action=="ce") {
+                        $sql="UPDATE `mid_committee` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `par6` = '$par6', `par7` = '$par7', `par8` = '$par8', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
+                    }
                     $marks = mysqli_query($conn, $sql);
                 }
             }
@@ -236,6 +242,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- Supervisor table body -->
                                         <?php
                                             $student_id = $_GET['id'];
                                             $sql = "SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
@@ -255,15 +262,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                                 <tr>
                                                     <td>'.$sno.'</td>
                                                     <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
-                                                    <td>
-                                                        <button type="button" id=sa'.$assigned_id.' class="btn btn-primary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-plus fa-xs"></i></button>
-                                                        <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-                                                    </td>';
+                                                    <td>';
                                                     if (mysqli_num_rows($result1) > 0) {
-                                                        echo '<td><strong>'.$row1['total'].'</strong></td>';
+                                                        echo '
+                                                        <button type="button" id=se'.$assigned_id.' class="btn btn-secondary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-pencil fa-xs"></i></button>
+                                                        <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                        </td>
+                                                        <td><strong>'.$row1['total'].'</strong></td>';
                                                     }
                                                     else {
-                                                        echo '<td>---</td>';
+                                                        echo '
+                                                        <button type="button" id=sa'.$assigned_id.' class="btn btn-primary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-plus fa-xs"></i></button>
+                                                        <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td>---</td>';
                                                     }
                                                 echo '</tr>
                                                 ';
@@ -318,15 +330,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                                 <tr>
                                                     <td>'.$sno.'</td>
                                                     <td>'. $row['external_post'].' ' . $row['external_fname'] . ' ' . $row['external_mname']. ' '.$row['external_lname'] . '</td>
-                                                    <td>
-                                                        <button type="button" id=ea'.$assigned_id.' class="btn btn-primary btn-sm extaddEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
-                                                        <button type="button" id=ed'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-                                                    </td>';
+                                                    <td>';
                                                     if (mysqli_num_rows($result2) > 0) {
-                                                        echo '<td><strong>'.$row2['total'].'</strong></td>';
+                                                        echo '
+                                                        <button type="button" id=ee'.$assigned_id.' class="btn btn-secondary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-pencil fa-xs"></i></button>
+                                                        <button type="button" id=ed'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td><strong>'.$row2['total'].'</strong></td>';
                                                     }
                                                     else {
-                                                        echo '<td>---</td>';
+                                                        echo '
+                                                        <button type="button" id=ea'.$assigned_id.' class="btn btn-primary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
+                                                        <button type="button" id=ed'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td>---</td>';
                                                     }
                                                 echo '</tr>
                                                 ';
@@ -385,13 +402,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                                     <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' ' .$row['teacher_lname'] . '</td>
                                                     <td>';
                                                     if (mysqli_num_rows($result1) > 0) {
-                                                        echo '<button type="button" class="btn btn-primary btn-sm" disabled><i class="fa fa-plus fa-xs"></i></button>
+                                                        echo '<button type="button" id=ce'.$assigned_id.' class="btn btn-secondary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-pencil fa-xs"></i></button>
                                                         <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
                                                     </td>
                                                     <td><strong>'.$row1['total'].'</strong></td>';
                                                     }
                                                     else {
-                                                        echo '<button type="button" id=ca'.$assigned_id.' class="btn btn-primary btn-sm comaddEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
+                                                        echo '<button type="button" id=ca'.$assigned_id.' class="btn btn-primary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
                                                         <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
                                                     </td>
                                                     <td>---</td>';
@@ -432,32 +449,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
 
     <script>
-    comaddEdits = document.getElementsByClassName("comaddEd");
-    Array.from(comaddEdits).forEach((element) => {
-        element.addEventListener("click", (e) => {
-            document.querySelectorAll(".comhidden")[0].setAttribute("name", "committee_assigned_id");
+    addEdits = document.getElementsByClassName("addEd");
+    Array.from(addEdits).forEach((element) => {
+        element.addEventListener("click", (e) => {            
             supervisor_assigned_id.value = null;
             assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
             document.getElementById("committee_markingLabel").innerText = name;
-            console.log("comm envoked")
-            element_id = e.currentTarget.id.substr(2, );
-            assigned_id.value = element_id;
-        })
-    })
-
-    extaddEdits = document.getElementsByClassName("extaddEd");
-    Array.from(extaddEdits).forEach((element) => {
-        element.addEventListener("click", (e) => {
-            document.querySelectorAll(".comhidden")[0].setAttribute("name", "external_assigned_id");
-            supervisor_assigned_id.value = null;
-            assigned_id.value = null;
-            tr = e.currentTarget.parentNode.parentNode;
-            name = tr.getElementsByTagName("td")[1].innerText;
-            document.getElementById("committee_markingLabel").innerText = name;
-            console.log("comm envoked")
-            element_id = e.currentTarget.id.substr(2, );
+            element_id = e.currentTarget.id;
             assigned_id.value = element_id;
         })
     })
@@ -471,8 +471,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
             document.getElementById("supervisor_markingLabel").innerText = name;
-            console.log("sup envoked")
-            element_id = e.currentTarget.id.substr(2, );
+            element_id = e.currentTarget.id;
             supervisor_assigned_id.value = element_id;
         })
     })

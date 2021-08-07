@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
                         <input class="comhidden" name="assigned_id" id="assigned_id"
-                            style="display: none;">
+                            >
                         <div class="table-responsive">
                             <table class="table table-striped table-hover committee-marks-table" style="width: 100%" ;>
                                 <colgroup>
