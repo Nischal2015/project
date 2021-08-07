@@ -2,7 +2,8 @@
     <!-- Offcanvas trigger -->
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
         aria-controls="sidebar">
-        <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
+        <!-- <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span> -->
+        <span class="material-icons" data-bs-target="#sidebar">menu</span>
     </button>
     <div class="page-title">
         <a class="navbar-brand fw-bold text-uppercase me-auto" id="thesis" href="#">
@@ -14,11 +15,11 @@
     </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="material-icons">menu</span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="d-flex ms-auto navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item dropdown me-3">
+            <li class="nav-item dropdown mx-3">
                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="material-icons me-1">

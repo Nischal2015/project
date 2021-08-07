@@ -160,7 +160,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="col-md-4 mb-4">
                         <!-- Select committee members -->
                         <div class="dropdown">
-                            <div class="btn-group">
+                            <div class="btn-group" style="width:100%;">
                                 <button class="btn dropdown-toggle border border-secondary border-1"
                                     id="dropdownMenuClickableInside" data-bs-toggle="dropdown"
                                     data-bs-auto-close="outside" aria-expanded="false"
