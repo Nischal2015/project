@@ -14,7 +14,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Displays the dashboard of admin profile">
+    <meta name="description" content="Displays the page for adding student">
     <!-- Font awesome pack -->
     <script src="https://kit.fontawesome.com/0212f0c4e4.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
@@ -32,9 +32,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 <body>
     <!-- Header starts here -->
     <?php include 'partials/_nav2.php'; ?>
-    <?php include 'partials/_sidebar.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
     <!-- Header ends here -->
+    
+    <aside>
+        <?php include 'partials/_sidebar.php'; ?>
+    </aside>
 
     <!-- Main content starts here -->
     <main class="p-2 mt-1" style="min-height: 800px">

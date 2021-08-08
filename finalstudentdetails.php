@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Displays the dashboard of admin profile">
+    <meta name="description" content="Displays the details of student in final thesis defense">
     <!-- Font awesome pack -->
     <script src="https://kit.fontawesome.com/0212f0c4e4.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
@@ -25,11 +25,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 </head>
 
 <body>
-    <header>        
+    <header>
         <?php include 'partials/_nav2.php'; ?>
-        <?php include 'partials/_sidebar.php'; ?>
         <?php include 'partials/_dbconnect.php'; ?>
     </header>
+
+    <aside>
+        <?php include 'partials/_sidebar.php'; ?>
+    </aside>
 
     <main class="p-2 mt-1" style="min-height: 800px">
         <?php
@@ -163,14 +166,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 </div>
             </div>
             <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
-            <div class="row mb-4">
-                <div class="col-md-7 d-flex justify-content-end text-muted">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a role="button" href="studentdetails.php?id=<?php echo $id;?>" class="btn btn-outline-primary border border-primary border-1">MidTerm</a>
-                        <a role="button" href="finalstudentdetails.php?id=<?php echo $id;?>" class="btn btn-primary" active>FinalTerm</a>
+                <div class="row mb-4">
+                    <div class="col-md-7 d-flex justify-content-end text-muted">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="studentdetails.php?id=<?php echo $id;?>"
+                                class="btn btn-outline-primary border border-primary border-1">MidTerm</a>
+                            <a role="button" href="finalstudentdetails.php?id=<?php echo $id;?>" class="btn btn-primary"
+                                active>FinalTerm</a>
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="row">
                     <!-- Supervisor Section -->
                     <div class="col-md-3 mb-4">
@@ -462,7 +467,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         </div>
     </main>
 
-    <?php include 'partials/_footer.php'; ?>
+    <footer>
+        <?php include 'partials/_footer.php'; ?>
+    </footer>
 
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -477,10 +484,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 -->
-    <footer>
-        <?php include 'partials/_marks_modal_final.php'; ?>
-    </footer>
 
+    <?php include 'partials/_marks_modal_final.php'; ?>
 
     <script>
     comaddEdits = document.getElementsByClassName("comaddEd");

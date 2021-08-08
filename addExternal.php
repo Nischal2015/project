@@ -15,7 +15,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Displays the dashboard of admin profile">
+    <meta name="description" content="Displays the page for adding external teacher">
     <!-- Font awesome pack -->
     <script src="https://kit.fontawesome.com/0212f0c4e4.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
@@ -30,18 +30,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 <body>
     <header>
         <?php include 'partials/_nav2.php'; ?>
-        <?php include 'partials/_sidebar.php'; ?>
         <?php include 'partials/_dbconnect.php'; ?>
+
         <?php
-    if (isset($_GET['delete'])) {
-        $external_id = $_GET['delete'];
-        echo $external_id;
-        $sql = "DELETE FROM `ext_teacher` WHERE `external_id` = '$external_id'";
-        $result = mysqli_query($conn, $sql);
-        $delete = true;
-    }
-    ?>
+        if (isset($_GET['delete'])) {
+            $external_id = $_GET['delete'];
+            echo $external_id;
+            $sql = "DELETE FROM `ext_teacher` WHERE `external_id` = '$external_id'";
+            $result = mysqli_query($conn, $sql);
+            $delete = true;
+        }
+        ?>
     </header>
+
+    <aside>
+        <?php include 'partials/_sidebar.php'; ?>
+    </aside>
 
     <main class="p-2 mt-1" style="min-height: 800px">
         <div class="container-fluid page-header">
@@ -114,7 +118,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2">
-                                            <select name="Etpost" class="form-select" aria-label="Default select example" id="Etpost">
+                                            <select name="Etpost" class="form-select"
+                                                aria-label="Default select example" id="Etpost">
                                                 <option selected value="">Choose..</option>
                                                 <option value="Dr.">Dr.</option>
                                                 <option value="Mr.">Mr.</option>
@@ -219,7 +224,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         </div>
     </main>
 
-    <?php include 'partials/_footer.php'; ?>
+    <footer>
+        <?php include 'partials/_footer.php'; ?>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>

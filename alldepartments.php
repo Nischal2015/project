@@ -17,7 +17,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Displays the dashboard of admin profile">
+    <meta name="description" content="Displays all departments">
     <!-- Font awesome pack -->
     <script src="https://kit.fontawesome.com/0212f0c4e4.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
@@ -32,9 +32,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 <body>
     <header>
         <?php include 'partials/_nav2.php'; ?>
-        <?php include 'partials/_sidebar.php'; ?>
         <?php include 'partials/_dbconnect.php'; ?>
     </header>
+
+    <aside>
+        <?php include 'partials/_sidebar.php'; ?>
+    </aside>
 
     <main class="p-2 mt-1" style="min-height: 800px">
         <div class="container-fluid page-header">
@@ -198,7 +201,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         </div>
     </main>
 
-    <?php include 'partials/_footer.php'; ?>
+    <footer>
+        <?php include 'partials/_footer.php'; ?>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
@@ -229,7 +234,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             } 
         })
     })
-
     </script>
 
 </body>

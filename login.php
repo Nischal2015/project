@@ -40,6 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Login page of website">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -58,7 +59,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <!-- Header starts here -->
-    <?php require 'partials/_nav.php' ?>
+    <header>
+        <?php require 'partials/_nav.php' ?>
+    </header>
     <!-- Header ends here -->
 
     <?php
@@ -84,31 +87,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	?>
-    <div class="container my-4 col-lg-4 col-md-8 col-12">
-        <ul class="nav nav-tabs nav-fill">
-            <li class="nav-item">
-                <a class="nav-link active border-light border-bottom-0 border-2  text-primary" aria-current="page"
-                    href="/project/login.php">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-secondary" href="/project/signup.php">SignUp</a>
-            </li>
-        </ul>
+    <main>
+        <div class="container my-4 col-lg-4 col-md-8 col-12">
+            <ul class="nav nav-tabs nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link active border-light border-bottom-0 border-2  text-primary" aria-current="page"
+                        href="/project/login.php">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="/project/signup.php">SignUp</a>
+                </li>
+            </ul>
 
-        <form action="/project/login.php" method="post" class="bg-light p-3 rounded-3">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </div>
+            <form action="/project/login.php" method="post" class="bg-light p-3 rounded-3">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </main>
 
-    <?php include 'partials/_footer.php'; ?>
+    <footer>
+        <?php include 'partials/_footer.php'; ?>
+    </footer>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

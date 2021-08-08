@@ -1,3 +1,5 @@
+<!-- Presents the navbar once the admin is logged in -->
+
 <nav class="navbar navbar-expand-lg bg-light fixed-top shadow my-0">
     <!-- Offcanvas trigger -->
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar"
