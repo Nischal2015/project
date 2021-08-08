@@ -51,29 +51,100 @@ else{
                     <div><strong>Firstname</strong></div>
                     <div><strong>Roll No.</strong></div>
                     <div><strong>Student Year</strong></div>
+                    <div><strong>Thesis Title</strong></div>
                 </div>
                 <div class="col-md-4">
                     <div>'.$row['student_fname'].'</div>
                     <div>'.$row['student_roll'].'</div>
                     <div>'.$row['student_year'].'</div>
+                    <div>'. strtoupper($row['student_thesis']) .'</div>
                 </div>
                 <div class="col-md-2">
                     <div><strong>Lastname</strong></div>
                     <div><strong>Gender</strong></div>
                     <div><strong>Department</strong></div>
+                    <div><strong>Marks Details</strong></div>
                 </div>
                 <div class="col-md-4">
                     <div>'.$row['student_lname'].'</div>
                     <div>'.$row['student_gender'].'</div>
                     <div>'.$row['student_dep'].'</div>
-                </div>
-                <div class="col-md-2">
-                    <div><strong>Thesis Title</strong></div>
-                </div>
-                <div class="col-md-6">
-                    <div>'. strtoupper($row['student_thesis']) .'</div>
+                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#marksDetailsModal">
+                    <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
+                    </button>
                 </div>';
                 ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="marksDetailsModal" aria-labelledby="marksDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="marksDetailsModalLabel"><strong>Marks Details<?php echo ' ('.$row['student_fname']. ' ' .$row['student_lname'].')'?></strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table id="marks-list" class="table table-striped table-hover" style="width:100%">
+                        <colgroup>
+                            <col span="1" style="width: 30%;">
+                            <col span="1" style="width: 25%;">
+                            <col span="1" style="width: 25%;">
+                            <col span="1" style="width: 20%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Mid</th>
+                                <th>Final</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            $std_id = $_GET['id'];
+                            $sql = "SELECT * FROM `total_marks` WHERE `tm_student_id`='$std_id'";
+                            $result = mysqli_query($conn, $sql);
+                            $student_marks = mysqli_fetch_assoc($result);
+                            echo '
+                            <tr>
+                                <th>Supervisor</th>
+                                <td>'.$student_marks['tm_mid_sup'].'</td>
+                                <td>'.$student_marks['tm_final_sup'].'</td>
+                                <td><strong>'.$student_marks['tm_mid_sup']+$student_marks['tm_final_sup'].'</strong></td>
+                            </tr>
+                            <tr>
+                                <th>Committee</th>
+                                <td>'.$student_marks['tm_mid_com'].'</td>
+                                <td>'.$student_marks['tm_final_com'].'</td>
+                                <td><strong>'.$student_marks['tm_mid_com']+$student_marks['tm_final_com'].'</strong></td>
+                            </tr>
+                            <tr>
+                                <th>External</th>
+                                <td>'.$student_marks['tm_mid_ext'].'</td>
+                                <td>'.$student_marks['tm_final_ext'].'</td>
+                                <td><strong>'.$student_marks['tm_mid_ext']+$student_marks['tm_final_ext'].'</strong></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Total</th>
+                                <td><strong>'.$student_marks['tm_mid_sup']+$student_marks['tm_mid_com']+$student_marks['tm_mid_ext'].'</strong></td>
+                                <td><strong>'.$student_marks['tm_final_sup']+$student_marks['tm_final_com']+$student_marks['tm_final_ext'].'</strong></td>
+                                <td><strong>'.$student_marks['tm_mid_sup']+$student_marks['tm_mid_com']+$student_marks['tm_mid_ext']+$student_marks['tm_final_sup']+$student_marks['tm_final_com']+$student_marks['tm_final_ext'].'</strong></td>
+                            </tr>
+                            </tfoot><strong>';
+                            ?>
+                        
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

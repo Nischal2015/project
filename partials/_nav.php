@@ -25,7 +25,6 @@ if (!$loggedin) {
 	echo '<li class="nav-item">
 	<a class="nav-link" href="/project/login.php">Login</a>
 	</li>
-
 	<li class="nav-item">
 	<a class="nav-link" href="/project/signup.php">Signup</a>
 	</li>';
@@ -49,4 +48,3 @@ echo '</ul>
 </nav>';
 
 ?>
-

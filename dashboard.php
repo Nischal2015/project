@@ -86,7 +86,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         </i></span>
                                 </div>
                                 <div class="col-md-9">
-                                    <strong class="card-title">Total Teachers</strong>
+                                    <strong class="card-title">Total Internals</strong>
                                     <p>
                                         <?php
                                         $sql = "SELECT `teacher_id` FROM `teacher`";
