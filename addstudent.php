@@ -53,6 +53,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 $thesis = $_POST['thesis'];
                 $sql = "INSERT INTO `students` (`student_fname`, `student_lname`, `student_roll`, `student_dep`, `student_gender`, `student_regdate`, `student_year`, `student_thesis`) VALUES ('$fname', '$lname', '$roll', '$dep', '$gender', '$regdate', '$year', '$thesis')";
                 $result = mysqli_query($conn, $sql);
+                
+                $getid = "SELECT `student_id` FROM `students` WHERE `student_roll` = '$roll'";
+                $result1 = mysqli_query($conn, $getid);
+                $row1 = mysqli_fetch_assoc($result1);
+                $student_id = $row1['student_id'];
+
+                $sql_marks = "INSERT INTO `total_marks` (`tm_student_id`, `tm_mid_sup`, `tm_mid_com`, `tm_mid_ext`, `tm_final_sup`, `tm_final_com`, `tm_final_ext`) VALUES ('$student_id', '0', '0', '0', '0', '0', '0')";
+                mysqli_query($conn, $sql_marks);
                 $showAlert = true;
             }
     

@@ -33,25 +33,42 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
     <main class="p-2 mt-1" style="min-height: 800px">
         <?php
+        function marks_calc_com($sql, $conn, $student_id) {
+            $portion_avg = "SELECT AVG(total) FROM mid_committee WHERE st_te_assigned_id IN ( SELECT assigned_id FROM mid_committee_assigned WHERE assigned_s_id = '$student_id')";
+            mysqli_query($conn, $sql);
+            $result_avg = mysqli_query($conn, $portion_avg);
+            $row_avg = mysqli_fetch_assoc($result_avg);
+            $portion = $row_avg['AVG(total)']/100*10;
+            $marks_portion = "UPDATE `total_marks` SET `tm_mid_com` = '$portion'  WHERE `tm_student_id` = '$student_id'";
+            mysqli_query($conn, $marks_portion);
+            echo "comm" . $portion;
+        }
+
+        function marks_calc_ext($sql, $conn, $student_id, $portion) {
+            $marks_portion = "UPDATE `total_marks` SET `tm_mid_ext` = '$portion'  WHERE `tm_student_id` = '$student_id'";
+            mysqli_query($conn, $sql);
+            mysqli_query($conn, $marks_portion);
+            echo "ext" . $portion;
+        }
             if($_SERVER['REQUEST_METHOD']=='POST') {
                 $student_id = $_GET['id'];
                 if(!empty($_POST['committee'])) {
                    foreach($_POST['committee'] as $selected) {
                        $sql= "INSERT INTO `mid_committee_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
-                       $result = mysqli_query($conn, $sql);
+                       mysqli_query($conn, $sql);
                    }
                 }
 
                 if (isset($_POST['supervisor'])) {
                     $supervisor_id = $_POST['supervisor'];
                     $sql= "INSERT INTO `mid_supervisor_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$supervisor_id') FROM students WHERE student_id='$student_id'";
-                    $result = mysqli_query($conn, $sql);
+                    mysqli_query($conn, $sql);
                 }
 
                 if (isset($_POST['external'])) {
                     $external_id = $_POST['external'];
                     $sql= "INSERT INTO `mid_external_assigned` (`assigned_s_id`, `assigned_ext_id`) SELECT student_id, (SELECT external_id FROM ext_teacher WHERE external_id = '$external_id') FROM students WHERE student_id='$student_id'";
-                    $result = mysqli_query($conn, $sql);
+                    mysqli_query($conn, $sql);
                 }
                 if (isset($_POST['supervisor_assigned_id'])) {
                     $identity = $_POST['supervisor_assigned_id'];
@@ -63,14 +80,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $par4 = $_POST['effort'];
                     $par5 = $_POST['organization'];
                     $sum = $par1+$par2+$par3+$par4+$par5;
+                    $portion = $sum / 100 * 20;
                     if($action=="sa") {
                     $sql = "INSERT INTO `mid_supervisor` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$sum')";
                     }
 
                     elseif($action=="se") {
-                        $sql="UPDATE `mid_supervisor` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
+                    $sql="UPDATE `mid_supervisor` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
                     }
-                    $marks = mysqli_query($conn, $sql);
+                    $marks_portion = "UPDATE `total_marks` SET `tm_mid_sup` = '$portion'  WHERE `tm_student_id` = '$student_id'";
+                    mysqli_query($conn, $sql);
+                    mysqli_query($conn, $marks_portion);
                 }
 
                 if (isset($_POST['assigned_id'])) {
@@ -86,19 +106,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $par7 = $_POST['completeness'];
                     $par8 = $_POST['planning'];
                     $sum = $par1+$par2+$par3+$par4+$par5+$par6+$par7+$par8;
+                    $portion = $sum / 100 * 10;
                     if($action=="ea") {
                     $sql = "INSERT INTO `mid_external` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
-                    }
-                    elseif($action=="ca") {
-                        $sql = "INSERT INTO `mid_committee` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
+                    marks_calc_ext($sql, $conn, $student_id, $portion);
                     }
                     elseif($action=="ee") {
                         $sql="UPDATE `mid_external` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `par6` = '$par6', `par7` = '$par7', `par8` = '$par8', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
+                        marks_calc_ext($sql, $conn, $student_id, $portion);
+                    }
+                    elseif($action=="ca") {
+                        $sql = "INSERT INTO `mid_committee` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$sum')";
+                        marks_calc_com($sql, $conn, $student_id);
                     }
                     elseif($action=="ce") {
                         $sql="UPDATE `mid_committee` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `par6` = '$par6', `par7` = '$par7', `par8` = '$par8', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
-                    }
-                    $marks = mysqli_query($conn, $sql);
+                        marks_calc_com($sql, $conn, $student_id);
+                    }                
                 }
             }
         ?>

@@ -25,7 +25,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 </head>
 
 <body>
-    <header>
+    <header>        
         <?php include 'partials/_nav2.php'; ?>
         <?php include 'partials/_sidebar.php'; ?>
         <?php include 'partials/_dbconnect.php'; ?>
@@ -63,14 +63,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $par4 = $_POST['effort'];
                     $par5 = $_POST['organization'];
                     $sum = $par1+$par2+$par3+$par4+$par5;
+                    $portion = $sum / 100 * 20;
                     if($action=="sa") {
                     $sql = "INSERT INTO `final_supervisor` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$sum')";
                     }
 
                     elseif($action=="se") {
-                        $sql="UPDATE `final_supervisor` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
+                    $sql="UPDATE `final_supervisor` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
                     }
-                    $marks = mysqli_query($conn, $sql);
+                    $marks_portion = "UPDATE `total_marks` SET `tm_final_sup` = '$portion'  WHERE `tm_student_id` = '$student_id'";
+                    mysqli_query($conn, $sql);
+                    mysqli_query($conn, $marks_portion);
                 }
 
                 if (isset($_POST['committee_assigned_id'])) {
@@ -94,7 +97,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     elseif($action=="ce") {
                         $sql="UPDATE `final_committee` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `par6` = '$par6', `par7` = '$par7', `par8` = '$par8', `par9` = '$par9', `par10` = '$par10', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
                     }     
-                    $marks = mysqli_query($conn, $sql);               
+                    $portion_avg = "SELECT AVG(total) FROM final_committee WHERE st_te_assigned_id IN ( SELECT assigned_id FROM final_committee_assigned WHERE assigned_s_id = '$student_id')";
+                    mysqli_query($conn, $sql);
+                    $result_avg = mysqli_query($conn, $portion_avg);
+                    $row_avg = mysqli_fetch_assoc($result_avg);
+                    $portion = $row_avg['AVG(total)']/100*20;
+                    $marks_portion = "UPDATE `total_marks` SET `tm_final_com` = '$portion'  WHERE `tm_student_id` = '$student_id'";
+                    mysqli_query($conn, $marks_portion);
+                    echo "comm" . $portion;             
                 }
 
                 if (isset($_POST['external_assigned_id'])) {
@@ -112,6 +122,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $par9 = $_POST['scope_research'];
                     $par10 = $_POST['ans_examiner'];
                     $sum = $par1+$par2+$par3+$par4+$par5+$par6+$par7+$par8+$par9+$par10;
+                    $portion = $sum / 100 * 20;
                     if($action=="ea") {
                     $sql = "INSERT INTO `final_external` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`,`par9`, `par10`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$par9', '$par10', '$sum')";
                     }
@@ -119,7 +130,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     elseif($action=="ee") {
                         $sql="UPDATE `final_external` SET `par1` = '$par1', `par2` = '$par2', `par3` = '$par3', `par4` = '$par4', `par5` = '$par5', `par6` = '$par6', `par7` = '$par7', `par8` = '$par8', `par9` = '$par9', `par10` = '$par10', `total` = '$sum' WHERE `st_te_assigned_id` = '$sno'";
                     }    
-                    $marks = mysqli_query($conn, $sql);               
+                    $marks_portion = "UPDATE `total_marks` SET `tm_final_ext` = '$portion'  WHERE `tm_student_id` = '$student_id'";
+                    mysqli_query($conn, $sql);
+                    mysqli_query($conn, $marks_portion);
+                    echo "ext" . $portion;               
                 }
             }
         ?>
