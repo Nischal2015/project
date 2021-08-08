@@ -1,3 +1,4 @@
+<!-- Navbar for the landing page -->
 <?php
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {

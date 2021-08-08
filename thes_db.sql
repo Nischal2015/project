@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 07, 2021 at 09:49 AM
+-- Generation Time: Aug 08, 2021 at 06:11 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -43,7 +43,6 @@ INSERT INTO `admin_user` (`sno`, `username`, `password`, `date`) VALUES
 (2, 'a', '$2y$10$mmHfjBYNz/S7hphpiY0LfuC0IVJYjqjmxb1h9SqWw8V.73lAlSLEG', '2021-07-22 12:33:51'),
 (3, 'admin', '$2y$10$2a.Tzp4TfvzZDvJVLM.ECeF9/IU0h5ALjGlz12FhxKI2BqKRThjUa', '2021-07-22 18:35:22'),
 (4, 'Genius2021', '$2y$10$FqwVHa.AqJObVgJKP7NXve8MZBayn7WDm5DSqLoOeSWKapHzdpKK2', '2021-07-22 20:25:06'),
-(5, 'genius', '$2y$10$k7AL006K51eqCnQyRSbOReNoe/jNDgEkOsI0QVPqYfefepQZ1IlTm', '2021-07-23 18:34:43'),
 (6, 'aero', '$2y$10$5P.F6Q8afegzHO0v9a3lf.ObFFuyuT8ObRPGLx3YwXFvZbAgxGhMu', '2021-08-01 17:17:16');
 
 -- --------------------------------------------------------
@@ -91,8 +90,8 @@ INSERT INTO `ext_teacher` (`external_id`, `external_fname`, `external_mname`, `e
 (6, 'Suresh', '', 'Magar', 'Dr.'),
 (7, 'Sabina', '', 'Joshi', 'Mrs.'),
 (8, 'Radha', 'Kumari', 'Maharjan', 'Mrs.'),
-(9, 'Swaka', 'Man ', 'Pandey', 'Mr.'),
-(10, 'Kamala', 'Shree', 'Rajbhandari', 'Dr.');
+(10, 'Kamala', 'Shree', 'Rajbhandari', 'Dr.'),
+(11, 'Saurav', '', 'Dangi', 'Mr.');
 
 -- --------------------------------------------------------
 
@@ -111,6 +110,8 @@ CREATE TABLE `final_committee` (
   `par6` int(10) NOT NULL,
   `par7` int(10) NOT NULL,
   `par8` int(10) NOT NULL,
+  `par9` int(10) NOT NULL,
+  `par10` int(10) NOT NULL,
   `total` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -118,13 +119,9 @@ CREATE TABLE `final_committee` (
 -- Dumping data for table `final_committee`
 --
 
-INSERT INTO `final_committee` (`final_com_marksid`, `st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES
-(2, 1, 10, 18, 10, 10, 10, 9, 18, 9, 94),
-(5, 11, 10, 10, 10, 10, 10, 10, 10, 10, 80),
-(6, 13, 10, 15, 10, 8, 9, 7, 18, 10, 87),
-(7, 15, 10, 19, 10, 10, 8, 9, 16, 8, 90),
-(9, 19, 10, 18, 10, 10, 10, 10, 18, 10, 96),
-(11, 21, 1, 1, 1, 1, 1, 1, 1, 1, 8);
+INSERT INTO `final_committee` (`final_com_marksid`, `st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `par9`, `par10`, `total`) VALUES
+(19, 26, 10, 10, 8, 8, 8, 8, 8, 8, 8, 9, 85),
+(20, 25, 8, 8, 9, 9, 9, 9, 9, 9, 10, 10, 90);
 
 -- --------------------------------------------------------
 
@@ -143,20 +140,9 @@ CREATE TABLE `final_committee_assigned` (
 --
 
 INSERT INTO `final_committee_assigned` (`assigned_id`, `assigned_s_id`, `assigned_teacher_id`) VALUES
-(17, 46, 6),
-(1, 46, 7),
-(2, 46, 8),
-(3, 46, 9),
-(18, 47, 2),
-(19, 47, 3),
-(20, 47, 4),
-(21, 55, 5),
-(14, 62, 2),
-(15, 62, 6),
-(16, 62, 9),
-(11, 64, 4),
-(12, 64, 6),
-(13, 64, 9);
+(25, 72, 2),
+(26, 72, 4),
+(27, 72, 7);
 
 -- --------------------------------------------------------
 
@@ -175,18 +161,10 @@ CREATE TABLE `final_external` (
   `par6` int(10) NOT NULL,
   `par7` int(10) NOT NULL,
   `par8` int(10) NOT NULL,
+  `par9` int(10) NOT NULL,
+  `par10` int(10) NOT NULL,
   `total` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `final_external`
---
-
-INSERT INTO `final_external` (`final_com_marksid`, `st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES
-(1, 5, 10, 10, 10, 10, 10, 10, 10, 10, 80),
-(2, 1, 10, 10, 10, 10, 10, 10, 10, 10, 80),
-(3, 8, 8, 13, 8, 8, 8, 8, 13, 8, 74),
-(4, 9, 2, 2, 2, 2, 2, 2, 2, 2, 16);
 
 -- --------------------------------------------------------
 
@@ -205,12 +183,7 @@ CREATE TABLE `final_external_assigned` (
 --
 
 INSERT INTO `final_external_assigned` (`assigned_id`, `assigned_s_id`, `assigned_ext_id`) VALUES
-(1, 46, 7),
-(8, 47, 10),
-(9, 55, 7),
-(6, 62, 7),
-(7, 63, 10),
-(5, 64, 6);
+(11, 72, 11);
 
 -- --------------------------------------------------------
 
@@ -234,10 +207,7 @@ CREATE TABLE `final_supervisor` (
 --
 
 INSERT INTO `final_supervisor` (`final_sup_marksid`, `st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `total`) VALUES
-(3, 8, 19, 12, 13, 14, 20, 78),
-(4, 7, 19, 19, 18, 17, 20, 93),
-(5, 10, 17, 17, 17, 17, 17, 85),
-(6, 11, 5, 5, 5, 5, 5, 25);
+(9, 13, 18, 19, 20, 20, 17, 94);
 
 -- --------------------------------------------------------
 
@@ -256,11 +226,7 @@ CREATE TABLE `final_supervisor_assigned` (
 --
 
 INSERT INTO `final_supervisor_assigned` (`assigned_id`, `assigned_s_id`, `assigned_teacher_id`) VALUES
-(7, 46, 8),
-(10, 47, 6),
-(11, 55, 4),
-(9, 62, 7),
-(8, 64, 8);
+(13, 72, 9);
 
 -- --------------------------------------------------------
 
@@ -287,15 +253,7 @@ CREATE TABLE `mid_committee` (
 --
 
 INSERT INTO `mid_committee` (`mid_com_marksid`, `st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES
-(2, 26, 10, 10, 10, 10, 10, 10, 10, 10, 80),
-(3, 33, 10, 15, 8, 9, 9, 9, 20, 9, 89),
-(7, 29, 5, 5, 5, 5, 5, 5, 5, 5, 40),
-(9, 34, 10, 15, 10, 10, 10, 10, 19, 10, 94),
-(11, 47, 10, 19, 10, 9, 9, 10, 19, 10, 96),
-(13, 45, 10, 20, 10, 10, 10, 10, 20, 10, 100),
-(14, 48, 8, 15, 7, 7, 6, 10, 16, 10, 79),
-(15, 50, 8, 15, 9, 7, 7, 8, 16, 8, 78),
-(16, 36, 10, 15, 10, 10, 10, 10, 20, 10, 95);
+(26, 66, 8, 8, 8, 8, 8, 8, 8, 8, 64);
 
 -- --------------------------------------------------------
 
@@ -314,32 +272,9 @@ CREATE TABLE `mid_committee_assigned` (
 --
 
 INSERT INTO `mid_committee_assigned` (`assigned_id`, `assigned_s_id`, `assigned_teacher_id`) VALUES
-(48, 46, 2),
-(49, 46, 3),
-(50, 46, 4),
-(51, 46, 7),
-(52, 46, 9),
-(35, 47, 4),
-(36, 47, 5),
-(59, 47, 9),
-(37, 52, 3),
-(38, 52, 5),
-(39, 52, 8),
-(29, 55, 4),
-(30, 55, 5),
-(26, 55, 7),
-(33, 55, 8),
-(34, 55, 9),
-(45, 62, 4),
-(46, 62, 5),
-(47, 62, 6),
-(40, 63, 2),
-(41, 63, 4),
-(42, 63, 8),
-(44, 63, 9),
-(56, 64, 2),
-(57, 64, 3),
-(58, 64, 4);
+(66, 72, 4),
+(67, 72, 6),
+(68, 72, 9);
 
 -- --------------------------------------------------------
 
@@ -361,16 +296,6 @@ CREATE TABLE `mid_external` (
   `total` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `mid_external`
---
-
-INSERT INTO `mid_external` (`mid_ext_marksid`, `st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`, `total`) VALUES
-(5, 9, 1, 1, 1, 1, 1, 1, 1, 1, 8),
-(6, 10, 10, 20, 10, 10, 10, 10, 20, 10, 100),
-(7, 11, 8, 16, 5, 6, 7, 8, 15, 9, 74),
-(8, 14, 10, 15, 8, 7, 6, 7, 20, 10, 83);
-
 -- --------------------------------------------------------
 
 --
@@ -388,13 +313,7 @@ CREATE TABLE `mid_external_assigned` (
 --
 
 INSERT INTO `mid_external_assigned` (`assigned_id`, `assigned_s_id`, `assigned_ext_id`) VALUES
-(11, 46, 7),
-(14, 47, 8),
-(7, 52, 8),
-(9, 55, 8),
-(10, 62, 9),
-(8, 63, 6),
-(13, 64, 9);
+(18, 72, 8);
 
 -- --------------------------------------------------------
 
@@ -413,17 +332,6 @@ CREATE TABLE `mid_supervisor` (
   `total` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `mid_supervisor`
---
-
-INSERT INTO `mid_supervisor` (`mid_sup_marksid`, `st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `total`) VALUES
-(16, 13, 1, 1, 1, 1, 1, 5),
-(17, 19, 20, 20, 19, 19, 18, 96),
-(18, 20, 15, 18, 18, 17, 17, 85),
-(19, 15, 12, 12, 12, 12, 12, 60),
-(22, 16, 12, 12, 12, 12, 20, 68);
-
 -- --------------------------------------------------------
 
 --
@@ -441,13 +349,7 @@ CREATE TABLE `mid_supervisor_assigned` (
 --
 
 INSERT INTO `mid_supervisor_assigned` (`assigned_id`, `assigned_s_id`, `assigned_teacher_id`) VALUES
-(20, 46, 9),
-(15, 47, 6),
-(16, 52, 9),
-(13, 55, 2),
-(19, 62, 3),
-(17, 63, 5),
-(22, 64, 3);
+(25, 72, 3);
 
 -- --------------------------------------------------------
 
@@ -472,15 +374,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`student_id`, `student_fname`, `student_lname`, `student_roll`, `student_gender`, `student_regdate`, `student_year`, `student_dep`, `student_thesis`) VALUES
-(45, 'Ramesh', 'Pandey', '076BCT076', 'Male', '2021-06-19', 2076, 'Mechanical', 'Research on panda'),
-(46, 'Ram', 'Lakhan', '075BEX450', 'Male', '2021-08-06', 2075, 'Electronics & Communi­cation', 'Making Electric Robot'),
-(47, 'Nitesh', 'Swarnakar', '076BCT058', 'Male', '2021-05-03', 2076, 'Electronics & Communi­cation', 'Understanding Blender objects'),
-(48, 'Roshan', 'Subedi', '078BCT068', 'Male', '2021-08-01', 2078, 'Science & Humanities', 'My Thesis'),
-(52, 'Sita', 'Gautam', '078BCE159', 'Female', '2021-08-31', 2078, 'Civil', 'Building blocks'),
-(55, 'Nischal', 'Shakya', '075BCT055', 'Male', '2021-05-04', 2075, 'Electronics & Communi­cation', 'Electrical Instruments'),
-(62, 'Ravi', 'Joshi', '076BEX785', 'Male', '2021-08-05', 2076, 'Electronics & Communi­cation', 'Devices on Electronics'),
-(63, 'Genius', 'Shakya', '078BCE015', 'Male', '2021-08-05', 2078, 'Civil', 'Making house from lego'),
-(64, 'Radha', 'Khadka', '078BCE555', 'Female', '2021-08-06', 2078, 'Civil', 'Modeling a house of legos');
+(72, 'Nischal', 'Shakya', '075BCT055', 'Male', '2021-08-08', 2075, 'Electronics & Communi­cation', 'MEAN vs MERN');
 
 -- --------------------------------------------------------
 
@@ -509,6 +403,30 @@ INSERT INTO `teacher` (`teacher_id`, `teacher_fname`, `teacher_mname`, `teacher_
 (7, 'Baburam', NULL, 'Dawadi', 'Mr.'),
 (8, 'Sanjeeb', 'Prasad', 'Pandey', 'Dr.'),
 (9, 'Nanda', 'Bikram', 'Adhikari', 'Dr.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `total_marks`
+--
+
+CREATE TABLE `total_marks` (
+  `tm_id` int(10) NOT NULL,
+  `tm_student_id` int(10) NOT NULL,
+  `tm_mid_sup` decimal(8,2) NOT NULL,
+  `tm_mid_com` decimal(8,2) NOT NULL,
+  `tm_mid_ext` decimal(8,2) NOT NULL,
+  `tm_final_sup` decimal(8,2) NOT NULL,
+  `tm_final_com` decimal(8,2) NOT NULL,
+  `tm_final_ext` decimal(8,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `total_marks`
+--
+
+INSERT INTO `total_marks` (`tm_id`, `tm_student_id`, `tm_mid_sup`, `tm_mid_com`, `tm_mid_ext`, `tm_final_sup`, `tm_final_com`, `tm_final_ext`) VALUES
+(3, 72, '0.00', '6.40', '0.00', '18.80', '17.50', '0.00');
 
 --
 -- Indexes for dumped tables
@@ -647,6 +565,13 @@ ALTER TABLE `teacher`
   ADD PRIMARY KEY (`teacher_id`);
 
 --
+-- Indexes for table `total_marks`
+--
+ALTER TABLE `total_marks`
+  ADD PRIMARY KEY (`tm_id`),
+  ADD UNIQUE KEY `tm_student_id` (`tm_student_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -666,91 +591,97 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `ext_teacher`
 --
 ALTER TABLE `ext_teacher`
-  MODIFY `external_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `external_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `final_committee`
 --
 ALTER TABLE `final_committee`
-  MODIFY `final_com_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `final_com_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `final_committee_assigned`
 --
 ALTER TABLE `final_committee_assigned`
-  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `final_external`
 --
 ALTER TABLE `final_external`
-  MODIFY `final_com_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `final_com_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `final_external_assigned`
 --
 ALTER TABLE `final_external_assigned`
-  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `final_supervisor`
 --
 ALTER TABLE `final_supervisor`
-  MODIFY `final_sup_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `final_sup_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `final_supervisor_assigned`
 --
 ALTER TABLE `final_supervisor_assigned`
-  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `mid_committee`
 --
 ALTER TABLE `mid_committee`
-  MODIFY `mid_com_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `mid_com_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `mid_committee_assigned`
 --
 ALTER TABLE `mid_committee_assigned`
-  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `mid_external`
 --
 ALTER TABLE `mid_external`
-  MODIFY `mid_ext_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `mid_ext_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `mid_external_assigned`
 --
 ALTER TABLE `mid_external_assigned`
-  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `mid_supervisor`
 --
 ALTER TABLE `mid_supervisor`
-  MODIFY `mid_sup_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `mid_sup_marksid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `mid_supervisor_assigned`
 --
 ALTER TABLE `mid_supervisor_assigned`
-  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `assigned_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `student_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
   MODIFY `teacher_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `total_marks`
+--
+ALTER TABLE `total_marks`
+  MODIFY `tm_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -833,6 +764,12 @@ ALTER TABLE `mid_supervisor`
 ALTER TABLE `mid_supervisor_assigned`
   ADD CONSTRAINT `student_id_foreign` FOREIGN KEY (`assigned_s_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `teacher_id_foreign` FOREIGN KEY (`assigned_teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `total_marks`
+--
+ALTER TABLE `total_marks`
+  ADD CONSTRAINT `total_marks_ibfk_1` FOREIGN KEY (`tm_student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
