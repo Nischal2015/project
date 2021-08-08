@@ -34,7 +34,7 @@ if (!$loggedin) {
 // Show this if the user is logged in
 if ($loggedin) {
 	echo '<li class="nav-item">
-	<a class="nav-link" href="/project/logout.php">Log Out</a>
+	<a class="nav-link" href="logout.php">Log Out</a>
 	</li>';
 }
 

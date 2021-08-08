@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2021 at 06:11 PM
+-- Generation Time: Aug 08, 2021 at 07:49 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -53,7 +53,7 @@ INSERT INTO `admin_user` (`sno`, `username`, `password`, `date`) VALUES
 
 CREATE TABLE `department` (
   `dep_id` int(3) NOT NULL,
-  `dep_name` text NOT NULL
+  `dep_name` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -61,12 +61,12 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`dep_id`, `dep_name`) VALUES
-(1, 'Electronics & Communi­cation'),
-(2, 'Electrical'),
+(6, 'Architecture'),
 (3, 'Civil'),
+(2, 'Electrical'),
+(1, 'Electronics & Communi­cation'),
 (4, 'Mechanical'),
-(5, 'Science & Humanities'),
-(6, 'Architecture');
+(5, 'Science & Humanities');
 
 -- --------------------------------------------------------
 
@@ -444,7 +444,7 @@ ALTER TABLE `admin_user`
 --
 ALTER TABLE `department`
   ADD PRIMARY KEY (`dep_id`),
-  ADD UNIQUE KEY `dep_name` (`dep_name`) USING HASH;
+  ADD UNIQUE KEY `dep_name` (`dep_name`);
 
 --
 -- Indexes for table `ext_teacher`
