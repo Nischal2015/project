@@ -28,9 +28,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 <body>
     <header>
         <?php include 'partials/_nav2.php'; ?>
-        <?php include 'partials/_sidebar.php'; ?>
         <?php include 'partials/_dbconnect.php'; ?>
-    </header>
+    </header>    
+    
+    <aside>
+        <?php include 'partials/_sidebar.php'; ?>
+    </aside>
 
     <main class="p-2 mt-1" style="min-height: 800px">
         <div class="container-fluid page-header">
@@ -200,27 +203,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <td>12</td>
                                             <td>57</td>
                                         </tr>
-                                        <tr>
-                                            <td>075BCT785</td>
-                                            <td>Lorem, ipsum.</td>
-                                            <td>45</td>
-                                            <td>12</td>
-                                            <td>57</td>
-                                        </tr>
-                                        <tr>
-                                            <td>075BCT785</td>
-                                            <td>Lorem, ipsum.</td>
-                                            <td>45</td>
-                                            <td>12</td>
-                                            <td>57</td>
-                                        </tr>
-                                        <tr>
-                                            <td>075BCT785</td>
-                                            <td>Lorem, ipsum.</td>
-                                            <td>45</td>
-                                            <td>12</td>
-                                            <td>57</td>
-                                        </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -281,25 +263,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-md-8 profile-content">
-                    <div class="card mb-4 mt-1">
-                        <div class="card-body">
-                            <h5 class="card-title">#Title 4</h5>
-                            <p class="card-text">The contents of the required title are be kept here</p>
-                        </div>
-                    </div>
-
-                    <div class="card mb-4 mt-1">
-                        <div class="card-body">
-                            <div>
-                                <canvas id="myChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-        </div>
-
-
         </div>
     </main>
 

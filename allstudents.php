@@ -11,11 +11,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Displays the dashboard of admin profile">
+    <meta name="description" content="Displays the page for all students">
     <meta http-equiv="Cache-control" content="public">
     <!-- Font awesome pack -->
     <script src="https://kit.fontawesome.com/0212f0c4e4.js" crossorigin="anonymous"></script>
@@ -30,10 +31,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 </head>
 
 <body>
-    <?php include 'partials/_nav2.php'; ?>
-    <?php include 'partials/_sidebar.php'; ?>
-    <?php include 'partials/_dbconnect.php'; ?>
-    <?php
+    <header>
+
+        <?php include 'partials/_nav2.php'; ?>
+        <?php include 'partials/_dbconnect.php'; ?>
+        <?php
     if (isset($_GET['delete'])) {
         $student_id = $_GET['delete'];
         echo $student_id;
@@ -43,9 +45,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             $delete = true;
         }
     }
-
+    
     if ($_SERVER['REQUEST_METHOD'] == "POST") {        
-          // Update the record
+        // Update the record
         $student_id = $_POST['snoEdit'];
         $fname = $_POST['fnameEdit'];
         $lname = $_POST['lnameEdit'];
@@ -55,15 +57,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         $regdate = $_POST['regdateEdit'];
         $year = $_POST['yearEdit'];
         $thesis = $_POST['thesisEdit'];
-      
+        
         $sql = "UPDATE `students` SET `student_fname` = '$fname', `student_lname` = '$lname', `student_roll` = '$roll', `student_gender` = '$gender', `student_regdate` = '$regdate', `student_year` = '$year', `student_dep` = '$dep', `student_thesis` = '$thesis' WHERE `student_id` = $student_id";
-
+        
         $result = mysqli_query($conn, $sql);
         if ($result) {
-        $update = true;
+            $update = true;
         }
     }       
     ?>
+    </header>
+
+    <aside>
+        <?php include 'partials/_sidebar.php'; ?>
+    </aside>
 
     <main class="p-2 mt-1" style="min-height: 800px">
         <div class="container-fluid page-header">
@@ -199,7 +206,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             </div>
         </div>
     </main>
-    <?php include 'partials/_footer.php'; ?>
+
+    <footer>
+        <?php include 'partials/_footer.php'; ?>
+    </footer>
     <?php include 'partials/_editmodal.php'; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -221,7 +231,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     $(document).ready(function() {
         $('#student-list').DataTable();
     });
-    
+
     infos = document.getElementsByClassName('information');
     Array.from(infos).forEach((element) => {
         element.addEventListener("click", (e) => {
@@ -265,4 +275,5 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     })
     </script>
 </body>
+
 </html>

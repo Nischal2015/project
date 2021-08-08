@@ -1,4 +1,4 @@
-<!-- register -->
+<!-- Register page for student -->
 <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
     <div class="row">
         <div class="col-md-6 pt-4">

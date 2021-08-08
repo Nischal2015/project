@@ -43,6 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Signup page of website">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -61,7 +62,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <!-- Header starts here -->
-    <?php require 'partials/_nav.php' ?>
+    <header>
+        <?php require 'partials/_nav.php' ?>
+    </header>
     <!-- Header ends here -->
 
     <!-- Alerts -->
@@ -83,41 +86,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 	?>
 
+    <main>
+        <div class="container my-4 col-lg-4 col-md-8 col-12">
+            <ul class="nav nav-tabs nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" aria-current="page" href="/project/login.php">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active border-light border-bottom-0 border-2 text-primary"
+                        href="/project/signup.php">SignUp</a>
+                </li>
+            </ul>
 
-    <div class="container my-4 col-lg-4 col-md-8 col-12">
-        <ul class="nav nav-tabs nav-fill">
-            <li class="nav-item">
-                <a class="nav-link text-secondary" aria-current="page" href="/project/login.php">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active border-light border-bottom-0 border-2 text-primary"
-                    href="/project/signup.php">SignUp</a>
-            </li>
-        </ul>
-
-        <!-- Signup form starts here -->
-        <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" class="bg-light p-3 rounded-3">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" maxlength="11" class="form-control" id="username" name="username"
-                    aria-describedby="usernameHelp">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <div class="mb-3">
-                <label for="cpassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="cpassword" name="cpassword">
-                <small id="passwordHelp" class="form-text">Make sure to type the same pasword</small>
-            </div>
-            <button type="submit" class="btn btn-primary">SignUp</button>
-        </form>
-        <!-- Signup form ends here -->
-    </div>
+            <!-- Signup form starts here -->
+            <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post" class="bg-light p-3 rounded-3">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" maxlength="11" class="form-control" id="username" name="username"
+                        aria-describedby="usernameHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="mb-3">
+                    <label for="cpassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="cpassword" name="cpassword">
+                    <small id="passwordHelp" class="form-text">Make sure to type the same pasword</small>
+                </div>
+                <button type="submit" class="btn btn-primary">SignUp</button>
+            </form>
+            <!-- Signup form ends here -->
+        </div>
+    </main>
 
     <!-- Footer starts here -->
-    <?php require 'partials/_footer.php'; ?>
+    <footer>
+        <?php require 'partials/_footer.php'; ?>
+    </footer>
     <!-- Footer end here -->
 
 
