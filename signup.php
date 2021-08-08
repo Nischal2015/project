@@ -85,10 +85,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
-  Signup
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">

@@ -73,7 +73,7 @@ main {
     background: #eceff3;
 }
 
-nav .page-title a{
+nav .page-title div{
     float: left;
     display:block;
     background: #6673FC;
