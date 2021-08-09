@@ -90,11 +90,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container my-4 col-lg-4 col-md-8 col-12">
             <ul class="nav nav-tabs nav-fill">
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" aria-current="page" href="/project/login.php">Login</a>
+                    <a class="nav-link text-secondary" aria-current="page" href="login.php">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active border-light border-bottom-0 border-2 text-primary"
-                        href="/project/signup.php">SignUp</a>
+                        href="signup.php">SignUp</a>
                 </li>
             </ul>
 

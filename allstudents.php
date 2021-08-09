@@ -120,10 +120,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         <div class="container my-4 col-lg-4 col-md-8 col-12">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a href="/project/allstudents.php?year=2075" role="button" class="nav-link">2075</a>
-                    <a href="/project/allstudents.php?year=2076" role="button" class="nav-link">2076</a>
-                    <a href="/project/allstudents.php?year=2077" role="button" class="nav-link">2077</a>
-                    <a href="/project/allstudents.php?year=2078" role="button" class="nav-link">2078</a>
+                    <a href="allstudents.php?year=2075" role="button" class="nav-link">2075</a>
+                    <a href="allstudents.php?year=2076" role="button" class="nav-link">2076</a>
+                    <a href="allstudents.php?year=2077" role="button" class="nav-link">2077</a>
+                    <a href="allstudents.php?year=2078" role="button" class="nav-link">2078</a>
                 </div>
             </nav>
         </div>
