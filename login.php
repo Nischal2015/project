@@ -3,8 +3,8 @@ $login = false;
 $showErrors = false;
 if($_SERVER["REQUEST_METHOD"] == "POST") {  
 	include 'partials/_dbconnect.php';
-	$username = $_POST['username']; 
-	$password = $_POST['password']; 
+	$username = mysqli_real_escape_string($conn, $_POST['username']); 
+	$password = mysqli_real_escape_string($conn, $_POST['password']); 
 
 	// $sql = "SELECT * FROM `users` WHERE username='$username' AND password='$password'";    
 	$sql = "SELECT * FROM `admin_user` WHERE username='$username'";    
