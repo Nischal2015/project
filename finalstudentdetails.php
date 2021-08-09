@@ -33,6 +33,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <aside>
         <?php include 'partials/_sidebar.php'; ?>
     </aside>
+    <?php require 'partials/_function.php'; ?>
 
     <main class="p-2 mt-1" style="min-height: 800px">
         <?php
@@ -60,11 +61,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $identity = $_POST['supervisor_assigned_id'];
                     $action=substr($identity, 0,2);
                     $sno = substr($identity,2);
-                    $par1 = $_POST['regularity']; 
-                    $par2 = $_POST['completeness_degree'];
-                    $par3 = $_POST['understanding_thesis'];
-                    $par4 = $_POST['effort'];
-                    $par5 = $_POST['organization'];
+                    $par1 = mysqli_real_escape_string($_POST['regularity']); 
+                    $par2 = mysqli_real_escape_string($_POST['completeness_degree']);
+                    $par3 = mysqli_real_escape_string($_POST['understanding_thesis']);
+                    $par4 = mysqli_real_escape_string($_POST['effort']);
+                    $par5 = mysqli_real_escape_string($_POST['organization']);
                     $sum = $par1+$par2+$par3+$par4+$par5;
                     $portion = $sum / 100 * 20;
                     if($action=="sa") {
@@ -83,16 +84,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $identity = $_POST['committee_assigned_id'];
                     $action=substr($identity, 0,2);
                     $sno = substr($identity,2);
-                    $par1 = $_POST['quality_of_presentation']; 
-                    $par2 = $_POST['problem_identification'];
-                    $par3 = $_POST['methodology'];
-                    $par4 = $_POST['literature_review'];
-                    $par5 = $_POST['understanding'];
-                    $par6 = $_POST['answers'];
-                    $par7 = $_POST['completeness'];
-                    $par8 = $_POST['planning'];
-                    $par9 = $_POST['originality'];
-                    $par10 = $_POST['consugrec'];
+                    $par1 = mysqli_real_escape_string($_POST['quality_of_presentation']);
+                    $par2 = mysqli_real_escape_string($_POST['problem_identification']);
+                    $par3 = mysqli_real_escape_string($_POST['methodology']);
+                    $par4 = mysqli_real_escape_string($_POST['literature_review']);
+                    $par5 = mysqli_real_escape_string($_POST['understanding']);
+                    $par6 = mysqli_real_escape_string($_POST['answers']);
+                    $par7 = mysqli_real_escape_string($_POST['completeness']);
+                    $par8 = mysqli_real_escape_string($_POST['planning']);
+                    $par9 = mysqli_real_escape_string($_POST['originality']);
+                    $par10 = mysqli_real_escape_string($_POST['consugrec']);
                     $sum = $par1+$par2+$par3+$par4+$par5+$par6+$par7+$par8+$par9+$par10;
                     if($action=="ca") {
                         $sql = "INSERT INTO `final_committee` (`st_te_assigned_id`, `par1`, `par2`, `par3`, `par4`, `par5`, `par6`, `par7`, `par8`,`par9`, `par10`, `total`) VALUES ('$sno', '$par1', '$par2', '$par3', '$par4', '$par5', '$par6', '$par7', '$par8', '$par9', '$par10', '$sum')";
@@ -106,24 +107,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     $row_avg = mysqli_fetch_assoc($result_avg);
                     $portion = $row_avg['AVG(total)']/100*20;
                     $marks_portion = "UPDATE `total_marks` SET `tm_final_com` = '$portion'  WHERE `tm_student_id` = '$student_id'";
-                    mysqli_query($conn, $marks_portion);
-                    echo "comm" . $portion;             
+                    mysqli_query($conn, $marks_portion);           
                 }
 
                 if (isset($_POST['external_assigned_id'])) {
                     $identity = $_POST['external_assigned_id'];
                     $action=substr($identity, 0,2);
                     $sno = substr($identity,2);
-                    $par1 = $_POST['standard']; 
-                    $par2 = $_POST['research_identification'];
-                    $par3 = $_POST['research_methodology'];
-                    $par4 = $_POST['data_processing'];
-                    $par5 = $_POST['objectives'];
-                    $par6 = $_POST['logic_reason'];
-                    $par7 = $_POST['qua_abstract'];
-                    $par8 = $_POST['originality_research'];
-                    $par9 = $_POST['scope_research'];
-                    $par10 = $_POST['ans_examiner'];
+                    $par1 = mysqli_real_escape_string($_POST['standard']); 
+                    $par2 = mysqli_real_escape_string($_POST['research_identification']);
+                    $par3 = mysqli_real_escape_string($_POST['research_methodology']);
+                    $par4 = mysqli_real_escape_string($_POST['data_processing']);
+                    $par5 = mysqli_real_escape_string($_POST['objectives']);
+                    $par6 = mysqli_real_escape_string($_POST['logic_reason']);
+                    $par7 = mysqli_real_escape_string($_POST['qua_abstract']);
+                    $par8 = mysqli_real_escape_string($_POST['originality_research']);
+                    $par9 = mysqli_real_escape_string($_POST['scope_research']);
+                    $par10 = mysqli_real_escape_string($_POST['ans_examiner']);
                     $sum = $par1+$par2+$par3+$par4+$par5+$par6+$par7+$par8+$par9+$par10;
                     $portion = $sum / 100 * 20;
                     if($action=="ea") {
@@ -135,8 +135,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     }    
                     $marks_portion = "UPDATE `total_marks` SET `tm_final_ext` = '$portion'  WHERE `tm_student_id` = '$student_id'";
                     mysqli_query($conn, $sql);
-                    mysqli_query($conn, $marks_portion);
-                    echo "ext" . $portion;               
+                    mysqli_query($conn, $marks_portion);              
                 }
             }
         ?>
@@ -189,7 +188,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                 while($row = mysqli_fetch_assoc($result)) {
                                     $teacher = $row['teacher_post'] . ' ' . $row['teacher_fname']. ' '.$row['teacher_mname']. ' ' . $row['teacher_lname'];
                                     echo '
-                                    <option value="'.$row['teacher_id'].'">'. $teacher . '</option>';
+                                    <option value="'.e($row['teacher_id']).'">'. e($teacher) . '</option>';
                                 }
                                 ?>
                             </select>
@@ -212,11 +211,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     $sql = "SELECT * FROM `teacher`";
                                     $result = mysqli_query($conn, $sql);
                                     while($row = mysqli_fetch_assoc($result)) {
-                                        $id = $row['teacher_id'];
-                                        $post = $row['teacher_post'];
-                                        $fname = $row['teacher_fname'];
-                                        $mname = $row['teacher_mname'];
-                                        $lname = $row['teacher_lname'];
+                                        $id = e($row['teacher_id']);
+                                        $post = e($row['teacher_post']);
+                                        $fname = e($row['teacher_fname']);
+                                        $mname = e($row['teacher_mname']);
+                                        $lname = e($row['teacher_lname']);
                                         echo '
                                         <li class="dropdown-item">
                                         <div class="col">
@@ -243,7 +242,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                 while($row = mysqli_fetch_assoc($result)) {
                                     $external = $row['external_post'] . ' ' . $row['external_fname']. ' '.$row['external_mname']. ' ' . $row['external_lname'];
                                     echo '
-                                    <option value="'.$row['external_id'].'">'. $external . '</option>';
+                                    <option value="'.e($row['external_id']).'">'. e($external) . '</option>';
                                 }
                             ?>
                             </select>
@@ -283,7 +282,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $student_id = $_GET['id'];
+                                            $student_id = e($_GET['id']);
                                             $sql = "SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
                                             FROM teacher t
                                             INNER JOIN final_supervisor_assigned ta
@@ -293,21 +292,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $result = mysqli_query($conn, $sql);
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
-                                                $assigned_id = $row['assigned_id'];
+                                                $assigned_id = e($row['assigned_id']);
                                                 $sql4 = "SELECT `total` FROM `final_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result4=mysqli_query($conn, $sql4);
                                                 $row4=mysqli_fetch_assoc($result4);
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
-                                                    <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' '.$row['teacher_lname'] . '</td>
+                                                    <td>'. e($row['teacher_post']).' ' . e($row['teacher_fname']) . ' ' . e($row['teacher_mname']). ' '.e($row['teacher_lname']) . '</td>
                                                     <td>';
                                                     if (mysqli_num_rows($result4) > 0) {
                                                         echo '
                                                         <button type="button" id=se'.$assigned_id.' class="btn btn-secondary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-pencil fa-xs"></i></button>
                                                         <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
                                                     </td>
-                                                    <td><strong>'.$row4['total'].'</strong></td>';
+                                                    <td><strong>'.e($row4['total']).'</strong></td>';
                                                     }
                                                     else {
                                                         echo '
@@ -351,7 +350,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $student_id = $_GET['id'];
+                                            $student_id = e($_GET['id']);
                                             $sql = "SELECT ta.assigned_id, t.external_id, t.external_post, t.external_fname, t.external_mname, t.external_lname
                                             FROM ext_teacher t
                                             INNER JOIN final_external_assigned ta
@@ -361,21 +360,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $result = mysqli_query($conn, $sql);
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
-                                                $assigned_id = $row['assigned_id'];
+                                                $assigned_id = e($row['assigned_id']);
                                                 $sql2 = "SELECT `total` FROM `final_external` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result2=mysqli_query($conn, $sql2);
                                                 $row2=mysqli_fetch_assoc($result2);
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
-                                                    <td>'. $row['external_post'].' ' . $row['external_fname'] . ' ' . $row['external_mname']. ' '.$row['external_lname'] . '</td>
+                                                    <td>'. e($row['external_post']).' ' . e($row['external_fname']) . ' ' . e($row['external_mname']). ' '.e($row['external_lname']) . '</td>
                                                     <td>';                                                        
                                                     if (mysqli_num_rows($result2) > 0) {
                                                         echo '
                                                         <button type="button" id=ee'.$assigned_id.' class="btn btn-secondary btn-sm extaddEd" data-bs-toggle="modal" data-bs-target="#external_marking"><i class="fa fa-pencil fa-xs"></i></button>
                                                         <button type="button" id=ed'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
                                                         </td>
-                                                        <td><strong>'.$row2['total'].'</strong></td>';
+                                                        <td><strong>'.e($row2['total']).'</strong></td>';
                                                     }
                                                     else {
                                                         echo '
@@ -421,7 +420,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $student_id = $_GET['id'];
+                                            $student_id = e($_GET['id']);
                                             $sql = "SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
                                             FROM teacher t
                                             INNER JOIN final_committee_assigned ta
@@ -430,21 +429,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $result = mysqli_query($conn, $sql);
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
-                                                $assigned_id = $row['assigned_id'];
+                                                $assigned_id = e($row['assigned_id']);
                                                 $sql1 = "SELECT `total` FROM `final_committee` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result1=mysqli_query($conn, $sql1);
                                                 $row1=mysqli_fetch_assoc($result1);
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
-                                                    <td>'. $row['teacher_post'].' ' . $row['teacher_fname'] . ' ' . $row['teacher_mname']. ' ' .$row['teacher_lname'] . '</td>
+                                                    <td>'. e($row['teacher_post']).' ' . e($row['teacher_fname']) . ' ' . e($row['teacher_mname']). ' ' .e($row['teacher_lname']) . '</td>
                                                     <td>';
                                                     if (mysqli_num_rows($result1) > 0) {
                                                         echo '
                                                         <button type="button" id=ce'.$assigned_id.' class="btn btn-secondary btn-sm comaddEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-pencil fa-xs"></i></button>
                                                         <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
                                                     </td>
-                                                    <td><strong>'.$row1['total'].'</strong></td>';
+                                                    <td><strong>'.e($row1['total']).'</strong></td>';
                                                     }
                                                     else {
                                                         echo '<button type="button" id=ca'.$assigned_id.' class="btn btn-primary btn-sm comaddEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
