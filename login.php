@@ -99,7 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 </li>
             </ul>
 
-            <form action="/project/login.php" method="post" class="bg-light p-3 rounded-3">
+            <form action="login.php" method="post" class="bg-light p-3 rounded-3">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
