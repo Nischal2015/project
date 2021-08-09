@@ -92,10 +92,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul class="nav nav-tabs nav-fill">
                 <li class="nav-item">
                     <a class="nav-link active border-light border-bottom-0 border-2  text-primary" aria-current="page"
-                        href="/project/login.php">Login</a>
+                        href="login.php">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="/project/signup.php">SignUp</a>
+                    <a class="nav-link text-secondary" href="signup.php">SignUp</a>
                 </li>
             </ul>
 
