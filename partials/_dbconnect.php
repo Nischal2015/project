@@ -1,5 +1,9 @@
 <!-- Establishing connection with the database -->
 <?php
+// $server="remotemysql.com";
+// $username="GfYJT7egTF";
+// $password="lW1UnyRWzL";
+// $database="GfYJT7egTF";
 
 $server="localhost";
 $username="root";

@@ -42,38 +42,35 @@ else{
             }
             ?>
         </div>
-        <div class="container mt-4">
-            <div class="row">
-                <?php
-                
-                
+        <div class="container-fluid mt-4">
+            
+                <?php              
                 echo '
-                <div class="col-md-2">
-                    <div><strong>Firstname</strong></div>
-                    <div><strong>Roll No.</strong></div>
-                    <div><strong>Student Year</strong></div>
-                    <div><strong>Thesis Title</strong></div>
+                <div class="row">
+                <div class="col-md-3 col-sm-6 col-6"><strong>Firstname</strong></div>
+                <div class="col-md-3 col-sm-6 col-6">'.e($row['student_fname']).'</div>
+                <div class="col-md-3 col-sm-6 col-6"><strong>Lastname</strong></div>
+                <div class="col-md-3 col-sm-6 col-6">'.e($row['student_lname']).'</div>
                 </div>
-                <div class="col-md-4">
-                    <div>'.$row['student_fname'].'</div>
-                    <div>'.$row['student_roll'].'</div>
-                    <div>'.$row['student_year'].'</div>
-                    <div>'. strtoupper($row['student_thesis']) .'</div>
+                <div class="row">
+                <div class="col-md-3 col-sm-6 col-6"><strong>Roll No.</strong></div>
+                <div class="col-md-3 col-sm-6 col-6">'.e($row['student_roll']).'</div>
+                <div class="col-md-3 col-sm-6 col-6"><strong>Gender</strong></div>
+                <div class="col-md-3 col-sm-6 col-6">'.e($row['student_gender']).'</div>
                 </div>
-                <div class="col-md-2">
-                    <div><strong>Lastname</strong></div>
-                    <div><strong>Gender</strong></div>
-                    <div><strong>Department</strong></div>
-                    <div><strong>Marks Details</strong></div>
+                <div class="row">
+                <div class="col-md-3 col-sm-6 col-6"><strong>Student Year</strong></div>
+                <div class="col-md-3 col-sm-6 col-6">'.e($row['student_year']).'</div>
+                <div class="col-md-3 col-sm-6 col-6"><strong>Department</strong></div>
+                <div class="col-md-3 col-sm-6 col-6">'.e($row['student_dep']).'</div>
                 </div>
-                <div class="col-md-4">
-                    <div>'.$row['student_lname'].'</div>
-                    <div>'.$row['student_gender'].'</div>
-                    <div>'.$row['student_dep'].'</div>
-                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#marksDetailsModal">
-                    <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
-                    </button>
-                </div>';
+                <div class="row">
+                <div class="col-md-3 col-sm-6 col-6"><strong>Thesis Title</strong></div>
+                <div class="col-md-3 col-sm-6 col-6">'. e($row['student_thesis']) .'</div>
+                <div class="col-md-3 col-sm-6 col-6"><strong>Marks Details</strong></div>
+                <div class="col-md-3 col-sm-6 col-6"><button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#marksDetailsModal">
+                <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
+                </button></div>';
                 ?>
             </div>
         </div>
@@ -85,7 +82,7 @@ else{
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="marksDetailsModalLabel"><strong>Marks Details<?php echo ' ('.$row['student_fname']. ' ' .$row['student_lname'].')'?></strong></h5>
+                <h5 class="modal-title" id="marksDetailsModalLabel"><strong>Marks Details<?php echo ' ('.e($row['student_fname']). ' ' .e($row['student_lname']).')'?></strong></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -114,29 +111,29 @@ else{
                             echo '
                             <tr>
                                 <th>Supervisor</th>
-                                <td>'.$student_marks['tm_mid_sup'].'</td>
-                                <td>'.$student_marks['tm_final_sup'].'</td>
-                                <td><strong>'.$student_marks['tm_mid_sup']+$student_marks['tm_final_sup'].'</strong></td>
+                                <td>'.e($student_marks['tm_mid_sup']).'</td>
+                                <td>'.e($student_marks['tm_final_sup']).'</td>
+                                <td><strong>'.e($student_marks['tm_mid_sup'])+e($student_marks['tm_final_sup']).'</strong></td>
                             </tr>
                             <tr>
                                 <th>Committee</th>
-                                <td>'.$student_marks['tm_mid_com'].'</td>
-                                <td>'.$student_marks['tm_final_com'].'</td>
-                                <td><strong>'.$student_marks['tm_mid_com']+$student_marks['tm_final_com'].'</strong></td>
+                                <td>'.e($student_marks['tm_mid_com']).'</td>
+                                <td>'.e($student_marks['tm_final_com']).'</td>
+                                <td><strong>'.e($student_marks['tm_mid_com'])+e($student_marks['tm_final_com']).'</strong></td>
                             </tr>
                             <tr>
                                 <th>External</th>
-                                <td>'.$student_marks['tm_mid_ext'].'</td>
-                                <td>'.$student_marks['tm_final_ext'].'</td>
-                                <td><strong>'.$student_marks['tm_mid_ext']+$student_marks['tm_final_ext'].'</strong></td>
+                                <td>'.e($student_marks['tm_mid_ext']).'</td>
+                                <td>'.e($student_marks['tm_final_ext']).'</td>
+                                <td><strong>'.e($student_marks['tm_mid_ext'])+e($student_marks['tm_final_ext']).'</strong></td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th>Total</th>
-                                <td><strong>'.$student_marks['tm_mid_sup']+$student_marks['tm_mid_com']+$student_marks['tm_mid_ext'].'</strong></td>
-                                <td><strong>'.$student_marks['tm_final_sup']+$student_marks['tm_final_com']+$student_marks['tm_final_ext'].'</strong></td>
-                                <td><strong>'.$student_marks['tm_mid_sup']+$student_marks['tm_mid_com']+$student_marks['tm_mid_ext']+$student_marks['tm_final_sup']+$student_marks['tm_final_com']+$student_marks['tm_final_ext'].'</strong></td>
+                                <td><strong>'.e($student_marks['tm_mid_sup'])+e($student_marks['tm_mid_com'])+e($student_marks['tm_mid_ext']).'</strong></td>
+                                <td><strong>'.e($student_marks['tm_final_sup'])+e($student_marks['tm_final_com'])+e($student_marks['tm_final_ext']).'</strong></td>
+                                <td><strong>'.e($student_marks['tm_mid_sup'])+e($student_marks['tm_mid_com'])+e($student_marks['tm_mid_ext'])+e($student_marks['tm_final_sup'])+e($student_marks['tm_final_com'])+e($student_marks['tm_final_ext']).'</strong></td>
                             </tr>
                             </tfoot><strong>';
                             ?>
