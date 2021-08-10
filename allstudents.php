@@ -116,7 +116,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 </div>
             </div>
         </div>
-        <div class="container my-4 col-lg-4 col-md-8 col-12">
+        <!-- <div class="container my-4 col-lg-4 col-md-8 col-12">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a href="allstudents.php?year=2075" role="button" class="nav-link">2075</a>
@@ -125,7 +125,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <a href="allstudents.php?year=2078" role="button" class="nav-link">2078</a>
                 </div>
             </nav>
-        </div>
+        </div> -->
 
         <div class="container-fluid">
             <div class="row">
