@@ -184,7 +184,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
           </div>
           <div class="col-sm-6 banner-image">
-            <img src="images/tu-logo.png" class="img-responsive tu_logo" />
+            <img src="images/tu-logo.png" class="img-responsive tu_logo" alt="tu-logo" />
           </div>
         </div>
       </div>
