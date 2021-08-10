@@ -22,7 +22,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Welcome - <?php echo $_SESSION['username'] ?></title>
+    <title>Register</title>
 </head>
 <!-- Header content ends here -->
 
@@ -46,14 +46,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             <?php
             $showAlert = false;
             if($_SERVER['REQUEST_METHOD']=='POST') {
-                $fname = $_POST['fname'];
-                $lname = $_POST['lname'];
-                $roll = $_POST['roll'];
-                $dep = $_POST['department'];
-                $gender = $_POST['gender'];
-                $regdate = $_POST['regdate'];
-                $year = $_POST['year'];
-                $thesis = $_POST['thesis'];
+                $fname = mysqli_real_escape_string($conn, $_POST['fname']);
+                $lname = mysqli_real_escape_string($conn, $_POST['lname']);
+                $roll = mysqli_real_escape_string($conn, $_POST['roll']);
+                $dep = mysqli_real_escape_string($conn, $_POST['department']);
+                $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+                $regdate = mysqli_real_escape_string($conn, $_POST['regdate']);
+                $year = mysqli_real_escape_string($conn, $_POST['year']);
+                $thesis = mysqli_real_escape_string($conn, $_POST['thesis']);
                 $sql = "INSERT INTO `students` (`student_fname`, `student_lname`, `student_roll`, `student_dep`, `student_gender`, `student_regdate`, `student_year`, `student_thesis`) VALUES ('$fname', '$lname', '$roll', '$dep', '$gender', '$regdate', '$year', '$thesis')";
                 $result = mysqli_query($conn, $sql);
                 

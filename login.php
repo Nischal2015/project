@@ -3,8 +3,8 @@ $login = false;
 $showErrors = false;
 if($_SERVER["REQUEST_METHOD"] == "POST") {  
 	include 'partials/_dbconnect.php';
-	$username = $_POST['username']; 
-	$password = $_POST['password']; 
+	$username = mysqli_real_escape_string($conn, $_POST['username']); 
+	$password = mysqli_real_escape_string($conn, $_POST['password']); 
 
 	// $sql = "SELECT * FROM `users` WHERE username='$username' AND password='$password'";    
 	$sql = "SELECT * FROM `admin_user` WHERE username='$username'";    
@@ -92,14 +92,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul class="nav nav-tabs nav-fill">
                 <li class="nav-item">
                     <a class="nav-link active border-light border-bottom-0 border-2  text-primary" aria-current="page"
-                        href="/project/login.php">Login</a>
+                        href="login.php">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary" href="/project/signup.php">SignUp</a>
+                    <a class="nav-link text-secondary" href="signup.php">SignUp</a>
                 </li>
             </ul>
 
-            <form action="/project/login.php" method="post" class="bg-light p-3 rounded-3">
+            <form action="login.php" method="post" class="bg-light p-3 rounded-3">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">

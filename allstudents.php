@@ -23,7 +23,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Welcome - <?php echo $_SESSION['username'] ?></title>
+    <title>Students</title>
     <!-- Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
@@ -31,41 +31,40 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 </head>
 
 <body>
+    <?php require 'partials/_function.php'; ?>
     <header>
-
         <?php include 'partials/_nav2.php'; ?>
         <?php include 'partials/_dbconnect.php'; ?>
         <?php
-    if (isset($_GET['delete'])) {
-        $student_id = $_GET['delete'];
-        echo $student_id;
-        $sql = "DELETE FROM `students` WHERE `student_id` = '$student_id'";
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-            $delete = true;
+        if (isset($_GET['delete'])) {
+            $student_id = e($_GET['delete']);
+            $sql = "DELETE FROM `students` WHERE `student_id` = '$student_id'";
+            $result = mysqli_query($conn, $sql);
+            if ($result) {
+                $delete = true;
+            }
         }
-    }
-    
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {        
-        // Update the record
-        $student_id = $_POST['snoEdit'];
-        $fname = $_POST['fnameEdit'];
-        $lname = $_POST['lnameEdit'];
-        $roll = $_POST['rollEdit'];
-        $gender = $_POST['genderEdit'];
-        $dep = $_POST['departmentEdit'];
-        $regdate = $_POST['regdateEdit'];
-        $year = $_POST['yearEdit'];
-        $thesis = $_POST['thesisEdit'];
         
-        $sql = "UPDATE `students` SET `student_fname` = '$fname', `student_lname` = '$lname', `student_roll` = '$roll', `student_gender` = '$gender', `student_regdate` = '$regdate', `student_year` = '$year', `student_dep` = '$dep', `student_thesis` = '$thesis' WHERE `student_id` = $student_id";
-        
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-            $update = true;
-        }
-    }       
-    ?>
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {        
+            // Update the record
+            $student_id = mysqli_real_escape_string($conn, $_POST['snoEdit']);
+            $fname = mysqli_real_escape_string($conn, $_POST['fnameEdit']);
+            $lname = mysqli_real_escape_string($conn, $_POST['lnameEdit']);
+            $roll = mysqli_real_escape_string($conn, $_POST['rollEdit']);
+            $gender = mysqli_real_escape_string($conn, $_POST['genderEdit']);
+            $dep = mysqli_real_escape_string($conn, $_POST['departmentEdit']);
+            $regdate = mysqli_real_escape_string($conn, $_POST['regdateEdit']);
+            $year = mysqli_real_escape_string($conn, $_POST['yearEdit']);
+            $thesis = mysqli_real_escape_string($conn, $_POST['thesisEdit']);
+            
+            $sql = "UPDATE `students` SET `student_fname` = '$fname', `student_lname` = '$lname', `student_roll` = '$roll', `student_gender` = '$gender', `student_regdate` = '$regdate', `student_year` = '$year', `student_dep` = '$dep', `student_thesis` = '$thesis' WHERE `student_id` = $student_id";
+            
+            $result = mysqli_query($conn, $sql);
+            if ($result) {
+                $update = true;
+            }
+        }       
+        ?>
     </header>
 
     <aside>
@@ -92,7 +91,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class='row'>
                     <div class='col-md-12'>
                         <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                            <strong>Success!</strong> Your student has been udpated succesfully.
+                            <strong>Success!</strong> Your student has been updated succesfully.
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                       </div>
                     </div>
@@ -120,10 +119,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         <div class="container my-4 col-lg-4 col-md-8 col-12">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a href="/project/allstudents.php?year=2075" role="button" class="nav-link">2075</a>
-                    <a href="/project/allstudents.php?year=2076" role="button" class="nav-link">2076</a>
-                    <a href="/project/allstudents.php?year=2077" role="button" class="nav-link">2077</a>
-                    <a href="/project/allstudents.php?year=2078" role="button" class="nav-link">2078</a>
+                    <a href="allstudents.php?year=2075" role="button" class="nav-link">2075</a>
+                    <a href="allstudents.php?year=2076" role="button" class="nav-link">2076</a>
+                    <a href="allstudents.php?year=2077" role="button" class="nav-link">2077</a>
+                    <a href="allstudents.php?year=2078" role="button" class="nav-link">2078</a>
                 </div>
             </nav>
         </div>
@@ -159,7 +158,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                     <tbody>
                                         <?php 
                                         if (isset($_GET['year'])) {
-                                            $year = $_GET['year'];
+                                            $year = e($_GET['year']);
                                             $sql = "SELECT * from `students` WHERE `student_year`='$year'";
                                         }
                                         else{
@@ -169,18 +168,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         while($row = mysqli_fetch_assoc($result)) {
                                             echo '
                                             <tr>
-                                                <td>'. $row['student_roll'] .'</td>
-                                                <td>'. $row['student_fname'] . ' ' . $row['student_lname'] . '</td>
-                                                <td>'. $row['student_dep'] .'</td>
-                                                <td>'. $row['student_thesis'] .'</td>
-                                                <td>'. $row['student_regdate']. '</td>
+                                                <td>'. e($row['student_roll']) .'</td>
+                                                <td>'. e($row['student_fname']) . ' ' . e($row['student_lname']) . '</td>
+                                                <td>'. e($row['student_dep']) .'</td>
+                                                <td>'. e($row['student_thesis']) .'</td>
+                                                <td>'. e($row['student_regdate']). '</td>
                                                 <td>
-                                                    <button type="button" class="edit btn btn-secondary btn-sm" id=e'. $row['student_id'] .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
+                                                    <button type="button" class="edit btn btn-secondary btn-sm" id=e'. e($row['student_id']) .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
                                                     <i class="fa fa-pencil"></i>
                                                     </button>
-                                                    <button type="button" class="delete btn btn-danger btn-sm" id=d'. $row['student_id'] .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
+                                                    <button type="button" class="delete btn btn-danger btn-sm" id=d'. e($row['student_id']) .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
                                                     </button>
-                                                    <a role="button" href="studentdetails.php?id='. $row['student_id'] .'" class="information btn btn-warning btn-sm" id='. $row['student_id'] .' title="Details" style="padding: 4px 5px !important;">	
+                                                    <a role="button" href="studentdetails.php?id='. e($row['student_id']) .'" class="information btn btn-warning btn-sm" id='. e($row['student_id']) .' title="Details" style="padding: 4px 5px !important;">	
                                                     <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
                                                     </button>
                                                 </td>
