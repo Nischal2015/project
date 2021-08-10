@@ -1,3 +1,38 @@
+<?php 
+$login = false;
+$showErrors = false;
+if($_SERVER["REQUEST_METHOD"] == "POST") {  
+	include 'partials/_dbconnect.php';
+	$username = mysqli_real_escape_string($conn, $_POST['username']); 
+	$password = mysqli_real_escape_string($conn, $_POST['password']); 
+
+	// $sql = "SELECT * FROM `users` WHERE username='$username' AND password='$password'";    
+	$sql = "SELECT * FROM `admin_user` WHERE username='$username'";    
+	$result = mysqli_query($conn, $sql);
+	$num = mysqli_num_rows($result);
+
+	if ($num == 1) {
+		while($row = mysqli_fetch_assoc($result)) {
+			if (password_verify($password, $row['password'])) {
+				$login = true;
+				session_start();
+				$_SESSION['loggedin'] = true;
+				$_SESSION['username'] = $username;
+				header("location: dashboard.php");
+			}
+			else
+			{
+				$showErrors = "Either the username or password do not match";
+			}
+		}
+	}
+	else
+	{
+		$showErrors = "Username doesn't exist";
+	}
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -18,6 +53,49 @@
     * {
         font-family: 'Poppins', sans-serif;
     }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .big-text {
+        font-size: 52px;
+        margin: 20px 0;
+        color: darkorange;
+    }
+
+    .btn-first {
+        margin: 30px 10px;
+        width: 150px;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .btn-first {
+        background-color: darkorange;
+        color: #fff;
+    }
+
+    .btn-first:hover {
+        background: darkorange;
+        border: none;
+        color: #fff;
+        box-shadow: 5px 5px 10px #999;
+        transition: 0.3s;
+    }
+
+    .banner-info {
+    margin: 100px 0;
+    }
+
+    .banner-image {
+    margin: 30px 0;
+    }
+    .tu_logo {
+    height: 400px;
+    width: 380px;
+    margin: 60px 0;
+    }
+
     </style>
     <title>Homepage</title>
 </head>
@@ -26,32 +104,95 @@
     <header>
         <?php require 'partials/_nav.php'; ?>
     </header>
-    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <!-- <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://source.unsplash.com/2040x900/?college,laptop" class="d-block mw-100"
-                    alt="Pulchowk College">
-            </div>
-            <div class="carousel-item">
-                <img src="https://source.unsplash.com/2040x900/?student,university" class="d-block mw-100"
-                    alt="Pulchowk College">
-            </div>
-            <div class="carousel-item">
-                <img src="https://source.unsplash.com/2040x900/?online,learning" class="d-block mw-100"
-                    alt="Pulchowk College">
-            </div>
-            <div class="carousel-item">
-                <img src="https://source.unsplash.com/2040x900/?graduation" class="d-block mw-100"
-                    alt="Pulchowk College">
-            </div>
-            <div class="carousel-item">
-                <img src="https://source.unsplash.com/2040x900/?professor,classroom" class="d-block mw-100"
-                    alt="Pulchowk College">
-            </div>
-        </div> -->
-    </div>
+    <?php
+	session_start();
+	if ($login) {
+		echo '
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Success!</strong> You are logged in
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>';
+	}
+
+	if ($showErrors) {
+		echo '
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong>Sorry! </strong>' . $showErrors.'
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>';
+	}
+
+	if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true) {
+		header("location: dashboard.php");
+	}
+
+	?>
 
 
+    <div class="container">
+        <div class="row contents">
+          <div class="col-sm-6 banner-info">
+            <h1>Institute of Engineering, TU</h1>
+            <p class="big-text">MSc Thesis Evaluation System</p>
+
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-first"
+              data-bs-toggle="modal"
+              data-bs-target="#login-button"
+            >
+              LOGIN
+            </button>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="login-button"
+              tabindex="-1"
+              aria-labelledby="login-buttonLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="login-buttonLabel">
+                      LOGIN
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                        <form action="index.php" method="post" class="bg-light p-3 rounded-3">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 banner-image">
+            <img src="images/tu-logo.png" class="img-responsive tu_logo" />
+          </div>
+        </div>
+      </div>
+
+      
+    <footer>
+        <?php include 'partials/_footer.php'; ?>
+    </footer>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
