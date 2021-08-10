@@ -97,19 +97,31 @@
                                             <input class="form-control" id="planning" name="planning" type="number">
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row"></th>
-                                        <td>Total</td>
-                                        <td>100</td>
-                                        <td id="disp_total">0</td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
                 </div>
+                <div class="modal-footer">
+                    <table class="table table-striped table-hover committee-marks-table" style="width: 100%">
+                        <colgroup>
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 48%;">
+                            <col span="1" style="width: 17%;">
+                            <col span="1" style="width: 25%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="row"></th>
+                                <td>Total</td>
+                                <td>100</td>
+                                <td id="disp_total">0</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -128,6 +140,12 @@
                             style="display: none;">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover supervisor-marks-table">
+                                <colgroup>
+                                    <col span="1" style="width: 10%;">
+                                    <col span="1" style="width: 50%;">
+                                    <col span="1" style="width: 15%;">
+                                    <col span="1" style="width: 25%;">
+                                </colgroup>
                                 <thead>
                                     <tr>
                                         <th scope="col">SN</th>
@@ -142,7 +160,8 @@
                                         <td>Regularity of works</td>
                                         <td>20</td>
                                         <td>
-                                            <input class="form-control" name="regularity" id="regularity" type="number" />
+                                            <input class="form-control" name="regularity" id="regularity"
+                                                type="number" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -152,7 +171,8 @@
                                         </td>
                                         <td>20</td>
                                         <td>
-                                            <input class="form-control" name="completeness_degree" id="completeness_degree" type="number" />
+                                            <input class="form-control" name="completeness_degree"
+                                                id="completeness_degree" type="number" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -161,7 +181,8 @@
                                         </td>
                                         <td>20</td>
                                         <td>
-                                            <input class="form-control" name="understanding_thesis" id="understanding_thesis" type="number" />
+                                            <input class="form-control" name="understanding_thesis"
+                                                id="understanding_thesis" type="number" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -178,26 +199,40 @@
                                         <td>Organization of study</td>
                                         <td>20</td>
                                         <td>
-                                            <input class="form-control" name="organization" id="organization" type="number" />
+                                            <input class="form-control" name="organization" id="organization"
+                                                type="number" />
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row"></th>
-                                        <td>Total</td>
-                                        <td>100</td>
-                                        <td id="sup_disp_total">
-                                            0
-                                        </td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </form>
                 </div>
+                <div class="modal-footer">
+                    <table class="table table-striped table-hover supervisor-marks-table" style="width: 100%">
+                        <colgroup>
+                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 48%;">
+                            <col span="1" style="width: 17%;">
+                            <col span="1" style="width: 25%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="row"></th>
+                                <td>Total</td>
+                                <td>100</td>
+                                <td id="sup_disp_total">
+                                    0
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
