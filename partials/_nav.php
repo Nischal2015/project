@@ -23,9 +23,7 @@ echo'<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
 // Show this if the user is not logged in
 if (!$loggedin) {
-	echo '<li class="nav-item">
-	<a class="nav-link" href="login.php">Login</a>
-	</li>
+	echo '
 	<li class="nav-item">
 	<a class="nav-link" href="signup.php">Signup</a>
 	</li>';

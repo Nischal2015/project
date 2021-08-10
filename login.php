@@ -52,6 +52,48 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     * {
         font-family: 'Poppins', sans-serif;
     }
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .big-text {
+        font-size: 52px;
+        margin: 20px 0;
+        color: darkorange;
+    }
+
+    .btn-first {
+        margin: 30px 10px;
+        width: 150px;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    .btn-first {
+        background-color: darkorange;
+        color: #fff;
+    }
+
+    .btn-first:hover {
+        background: darkorange;
+        border: none;
+        color: #fff;
+        box-shadow: 5px 5px 10px #999;
+        transition: 0.3s;
+    }
+
+    .banner-info {
+    margin: 100px 0;
+    }
+
+    .banner-image {
+    margin: 30px 0;
+    }
+    .tu_logo {
+    height: 400px;
+    margin: 60px 0;
+    }
+
     </style>
     <title>Login</title>
 </head>
@@ -87,32 +129,67 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	?>
-    <main>
-        <div class="container my-4 col-lg-4 col-md-8 col-12">
-            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item">
-                    <a class="nav-link active border-light border-bottom-0 border-2  text-primary" aria-current="page"
-                        href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-secondary" href="signup.php">SignUp</a>
-                </li>
-            </ul>
 
-            <form action="login.php" method="post" class="bg-light p-3 rounded-3">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+
+<div class="container">
+        <div class="row contents">
+          <div class="col-sm-6 banner-info">
+            <h1>Institute of Engineering, TU</h1>
+            <p class="big-text">MSc Thesis Evaluation System</p>
+
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-first"
+              data-bs-toggle="modal"
+              data-bs-target="#login-button"
+            >
+              LOGIN
+            </button>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="login-button"
+              tabindex="-1"
+              aria-labelledby="login-buttonLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="login-buttonLabel">
+                      LOGIN
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                        <form action="login.php" method="post" class="bg-light p-3 rounded-3">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                  </div>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 banner-image">
+            <img src="images/tu-logo.png" class="img-responsive tu_logo" />
+          </div>
         </div>
-    </main>
+      </div>
 
     <footer>
         <?php include 'partials/_footer.php'; ?>
