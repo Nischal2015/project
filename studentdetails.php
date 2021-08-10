@@ -475,6 +475,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 -->
 
     <script>
+    function convNum(number) {
+        number = number ? number : 0;
+        return number;
+    }
+
+    function tot_marks(modal_id, id_name) {
+    input = Array.from(document.querySelectorAll("#" + modal_id+" input"))
+    fil_input = input.slice(1, input.length);
+    fil_input.forEach((element) => {
+        element.addEventListener("input", (e) => {
+            sum = 0;
+            for (let i = 0; i < input.length; i++) {
+                sum = sum + convNum(parseInt(input[i].value));
+            }
+            document.getElementById(id_name).innerText = sum;
+        })
+    })
+    }
+
     addEdits = document.getElementsByClassName("addEd");
     Array.from(addEdits).forEach((element) => {
         element.addEventListener("click", (e) => {
@@ -485,6 +504,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             document.getElementById("committee_markingLabel").innerText = name;
             element_id = e.currentTarget.id;
             assigned_id.value = element_id;
+            tot_marks("committee_marking", "disp_total");
         })
     })
 
@@ -499,8 +519,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             document.getElementById("supervisor_markingLabel").innerText = name;
             element_id = e.currentTarget.id;
             supervisor_assigned_id.value = element_id;
+            tot_marks("supervisor_marking", "sup_disp_total");
         })
     })
+
+
+    
     </script>
 </body>
 

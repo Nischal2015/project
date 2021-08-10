@@ -101,7 +101,7 @@
                                         <th scope="row"></th>
                                         <td>Total</td>
                                         <td>100</td>
-                                        <td>disp_total</td>
+                                        <td id="disp_total">0</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -185,8 +185,8 @@
                                         <th scope="row"></th>
                                         <td>Total</td>
                                         <td>100</td>
-                                        <td>
-                                            disp_total
+                                        <td id="sup_disp_total">
+                                            0
                                         </td>
                                     </tr>
                                 </tbody>
