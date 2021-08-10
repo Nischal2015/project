@@ -92,6 +92,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     .tu_logo {
     height: 400px;
+    width: 380px;
     margin: 60px 0;
     }
 
@@ -187,6 +188,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         </div>
       </div>
+
+      
+    <footer>
+        <?php include 'partials/_footer.php'; ?>
+    </footer>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
