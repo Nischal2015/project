@@ -169,9 +169,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <div class="col-md-7 d-flex justify-content-end text-muted">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a role="button" href="studentdetails.php?id=<?php echo $id;?>"
-                                class="btn" style="color:darkorange; border: 1px solid darkorange">MidTerm</a>
-                            <a role="button" href="finalstudentdetails.php?id=<?php echo $id;?>" class="btn"
-                                active style="background-color: darkorange !important; color:white !important;">FinalTerm</a>
+                                class="btn btn-outline-primary border border-primary border-1">MidTerm</a>
+                            <a role="button" href="finalstudentdetails.php?id=<?php echo $id;?>" class="btn btn-primary"
+                                activez>FinalTerm</a>
                         </div>
                     </div>
                 </div>
@@ -250,7 +250,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     </div>
                     <!-- Button for submitting the teacher selected -->
                     <div class="col-md-2">
-                        <button class="btn" style="background-color: darkorange; color:white;" type="submit">Add</button>
+                        <button class="btn btn-primary" type="submit">Add</button>
                     </div>
                 </div>
             </form>

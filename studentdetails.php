@@ -157,10 +157,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class="row mb-4">
                     <div class="col-md-7 d-flex justify-content-end text-muted">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" href="studentdetails.php?id=<?php echo $id;?>" class="btn"
-                                active style="background-color: darkorange !important; color:white !important;">MidTerm</a>
+                            <a role="button" href="studentdetails.php?id=<?php echo $id;?>" class="btn btn-primary"
+                                active>MidTerm</a>
                             <a role="button" href="finalstudentdetails.php?id=<?php echo $id;?>"
-                                class="btn" style="color:darkorange; border: 1px solid darkorange">FinalTerm</a>
+                                class="btn btn-outline-primary border border-primary border-1">FinalTerm</a>
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <div class="btn-group" style="width:100%;">
                                 <button class="btn dropdown-toggle border border-secondary border-1"
                                     id="dropdownMenuClickableInside" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside" aria-expanded="false">
+                                    data-bs-auto-close="outside" aria-expanded="false"
+                                    style="background-color: #ffffff !important;">
                                     Select committee members
                                 </button>
                                 <!-- Committe members dropdown -->
@@ -238,7 +239,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     </div>
                     <!-- Button for submitting the teacher selected -->
                     <div class="col-md-2">
-                        <button class="btn" style="background-color: darkorange; color:white;" type="submit">Add</button>
+                        <button class="btn btn-primary" type="submit">Add</button>
                     </div>
                 </div>
             </form>

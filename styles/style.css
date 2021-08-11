@@ -8,16 +8,6 @@
     --topNavbarHeight: 57px;
 }
 
-.page-item.active .page-link {
-    background-color: darkorange !important;
-    border-color: darkorange !important;
-}
-
-.card-header, .modal-header {
-    background-color: darkorange;
-    color: white;
-}
-
 .navbar {
     padding-right: 0px !important;
 }
@@ -45,7 +35,7 @@ a, span{
         text-decoration: none;    
 }
 nav>ul>li>a:hover span {
-    color: darkorange;  
+    color: #317cec;  
     transition: 0.20s; 
     background: #F4F6F9; 
 }
@@ -56,7 +46,7 @@ nav>ul>li:hover, nav>ul>li[aria-expanded="true"] {
 }
 
 nav>ul>li[aria-expanded="true"] span {
-    color: darkorange;  
+    color: #317cec;  
 }
 
 
@@ -65,7 +55,7 @@ nav>ul>li[aria-expanded="true"] div li a span {
 }
 
 nav>ul>li[aria-expanded="true"] div li:hover a span {
-    color: darkorange;
+    color: #317cec;
 }
 
 nav div #thesis {
@@ -85,7 +75,7 @@ main {
 nav .page-title div{
     float: left;
     display:block;
-    background: darkorange;
+    background: #6673FC;
     width: 240px;
     padding: 13.5px 0px !important;
     padding-left: 40px;
@@ -117,15 +107,6 @@ li #sidebar-pic img {
 div .card {
     border-radius: 4px !important;
     box-shadow: 4px 8px 10px 0 #dfe1e7;
-}
-
-i.material-icons.close-btn {
-    color: rgb(255, 255, 255);
-}
-i.material-icons.close-btn:hover {
-    color: #f1f1f1;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
 @media (min-width:992px) {
