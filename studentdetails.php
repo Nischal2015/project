@@ -239,7 +239,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     </div>
                     <!-- Button for submitting the teacher selected -->
                     <div class="col-md-2">
-                        <button class="btn btn-primary" type="submit">Add</button>
+                        <button class="btn" style="background-color: darkorange; color:white;" type="submit">Add</button>
                     </div>
                 </div>
             </form>
