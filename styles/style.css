@@ -35,7 +35,7 @@ a, span{
         text-decoration: none;    
 }
 nav>ul>li>a:hover span {
-    color: #317cec;  
+    color: darkorange;  
     transition: 0.20s; 
     background: #F4F6F9; 
 }
@@ -46,7 +46,7 @@ nav>ul>li:hover, nav>ul>li[aria-expanded="true"] {
 }
 
 nav>ul>li[aria-expanded="true"] span {
-    color: #317cec;  
+    color: darkorange;  
 }
 
 
@@ -55,7 +55,7 @@ nav>ul>li[aria-expanded="true"] div li a span {
 }
 
 nav>ul>li[aria-expanded="true"] div li:hover a span {
-    color: #317cec;
+    color: darkorange;
 }
 
 nav div #thesis {
