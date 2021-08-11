@@ -26,11 +26,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 </head>
 
 <body>
+    <?php include 'partials/_function.php'; ?>
     <header>
         <?php include 'partials/_nav2.php'; ?>
         <?php include 'partials/_dbconnect.php'; ?>
-    </header>    
-    
+    </header>
+
     <aside>
         <?php include 'partials/_sidebar.php'; ?>
     </aside>
@@ -60,9 +61,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-md-3">
-                                    <span class="pe-2"><i class="material-icons d-flex justify-content-center">
+                                    <span class="pe-2">
+                                        <i class="material-icons d-flex justify-content-center">
                                             people
-                                        </i></span>
+                                        </i>
+                                    </span>
                                 </div>
                                 <div class="col-md-9">
                                     <strong class="card-title">Total Students</strong>
@@ -175,34 +178,28 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>075BCT999</td>
-                                            <td>Lorem, ipsum dolor.</td>
-                                            <td>12</td>
-                                            <td>48</td>
-                                            <td>60</td>
-                                        </tr>
-                                        <tr>
-                                            <td>075BCT174</td>
-                                            <td>Lorem, ipsum dolor.</td>
-                                            <td>96</td>
-                                            <td>78</td>
-                                            <td>174</td>
-                                        </tr>
-                                        <tr>
-                                            <td>075BCT785</td>
-                                            <td>Lorem, ipsum.</td>
-                                            <td>45</td>
-                                            <td>12</td>
-                                            <td>57</td>
-                                        </tr>
-                                        <tr>
-                                            <td>075BCT785</td>
-                                            <td>Lorem, ipsum.</td>
-                                            <td>45</td>
-                                            <td>12</td>
-                                            <td>57</td>
-                                        </tr>
+                                        <?php
+                                        $st_sql = "SELECT s.student_roll, s.student_fname, s.student_lname, tm.tm_mid_sup, tm.tm_mid_com, tm.tm_mid_ext, tm.tm_final_sup, tm.tm_final_com, tm.tm_final_ext
+                                        FROM students s
+                                        INNER JOIN total_marks tm
+                                        ON s.student_id=tm.tm_student_id
+                                        ";
+                                        $result = mysqli_query($conn, $st_sql);
+                                        while($st_row = mysqli_fetch_assoc($result)) {
+                                            $internal = $st_row['tm_mid_sup']+$st_row['tm_mid_com']+$st_row['tm_final_sup']+$st_row['tm_final_com'];
+                                            $external = $st_row['tm_final_ext']+$st_row['tm_mid_ext'];
+                                            $total = $internal + $external;
+                                           echo '
+                                           <tr>
+                                                <td>'.e($st_row['student_roll']).'</td>
+                                                <td>'.e($st_row['student_fname']).' '.e($st_row['student_lname']).'</td>
+                                                <td>'.e($internal).'</td>
+                                                <td>'.e($external).'</td>
+                                                <td>'.e($total).'</td>
+                                           </tr>
+                                           '; 
+                                        }
+                                        ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
