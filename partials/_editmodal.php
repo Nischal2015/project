@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
+                <form action="allstudents.php" method="post">
                 <input class="hidden" name="snoEdit" id="snoEdit" style="display: none;">
                     <div class="row">
                         <div class="col-md-6 pt-4">
