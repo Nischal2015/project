@@ -8,6 +8,11 @@
     --topNavbarHeight: 57px;
 }
 
+.page-item.active .page-link {
+    background-color: darkorange !important;
+    border-color: darkorange !important;
+}
+
 .navbar {
     padding-right: 0px !important;
 }
