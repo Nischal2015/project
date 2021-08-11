@@ -114,6 +114,15 @@ div .card {
     box-shadow: 4px 8px 10px 0 #dfe1e7;
 }
 
+i.material-icons.close-btn {
+    color: rgb(255, 255, 255);
+}
+i.material-icons.close-btn:hover {
+    color: #f1f1f1;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
 @media (min-width:992px) {
     body {
         overflow: auto !important;

@@ -179,7 +179,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                                     </button>
                                                     <button type="button" class="delete btn btn-danger btn-sm" id=d'. e($row['student_id']) .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
                                                     </button>
-                                                    <a role="button" href="studentdetails.php?id='. e($row['student_id']) .'" class="information btn btn-warning btn-sm" id='. e($row['student_id']) .' title="Details" style="padding: 4px 5px !important;">	
+                                                    <a role="button" href="studentdetails.php?id='. e($row['student_id']) .'" class="information btn btn-primary btn-sm" id='. e($row['student_id']) .' title="Details" style="padding: 4px 5px !important;">	
                                                     <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
                                                     </button>
                                                 </td>
