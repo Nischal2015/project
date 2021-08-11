@@ -68,7 +68,7 @@ else{
                 <div class="col-md-3 col-sm-6 col-6"><strong>Thesis Title</strong></div>
                 <div class="col-md-3 col-sm-6 col-6">'. e($row['student_thesis']) .'</div>
                 <div class="col-md-3 col-sm-6 col-6"><strong>Marks Details</strong></div>
-                <div class="col-md-3 col-sm-6 col-6"><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#marksDetailsModal">
+                <div class="col-md-3 col-sm-6 col-6"><button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#marksDetailsModal">
                 <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
                 </button></div>';
                 ?>
