@@ -99,7 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         margin: 60px 0;
     }
     </style>
-    <title>Homepage</title>
+    <title>MSc Thesis Evaluation System</title>
 </head>
 
 <body>
