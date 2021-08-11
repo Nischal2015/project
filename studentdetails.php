@@ -190,8 +190,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <div class="btn-group" style="width:100%;">
                                 <button class="btn dropdown-toggle border border-secondary border-1"
                                     id="dropdownMenuClickableInside" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside" aria-expanded="false"
-                                    style="background-color: #ffffff !important;">
+                                    data-bs-auto-close="outside" aria-expanded="false">
                                     Select committee members
                                 </button>
                                 <!-- Committe members dropdown -->
