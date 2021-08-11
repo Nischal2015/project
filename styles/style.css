@@ -75,7 +75,7 @@ main {
 nav .page-title div{
     float: left;
     display:block;
-    background: #6673FC;
+    background: darkorange;
     width: 240px;
     padding: 13.5px 0px !important;
     padding-left: 40px;
