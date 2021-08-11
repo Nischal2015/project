@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
+                    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
                         <input class="comhidden" name="committee_assigned_id" id="committee_assigned_id"
                             style="display:none;">
                         <div class="table-responsive">
@@ -154,7 +154,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
+                    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
                         <input class="comhidden" name="external_assigned_id" id="external_assigned_id"
                             style="display:none;">
                         <div class="table-responsive">
@@ -302,7 +302,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
+                    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
                         <input class="hidden" name="supervisor_assigned_id" id="supervisor_assigned_id"
                             style="display: none;">
                         <div class="table-responsive">
