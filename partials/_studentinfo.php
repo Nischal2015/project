@@ -43,8 +43,8 @@ else{
             ?>
         </div>
         <div class="container-fluid mt-4">
-            
-                <?php              
+
+            <?php              
                 echo '
                 <div class="row">
                 <div class="col-md-3 col-sm-6 col-6"><strong>Firstname</strong></div>
@@ -72,9 +72,9 @@ else{
                 <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
                 </button></div>';
                 ?>
-            </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- Modal -->
@@ -82,8 +82,14 @@ else{
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="marksDetailsModalLabel"><strong>Marks Details<?php echo ' ('.e($row['student_fname']). ' ' .e($row['student_lname']).')'?></strong></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="marksDetailsModalLabel"><strong>Marks
+                        Details<?php echo ' ('.e($row['student_fname']). ' ' .e($row['student_lname']).')'?></strong>
+                </h5>
+                <span>
+                    <i class="material-icons close-btn" data-bs-dismiss="modal" aria-label="Close">
+                        close
+                    </i>
+                </span>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
@@ -137,7 +143,7 @@ else{
                             </tr>
                             </tfoot><strong>';
                             ?>
-                        
+
                     </table>
                 </div>
             </div>

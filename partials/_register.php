@@ -32,36 +32,36 @@
         </div>
         <div class="col-md-6 pt-4">
             <div class="form-floating mb-2">
-                <select name="department" class="form-select" aria-label="Default select example">
+                <select id="departmentadd" name="department" class="form-select" aria-label="Default select example">
                     <option selected>Choose..</option>
                     <?php
                     $sql = "SELECT * FROM `department`";
                     $result = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($result)) {
-                        $field = $row['dep_name'];
+                        $field = e($row['dep_name']);
                         echo '<option value="'. $field .'">'. $field .'</option>';   
                     }
                     ?>                 
                 </select>
-                <label for="department">Department</label>
+                <label for="departmentadd">Department</label>
             </div>
         </div>
         <div class="col-md-6 pt-4">
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="year" name="year" placeholder="Thesis">
-                <label for="InputRoll">Year</label>
+                <label for="year">Year</label>
             </div>
         </div>
         <div class="col-md-6 pt-4">
             <div class="form-floating mb-2">
                 <input type="text" class="form-control" id="thesis" name="thesis" placeholder="Thesis">
-                <label for="InputRoll">Thesis Title</label>
+                <label for="thesis">Thesis Title</label>
             </div>
         </div>
         <div class="col-md-6 pt-4">
             <div class="form-floating mb-2">
                 <input type="date" class="form-control" id="regdate" name="regdate" placeholder="Registration Date">
-                <label for="InputDate">Registration Date</label>
+                <label for="regdate">Registration Date</label>
             </div>
         </div>
         <div class="col-md-12 py-3">

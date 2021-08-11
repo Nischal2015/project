@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="<?php $_SERVER['REQUEST_URI']; ?>" method="post">
+                <form action="allstudents.php" method="post">
                 <input class="hidden" name="snoEdit" id="snoEdit" style="display: none;">
                     <div class="row">
                         <div class="col-md-6 pt-4">
@@ -51,12 +51,12 @@
                                     $sql = "SELECT * FROM `department`";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        $field = $row['dep_name'];
+                                        $field = e($row['dep_name']);
                                         echo '<option value="'. $field . '">'. $field .'</option>';   
                                     }
                                     ?>
                                 </select>
-                                <label for="department">Department</label>
+                                <label for="departmentEdit">Department</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
