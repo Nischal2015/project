@@ -37,6 +37,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <?php require 'partials/_function.php'; ?>
     <main class="p-2 mt-1" style="min-height: 800px">
         <?php
+        $student_id = $_GET['id'];
         function marks_calc_com($sql, $conn, $student_id) {
             $portion_avg = "SELECT AVG(total) FROM mid_committee WHERE st_te_assigned_id IN ( SELECT assigned_id FROM mid_committee_assigned WHERE assigned_s_id = '$student_id')";
             mysqli_query($conn, $sql);
@@ -52,8 +53,41 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             mysqli_query($conn, $sql);
             mysqli_query($conn, $marks_portion);
         }
+
+        if (isset($_GET['sdelete'])) {
+            $assigned_id_1 = e($_GET['sdelete']);
+            echo $assigned_id_1;
+                $sql = "DELETE FROM `mid_supervisor_assigned` WHERE `assigned_id` = '$assigned_id_1'";
+                $sql1 = "UPDATE `total_marks` SET `tm_mid_sup` = '0'  WHERE `tm_student_id` = '$student_id'";
+                mysqli_query($conn, $sql);
+                mysqli_query($conn, $sql1);
+                $delete = true;
+            }
+        elseif (isset($_GET['edelete'])) {
+            $assigned_id_1 = e($_GET['edelete']);
+            echo $assigned_id_1;
+                $sql = "DELETE FROM `mid_external_assigned` WHERE `assigned_id` = '$assigned_id_1'";
+                $sql1 = "UPDATE `total_marks` SET `tm_mid_ext` = '0'  WHERE `tm_student_id` = '$student_id'";
+                mysqli_query($conn, $sql);
+                mysqli_query($conn, $sql1);
+                $delete = true;
+            }
+        elseif (isset($_GET['cdelete'])) {
+            $assigned_id_1 = e($_GET['cdelete']);
+            echo $assigned_id_1;
+                $sql = "DELETE FROM `mid_committee_assigned` WHERE `assigned_id` = '$assigned_id_1'";
+                mysqli_query($conn, $sql);
+                $portion_avg = "SELECT AVG(total) FROM mid_committee WHERE st_te_assigned_id IN ( SELECT assigned_id FROM mid_committee_assigned WHERE assigned_s_id = '$student_id')";
+
+                $result_avg = mysqli_query($conn, $portion_avg);
+                $row_avg = mysqli_fetch_assoc($result_avg);
+                $portion = $row_avg['AVG(total)']/100*10;
+                $marks_portion = "UPDATE `total_marks` SET `tm_mid_com` = '$portion'  WHERE `tm_student_id` = '$student_id'";
+                mysqli_query($conn, $marks_portion);
+                $delete = true;                    
+            }
             if($_SERVER['REQUEST_METHOD']=='POST') {
-                $student_id = $_GET['id'];
+                
                 if(!empty($_POST['committee'])) {
                    foreach($_POST['committee'] as $selected) {
                        $sql= "INSERT INTO `mid_committee_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
@@ -129,6 +163,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             }
         ?>
         <div class="container-fluid page-header">
+            <?php
+                if($delete) {
+                    echo '            
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> You have unassigned the teacher successfully.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            ?>
             <div class="row">
                 <div class="col-md-6 py-3">
                     <h4 class="text-muted fw-bold">Student Details</h4>
@@ -481,17 +528,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     }
 
     function tot_marks(modal_id, id_name) {
-    input = Array.from(document.querySelectorAll("#" + modal_id+" input"))
-    fil_input = input.slice(1, input.length);
-    fil_input.forEach((element) => {
-        element.addEventListener("input", (e) => {
-            sum = 0;
-            for (let i = 0; i < input.length; i++) {
-                sum = sum + convNum(parseInt(input[i].value));
-            }
-            document.getElementById(id_name).innerText = sum;
+        input = Array.from(document.querySelectorAll("#" + modal_id + " input"))
+        fil_input = input.slice(1, input.length);
+        fil_input.forEach((element) => {
+            element.addEventListener("input", (e) => {
+                sum = 0;
+                for (let i = 0; i < input.length; i++) {
+                    sum = sum + convNum(parseInt(input[i].value));
+                }
+                document.getElementById(id_name).innerText = sum;
+            })
         })
-    })
     }
 
     addEdits = document.getElementsByClassName("addEd");
@@ -522,9 +569,31 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             tot_marks("supervisor_marking", "sup_disp_total");
         })
     })
-
-
-    
+    deletes = document.getElementsByClassName('delete');
+    Array.from(deletes).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            action = e.currentTarget.id.substr(0, 2);
+            element_id = e.currentTarget.id.substr(2, );
+            console.log(window.location.search.split('&')[0]);
+            console.log(element_id);
+            if (action == "sd") {
+                if (confirm("Are you sure you want to delete the record?")) {
+                    window.location =
+                        `./studentdetails.php${window.location.search.split('&')[0]}&sdelete=${element_id}`;
+                }
+            } else if (action === "ed") {
+                if (confirm("Are you sure you want to delete the record?")) {
+                    window.location =
+                        `./studentdetails.php${window.location.search.split('&')[0]}&edelete=${element_id}`;
+                }
+            } else if (action === "cd") {
+                if (confirm("Are you sure you want to delete the record?")) {
+                    window.location =
+                        `./studentdetails.php${window.location.search.split('&')[0]}&cdelete=${element_id}`;
+                }
+            }
+        })
+    })
     </script>
 </body>
 
