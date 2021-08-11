@@ -5,11 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="committee_markingLabel"></h5>
-                    <span>
-                        <i class="material-icons close-btn" data-bs-dismiss="modal" aria-label="Close">
-                            close
-                        </i>
-                    </span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
@@ -155,11 +151,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="external_markingLabel"></h5>
-                    <span>
-                        <i class="material-icons close-btn" data-bs-dismiss="modal" aria-label="Close">
-                            close
-                        </i>
-                    </span>                </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
                     <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
                         <input class="comhidden" name="external_assigned_id" id="external_assigned_id"
@@ -306,11 +299,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="supervisor_markingLabel"></h5>
-                    <span>
-                        <i class="material-icons close-btn" data-bs-dismiss="modal" aria-label="Close">
-                            close
-                        </i>
-                    </span>                </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
                     <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
                         <input class="hidden" name="supervisor_assigned_id" id="supervisor_assigned_id"

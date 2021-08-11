@@ -5,11 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="committee_markingLabel"></h5>
-                    <span>
-                        <i class="material-icons close-btn" data-bs-dismiss="modal" aria-label="Close">
-                            close
-                        </i>
-                    </span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
@@ -136,11 +132,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="supervisor_markingLabel"></h5>
-                    <span>
-                        <i class="material-icons close-btn" data-bs-dismiss="modal" aria-label="Close">
-                            close
-                        </i>
-                    </span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post">
