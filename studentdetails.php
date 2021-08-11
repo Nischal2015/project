@@ -201,7 +201,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                     <?php include 'partials/_studentinfo.php'; ?>
                 </div>
             </div>
-            <form action="<?php echo e($_SERVER['REQUEST_URI'])?>" method="post">
+            <form action="studentdetails.php?id=<?php echo $student_id; ?>" method="post">
                 <div class="row mb-4">
                     <div class="col-md-7 d-flex justify-content-end text-muted">
                         <div class="btn-group" role="group" aria-label="Basic example">
