@@ -30,6 +30,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 <!-- Body starts here -->
 
 <body>
+    <?php include 'partials/_function.php'; ?>
     <!-- Header starts here -->
     <?php include 'partials/_nav2.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
@@ -49,13 +50,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 $fname = mysqli_real_escape_string($conn, $_POST['fname']);
                 $lname = mysqli_real_escape_string($conn, $_POST['lname']);
                 $roll = mysqli_real_escape_string($conn, $_POST['roll']);
-                $dep = $_POST['department'];
-                $gender = $_POST['gender'];
-                $regdate = $_POST['regdate'];
+                $dep = mysqli_real_escape_string($conn, $_POST['department']);
+                $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+                $regdate = mysqli_real_escape_string($conn, $_POST['regdate']);
                 $year = mysqli_real_escape_string($conn, $_POST['year']);
                 $thesis = mysqli_real_escape_string($conn, $_POST['thesis']);
+                echo $fname. "<br>";
+                echo $lname. "<br>";
+                echo $roll. "<br>";
+                echo $dep. "<br>";
+                echo $gender. "<br>";
+                echo $regdate. "<br>";
+                echo $year. "<br>";
+                echo $thesis. "<br>";
                 $sql = "INSERT INTO `students` (`student_fname`, `student_lname`, `student_roll`, `student_dep`, `student_gender`, `student_regdate`, `student_year`, `student_thesis`) VALUES ('$fname', '$lname', '$roll', '$dep', '$gender', '$regdate', '$year', '$thesis')";
                 $result = mysqli_query($conn, $sql);
+                echo var_dump($result);
                 
                 $getid = "SELECT `student_id` FROM `students` WHERE `student_roll` = '$roll'";
                 $result1 = mysqli_query($conn, $getid);

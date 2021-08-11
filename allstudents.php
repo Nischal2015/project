@@ -91,7 +91,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class='row'>
                     <div class='col-md-12'>
                         <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                            <strong>Success!</strong> Your student has been updated succesfully.
+                            <strong>Success!</strong> Your student has been updated successfully.
                         <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                       </div>
                     </div>
@@ -170,7 +170,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             <tr>
                                                 <td>'. e($row['student_roll']) .'</td>
                                                 <td>'. e($row['student_fname']) . ' ' . e($row['student_lname']) . '</td>
-                                                <td>'. e($row['student_dep']) .'</td>
+                                                <td>'. $row['student_dep'] .'</td>
                                                 <td>'. e($row['student_thesis']) .'</td>
                                                 <td>'. e($row['student_regdate']). '</td>
                                                 <td>
@@ -261,6 +261,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             fname = item[1].innerText.split(" ")[0];
             lname = item[1].innerText.split(" ")[1];
             department = item[2].innerText;
+            console.log(department);
             thesis = item[3].innerText;
             regdate = item[4].innerText;
             rollEdit.value = roll;

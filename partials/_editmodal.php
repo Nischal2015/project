@@ -51,12 +51,12 @@
                                     $sql = "SELECT * FROM `department`";
                                     $result = mysqli_query($conn, $sql);
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        $field = $row['dep_name'];
+                                        $field = e($row['dep_name']);
                                         echo '<option value="'. $field . '">'. $field .'</option>';   
                                     }
                                     ?>
                                 </select>
-                                <label for="department">Department</label>
+                                <label for="departmentEdit">Department</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
