@@ -1,6 +1,6 @@
 <!-- Sidebar starts here -->
 <div class="offcanvas offcanvas-start sidebar-nav bg-white text-white shadow" id="sidebar"
-    aria-labelledby="sidebarLabel">
+    aria-labelledby="sidebarLabel" style="z-index: 0;">
     <div class="offcanvas-body p-0">
         <nav class="navbar-white">
             <ul class="navbar-nav side-link">
