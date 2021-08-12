@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 * {
     font-family: 'Poppins', sans-serif;
 }
@@ -129,4 +129,5 @@ div .card {
     main {
         margin-left: var(--offcanvas-width);
     }    
-}
+} */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');*{font-family:'Poppins',sans-serif}:root{--offcanvas-width:240px;--topNavbarHeight:57px}.navbar{padding-right:0!important}.sidebar-nav{width:var(--offcanvas-width)}.sidebar-link{display:flex;align-items:center}.sidebar-link .right-icon{display:inline-flex;transition:all ease .2s}.sidebar-link[aria-expanded="true"] .right-icon{transform:rotate(90deg)}a,span{color:#3a3a3a;text-decoration:none}nav>ul>li>a:hover span{color:#317cec;transition:.20s;background:#f4f6f9}nav>ul>li:hover,nav>ul>li[aria-expanded="true"]{background:#f4f6f9;transition:.2s}nav>ul>li[aria-expanded="true"] span{color:#317cec}nav>ul>li[aria-expanded="true"] div li a span{color:#3a3a3a}nav>ul>li[aria-expanded="true"] div li:hover a span{color:#317cec}nav div #thesis{width:240px;color:#fff;padding:10px 0}body{padding-right:0!important}main{background:#eceff3}nav .page-title div{float:left;display:block;background:#6673fc;width:240px;padding:13.5px 0!important;padding-left:40px;color:#fff;box-sizing:border-box}main .page-header{margin-top:70px}div .profile-pic img{margin:0 auto;height:130px;width:130px;border:2px solid #bec1c4;padding:2px;margin-top:1rem}li #sidebar-pic img{height:95px!important;width:90px!important;margin-top:2rem;margin:0 auto;padding:5px}div .card{border-radius:4px!important;box-shadow:4px 8px 10px 0 #dfe1e7}@media(min-width:992px){body{overflow:auto!important}.offcanvas-backdrop::before{display:none}.sidebar-nav{transform:none;visibility:visible!important;top:var(--topNavbarHeight);height:calc(100% - var(--topNavbarHeight))}.navbar-expand-lg{padding:0}main{margin-left:var(--offcanvas-width)}}
