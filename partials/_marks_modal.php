@@ -1,14 +1,14 @@
     <!-- This is the modal for mid term -->
     <!-- Committee and External Modal -->
-    <div class="modal fade" id="committee_marking" aria-labelledby="committee_markingLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="committee_markingLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="studentdetails.php?id=<?php echo $student_id; ?>" method="post">
+    <form action="studentdetails.php?id=<?php echo $student_id; ?>" method="post">
+        <div class="modal fade" id="committee_marking" aria-labelledby="committee_markingLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="committee_markingLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
                         <input class="comhidden" name="assigned_id" id="assigned_id" style="display:none;">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover committee-marks-table" style="width: 100%" ;>
@@ -100,31 +100,31 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <table class="table table-striped table-hover committee-marks-table" style="width: 100%">
+                            <colgroup>
+                                <col span="1" style="width: 10%;">
+                                <col span="1" style="width: 48%;">
+                                <col span="1" style="width: 17%;">
+                                <col span="1" style="width: 25%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>Total</td>
+                                    <td>100</td>
+                                    <td id="disp_total">0</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <table class="table table-striped table-hover committee-marks-table" style="width: 100%">
-                        <colgroup>
-                            <col span="1" style="width: 10%;">
-                            <col span="1" style="width: 48%;">
-                            <col span="1" style="width: 17%;">
-                            <col span="1" style="width: 25%;">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="row"></th>
-                                <td>Total</td>
-                                <td>100</td>
-                                <td id="disp_total">0</td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-                </form>
             </div>
         </div>
-    </div>
+    </form>
 
     <!--Supervisor Modal -->
     <div class="modal fade" id="supervisor_marking" aria-labelledby="supervisor_markingLabel" aria-hidden="true">
