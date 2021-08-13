@@ -1,15 +1,4 @@
-<!-- Navbar for the landing page -->
-<?php
-
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-	$loggedin = true;
-}
-else
-{
-	$loggedin = false;
-}
-
-echo'<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<?php if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){$loggedin=true;}else{$loggedin=false;}echo'<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container-fluid">
 <a class="navbar-brand" href="/">Pulchowk Campus</a>
 <!--
@@ -23,30 +12,15 @@ echo'<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <li class="nav-item">
 <a class="nav-link active" aria-current="page" href="index.php">Home</a>
 </li>
--->';
-
-// Show this if the user is not logged in
-if (!$loggedin) {
-	echo '
+-->';if(!$loggedin){echo '
 	<!--
 	<li class="nav-item">
 	<a class="nav-link" href="signup.php">Signup</a>
 	</li>
 -->
-	';
-}
-
-// Show this if the user is logged in
-if ($loggedin) {
-	echo '<li class="nav-item">
+	';}if($loggedin){echo '<li class="nav-item">
 	<a class="nav-link" href="logout.php">Log Out</a>
-	</li>';
-}
-
-
-echo '
+	</li>';}echo '
 </div>
 </div>
-</nav>';
-
-?>
+</nav>'; ?>
