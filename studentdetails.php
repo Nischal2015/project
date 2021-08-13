@@ -48,13 +48,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             $marks_portion = "UPDATE `total_marks` SET `tm_mid_com` = '$portion'  WHERE `tm_student_id` = '$student_id'";
             mysqli_query($conn, $marks_portion);
         }
-
         function marks_calc_ext($sql, $conn, $student_id, $portion) {
             $marks_portion = "UPDATE `total_marks` SET `tm_mid_ext` = '$portion'  WHERE `tm_student_id` = '$student_id'";
             mysqli_query($conn, $sql);
             mysqli_query($conn, $marks_portion);
         }
-
         if (isset($_GET['sdelete'])) {
             $assigned_id_1 = e($_GET['sdelete']);
             echo $assigned_id_1;
