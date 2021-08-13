@@ -22,3 +22,7 @@ AddOutputFilterByType DEFLATE text/javascript
 AddOutputFilterByType DEFLATE text/plain
 AddOutputFilterByType DEFLATE text/xml
 </IfModule>
+
+# Checks if the file is physically NOT present
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-z0-9-]+)+/([a-z0-9-]+)\$	/controller.php?partA=$1&partB=$2 [L]

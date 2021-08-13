@@ -1,0 +1,1 @@
+<?php function cache_page($content){$fileName=$_SERVER['DOCUMENT_ROOT'].$_SERVER["REQUEST_URI"];if(false!==($f=@fopen($fileName,'w'))){fwrite($f,$content);fclose($f);}return $content.'';}ob_start('cache_page'); ?>
