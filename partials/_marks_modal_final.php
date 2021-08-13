@@ -1,14 +1,14 @@
     <!-- This is the modal for final term -->
     <!-- Committee Modal -->
-    <div class="modal fade" id="committee_marking" aria-labelledby="committee_markingLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="committee_markingLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
+    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
+        <div class="modal fade" id="committee_marking" aria-labelledby="committee_markingLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="committee_markingLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
                         <input class="comhidden" name="committee_assigned_id" id="committee_assigned_id"
                             style="display:none;">
                         <div class="table-responsive">
@@ -118,43 +118,42 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <table class="table table-striped table-hover committee-marks-table" style="width: 100%">
+                            <colgroup>
+                                <col span="1" style="width: 10%;">
+                                <col span="1" style="width: 48%;">
+                                <col span="1" style="width: 17%;">
+                                <col span="1" style="width: 25%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>Total</td>
+                                    <td>100</td>
+                                    <td id="com_disp_total">0</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <table class="table table-striped table-hover committee-marks-table" style="width: 100%">
-                        <colgroup>
-                            <col span="1" style="width: 10%;">
-                            <col span="1" style="width: 48%;">
-                            <col span="1" style="width: 17%;">
-                            <col span="1" style="width: 25%;">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="row"></th>
-                                <td>Total</td>
-                                <td>100</td>
-                                <td id="com_disp_total">0</td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-                </form>
             </div>
         </div>
-    </div>
-    </div>
+    </form>
 
     <!-- External Modal -->
-    <div class="modal fade" id="external_marking" aria-labelledby="external_markingLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="external_markingLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
+    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
+        <div class="modal fade" id="external_marking" aria-labelledby="external_markingLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="external_markingLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
                         <input class="comhidden" name="external_assigned_id" id="external_assigned_id"
                             style="display:none;">
                         <div class="table-responsive">
@@ -267,42 +266,42 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <table class="table table-striped table-hover external-marks-table" style="width: 100%" ;>
+                            <colgroup>
+                                <col span="1" style="width: 10%;">
+                                <col span="1" style="width: 48%;">
+                                <col span="1" style="width: 17%;">
+                                <col span="1" style="width: 25%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>Total</td>
+                                    <td>100</td>
+                                    <td id="ext_disp_total">0</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <table class="table table-striped table-hover external-marks-table" style="width: 100%" ;>
-                        <colgroup>
-                            <col span="1" style="width: 10%;">
-                            <col span="1" style="width: 48%;">
-                            <col span="1" style="width: 17%;">
-                            <col span="1" style="width: 25%;">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="row"></th>
-                                <td>Total</td>
-                                <td>100</td>
-                                <td id="ext_disp_total">0</td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-                </form>
             </div>
         </div>
-    </div>
+    </form>
 
     <!--Supervisor Modal -->
-    <div class="modal fade" id="supervisor_marking" aria-labelledby="supervisor_markingLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="supervisor_markingLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
+    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
+        <div class="modal fade" id="supervisor_marking" aria-labelledby="supervisor_markingLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="supervisor_markingLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
                         <input class="hidden" name="supervisor_assigned_id" id="supervisor_assigned_id"
                             style="display: none;">
                         <div class="table-responsive">
@@ -373,32 +372,32 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <table class="table table-striped table-hover supervisor-marks-table">
+                            <colgroup>
+                                <col span="1" style="width: 10%;">
+                                <col span="1" style="width: 48%;">
+                                <col span="1" style="width: 17%;">
+                                <col span="1" style="width: 25%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>Total</td>
+                                    <td>100</td>
+                                    <td id="sup_disp_total">
+                                        0
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <table class="table table-striped table-hover supervisor-marks-table">
-                        <colgroup>
-                            <col span="1" style="width: 10%;">
-                            <col span="1" style="width: 48%;">
-                            <col span="1" style="width: 17%;">
-                            <col span="1" style="width: 25%;">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="row"></th>
-                                <td>Total</td>
-                                <td>100</td>
-                                <td id="sup_disp_total">
-                                    0
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Cancel
-                    </button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-                </form>
             </div>
         </div>
-    </div>
+    </form>
