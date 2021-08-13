@@ -1,1 +1,1 @@
-<?php session_start();session_unset();session_destroy();header("location: /");exit(); ?>
+<?php require_once("cache.php");session_start();session_unset();session_destroy();header("location: /");exit(); ?>
