@@ -67,7 +67,7 @@
 
     <body>
         <header><?php require 'partials/_nav.php'; ?></header>
-        <?php session_start();if($login){echo '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Success!</strong> You are logged in<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';}if($showErrors){echo '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Sorry! </strong>'.$showErrors.'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';}if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){header("location: dashboard.php");} ?>
+        <?php if($login){echo '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Success!</strong> You are logged in<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';}if($showErrors){echo '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Sorry! </strong>'.$showErrors.'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';}if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){header("location: dashboard.php");} ?>
         <div class="container">
             <div class="contents row">
                 <div class="col-sm-6 banner-info">
