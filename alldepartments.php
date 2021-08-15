@@ -1,4 +1,4 @@
-<?php require_once("partials/_cache.php");$showAlert=false;$delete=false;$showErrors=false;session_start();if(!isset($_SESSION['loggedin'])||$_SESSION['loggedin']!=true){header("location: /");exit;} ?>
+<?php $showAlert=false;$delete=false;$showErrors=false;session_start();if(!isset($_SESSION['loggedin'])||$_SESSION['loggedin']!=true){header("location: /");exit;} ?>
 <!doctype html>
 <html lang="en">
 
