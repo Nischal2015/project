@@ -11,7 +11,7 @@
             crossorigin="anonymous" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC">
         <title>Details</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="styles/style.css" rel="stylesheet">
+        <link href="styles/style.min.css" rel="stylesheet">
     </head>
 
     <body>

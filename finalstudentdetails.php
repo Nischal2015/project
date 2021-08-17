@@ -227,61 +227,7 @@
     <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"></script>
     <?php include 'partials/_marks_modal_final.php'; ?><script>
-    function convNum(e) {
-        return e = e || 0
-    }
-
-    function tot_marks(e, t) {
-        input = Array.from(document.querySelectorAll("#" + e + " input")), fil_input = input.slice(1, input.length),
-            fil_input.forEach(e => {
-                e.addEventListener("input", e => {
-                    sum = 0;
-                    for (let e = 0; e < input.length; e++) sum += convNum(parseInt(input[e].value));
-                    document.getElementById(t).innerText = sum
-                })
-            })
-    }
-    comaddEdits = document.getElementsByClassName("comaddEd"), Array.from(comaddEdits).forEach(e => {
-        e.addEventListener("click", e => {
-            supervisor_assigned_id.value = null, committee_assigned_id.value = null,
-                external_assigned_id.value = null, tr = e.currentTarget.parentNode.parentNode, name = tr
-                .getElementsByTagName("td")[1].innerText, document.getElementById(
-                    "committee_markingLabel").innerText = name, element_id = e.currentTarget.id,
-                committee_assigned_id.value = element_id, tot_marks("committee_marking",
-                    "com_disp_total")
-        })
-    }), extaddEdits = document.getElementsByClassName("extaddEd"), Array.from(extaddEdits).forEach(e => {
-        e.addEventListener("click", e => {
-            supervisor_assigned_id.value = null, committee_assigned_id.value = null,
-                external_assigned_id.value = null, tr = e.currentTarget.parentNode.parentNode, name = tr
-                .getElementsByTagName("td")[1].innerText, document.getElementById(
-                    "external_markingLabel").innerText = name, element_id = e.currentTarget.id,
-                external_assigned_id.value = element_id, tot_marks("external_marking", "ext_disp_total")
-        })
-    }), supaddEdits = document.getElementsByClassName("supaddEd"), Array.from(supaddEdits).forEach(e => {
-        e.addEventListener("click", e => {
-            committee_assigned_id.value = null, external_assigned_id.value = null,
-                supervisor_assigned_id.value = null, tr = e.currentTarget.parentNode.parentNode, name =
-                tr.getElementsByTagName("td")[1].innerText, document.getElementById(
-                    "supervisor_markingLabel").innerText = name, element_id = e.currentTarget.id,
-                supervisor_assigned_id.value = element_id, tot_marks("supervisor_marking",
-                    "sup_disp_total")
-        })
-    }), deletes = document.getElementsByClassName("delete"), Array.from(deletes).forEach(e => {
-        e.addEventListener("click", e => {
-            action = e.currentTarget.id.substr(0, 2), element_id = e.currentTarget.id.substr(2), console
-                .log(window.location.search.split("&")[0]), console.log(element_id), "sd" == action ?
-                confirm("Are you sure you want to delete the record?") && (window.location =
-                    `./finalstudentdetails.php${window.location.search.split("&")[0]}&sdelete=${element_id}`
-                    ) : "ed" === action ? confirm("Are you sure you want to delete the record?") && (
-                    window.location =
-                    `./finalstudentdetails.php${window.location.search.split("&")[0]}&edelete=${element_id}`
-                    ) : "cd" === action && confirm("Are you sure you want to delete the record?") && (
-                    window.location =
-                    `./finalstudentdetails.php${window.location.search.split("&")[0]}&cdelete=${element_id}`
-                    )
-        })
-    });
+    function convNum(a){return a=a||0}function tot_marks(a,b){input=Array.from(document.querySelectorAll("#"+a+" input")),fil_input=input.slice(1,input.length),fil_input.forEach(a=>{a.addEventListener("input",()=>{sum=0;for(let a=0;a<input.length;a++)sum+=convNum(parseInt(input[a].value));document.getElementById(b).innerText=sum})})}comaddEdits=document.getElementsByClassName("comaddEd"),Array.from(comaddEdits).forEach(a=>{a.addEventListener("click",a=>{supervisor_assigned_id.value=null,committee_assigned_id.value=null,external_assigned_id.value=null,tr=a.currentTarget.parentNode.parentNode,name=tr.getElementsByTagName("td")[1].innerText,document.getElementById("committee_markingLabel").innerText=name,element_id=a.currentTarget.id,committee_assigned_id.value=element_id,tot_marks("committee_marking","com_disp_total")})}),extaddEdits=document.getElementsByClassName("extaddEd"),Array.from(extaddEdits).forEach(a=>{a.addEventListener("click",a=>{supervisor_assigned_id.value=null,committee_assigned_id.value=null,external_assigned_id.value=null,tr=a.currentTarget.parentNode.parentNode,name=tr.getElementsByTagName("td")[1].innerText,document.getElementById("external_markingLabel").innerText=name,element_id=a.currentTarget.id,external_assigned_id.value=element_id,tot_marks("external_marking","ext_disp_total")})}),supaddEdits=document.getElementsByClassName("supaddEd"),Array.from(supaddEdits).forEach(a=>{a.addEventListener("click",a=>{committee_assigned_id.value=null,external_assigned_id.value=null,supervisor_assigned_id.value=null,tr=a.currentTarget.parentNode.parentNode,name=tr.getElementsByTagName("td")[1].innerText,document.getElementById("supervisor_markingLabel").innerText=name,element_id=a.currentTarget.id,supervisor_assigned_id.value=element_id,tot_marks("supervisor_marking","sup_disp_total")})}),deletes=document.getElementsByClassName("delete"),Array.from(deletes).forEach(a=>{a.addEventListener("click",a=>{action=a.currentTarget.id.substr(0,2),element_id=a.currentTarget.id.substr(2),console.log(window.location.search.split("&")[0]),console.log(element_id),"sd"==action?confirm("Are you sure you want to delete the record?")&&(window.location=`./finalstudentdetails.php${window.location.search.split("&")[0]}&sdelete=${element_id}`):"ed"===action?confirm("Are you sure you want to delete the record?")&&(window.location=`./finalstudentdetails.php${window.location.search.split("&")[0]}&edelete=${element_id}`):"cd"===action&&confirm("Are you sure you want to delete the record?")&&(window.location=`./finalstudentdetails.php${window.location.search.split("&")[0]}&cdelete=${element_id}`)})});
     </script>
     
 </body>
