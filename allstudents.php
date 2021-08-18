@@ -67,15 +67,6 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-<<<<<<< HEAD
-                                    <tbody><?php if(isset($_GET['year'])){$year=e($_GET['year']);$sql="SELECT * from `students` WHERE `student_year`='$year'";}else{$sql="SELECT * FROM `students`";}$result=mysqli_query($conn,$sql);while($row=mysqli_fetch_assoc($result)){echo '
-<tr><td>'.e($row['student_roll']).'</td><td>'.e($row['student_fname']).' '.e($row['student_lname']).'</td>
-<td>'.$row['student_dep'].'</td><td>'.e($row['student_thesis']).'</td><td>'.e($row['student_regdate']).'</td><td>
-<button type="button" class="edit btn btn-secondary btn-sm" id=e'.e($row['student_id']).'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal"><i class="fa fa-pencil"></i></button>
-<button type="button" class="delete btn btn-danger btn-sm" id=d'.e($row['student_id']).' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i></button>
-<a role="button" href="studentdetails.php?id='.e($row['student_id']).'" class="information btn btn-warning btn-sm" id='.e($row['student_id']).' title="Details" style="padding: 4px 5px !important;"><i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i></a>
-</td></tr>';} ?></tbody>
-=======
                                     <tbody>
                                         <?php 
                                         if (isset($_GET['year'])) {
@@ -108,7 +99,6 @@
                                         }
                                         ?>
                                     </tbody>
->>>>>>> 76a699ea0b40307128bfeb91353777e7e7c8d9c5
                                     <tfoot>
                                         <tr>
                                             <th>Roll</th>
