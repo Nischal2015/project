@@ -85,11 +85,8 @@ else{
                 <h5 class="modal-title" id="marksDetailsModalLabel"><strong>Marks
                         Details<?php echo ' ('.e($row['student_fname']). ' ' .e($row['student_lname']).')'?></strong>
                 </h5>
-                <span>
-                    <i class="material-icons close-btn" data-bs-dismiss="modal" aria-label="Close">
-                        close
-                    </i>
-                </span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
             </div>
             <div class="modal-body">
                 <div class="table-responsive">

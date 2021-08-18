@@ -218,7 +218,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <a role="button" href="studentdetails.php?id=<?php echo $student_id;?>"
                                 class="btn btn-outline-primary border border-primary border-1">MidTerm</a>
                             <a role="button" href="finalstudentdetails.php?id=<?php echo $student_id;?>" class="btn btn-primary"
-                                activez>FinalTerm</a>
+                                active>FinalTerm</a>
                         </div>
                     </div>
                 </div>
@@ -303,9 +303,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             </form>
 
             <div class="row">
-                <!-- Left hand table -->
                 <div class="col-md-6">
-                    <!-- Table for supervisor -->
                     <div class="card mb-4 mt-1">
                         <div class="card-header">
                             <strong>Supervisor</strong>
@@ -441,8 +439,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                     </div>
                 </div>
-
-                <!-- Table for committee members -->
                 <div class="col-md-6">
                     <div class="card mb-4 mt-1">
                         <div class="card-header">
@@ -516,7 +512,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <footer>
         <?php include 'partials/_footer.php'; ?>
     </footer>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -560,10 +556,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             external_assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
-            document.getElementById("committee_markingLabel").innerText = name;
             element_id = e.currentTarget.id;
-            committee_assigned_id.value = element_id;
-            tot_marks("committee_marking", "com_disp_total");
+            $.ajax({
+                type: "GET",
+                url: `finalstudentdetails.php?cid=${element_id}&id=<?php echo $student_id;?>`,
+                dataType: "html",
+                success: function(data) {
+                    $("#committee_marking").html(jQuery(data).find('#committee_marking').html());
+                    $("#committee_assigned_id").val(element_id);
+                    $("#committee_markingLabel").text(name);
+                    tot_marks("committee_marking", "com_disp_total");
+                }
+            })
         })
     })
 
@@ -575,10 +579,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             external_assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
-            document.getElementById("external_markingLabel").innerText = name;
             element_id = e.currentTarget.id;
-            external_assigned_id.value = element_id;
-            tot_marks("external_marking", "ext_disp_total");
+            $.ajax({
+                type: "GET",
+                url: `finalstudentdetails.php?eid=${element_id}&id=<?php echo $student_id;?>`,
+                dataType: "html",
+                success: function(data) {
+                    $("#external_marking").html(jQuery(data).find('#external_marking').html());
+                    $("#external_assigned_id").val(element_id);
+                    $("#external_markingLabel").text(name);
+                    tot_marks("external_marking", "ext_disp_total");
+                }
+            })
         })
     })
 
@@ -590,10 +602,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             supervisor_assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
-            document.getElementById("supervisor_markingLabel").innerText = name;
             element_id = e.currentTarget.id;
-            supervisor_assigned_id.value = element_id;
-            tot_marks("supervisor_marking", "sup_disp_total");
+            $.ajax({
+                type: "GET",
+                url: `finalstudentdetails.php?sid=${element_id}&id=<?php echo $student_id;?>`,
+                dataType: "html",
+                success: function(data) {
+                    $("#supervisor_marking").html(jQuery(data).find('#supervisor_marking').html());
+                    $("#supervisor_assigned_id").val(element_id);
+                    $("#supervisor_markingLabel").text(name);
+                    tot_marks("supervisor_marking", "sup_disp_total");
+                }
+            })
         })
     })
 

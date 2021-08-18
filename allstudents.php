@@ -181,7 +181,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                                     </button>
                                                     <a role="button" href="studentdetails.php?id='. e($row['student_id']) .'" class="information btn btn-warning btn-sm" id='. e($row['student_id']) .' title="Details" style="padding: 4px 5px !important;">	
                                                     <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>';
                                         }

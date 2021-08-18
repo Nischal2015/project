@@ -38,7 +38,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <?php require 'partials/_function.php'; ?>
     <main class="p-2 mt-1" style="min-height: 800px">
         <?php
-        $student_id = $_GET['id'];
+        $student_id = $_GET['id'];        
         function marks_calc_com($sql, $conn, $student_id) {
             $portion_avg = "SELECT AVG(total) FROM mid_committee WHERE st_te_assigned_id IN ( SELECT assigned_id FROM mid_committee_assigned WHERE assigned_s_id = '$student_id')";
             mysqli_query($conn, $sql);
@@ -48,13 +48,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             $marks_portion = "UPDATE `total_marks` SET `tm_mid_com` = '$portion'  WHERE `tm_student_id` = '$student_id'";
             mysqli_query($conn, $marks_portion);
         }
-
         function marks_calc_ext($sql, $conn, $student_id, $portion) {
             $marks_portion = "UPDATE `total_marks` SET `tm_mid_ext` = '$portion'  WHERE `tm_student_id` = '$student_id'";
             mysqli_query($conn, $sql);
             mysqli_query($conn, $marks_portion);
         }
-
         if (isset($_GET['sdelete'])) {
             $assigned_id_1 = e($_GET['sdelete']);
             echo $assigned_id_1;
@@ -87,8 +85,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 mysqli_query($conn, $marks_portion);
                 $delete = true;                    
             }
-            if($_SERVER['REQUEST_METHOD']=='POST') {
-                
+            if($_SERVER['REQUEST_METHOD']=='POST') {                
                 if(!empty($_POST['committee'])) {
                    foreach($_POST['committee'] as $selected) {
                        $sql= "INSERT INTO `mid_committee_assigned` (`assigned_s_id`, `assigned_teacher_id`) SELECT student_id, (SELECT teacher_id FROM teacher WHERE teacher_id = '$selected') FROM students WHERE student_id='$student_id'";
@@ -205,8 +202,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                 <div class="row mb-4">
                     <div class="col-md-7 d-flex justify-content-end text-muted">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <a role="button" href="studentdetails.php?id=<?php echo $student_id;?>" class="btn btn-primary"
-                                active>MidTerm</a>
+                            <a role="button" href="studentdetails.php?id=<?php echo $student_id;?>"
+                                class="btn btn-primary" active>MidTerm</a>
                             <a role="button" href="finalstudentdetails.php?id=<?php echo $student_id;?>"
                                 class="btn btn-outline-primary border border-primary border-1">FinalTerm</a>
                         </div>
@@ -507,7 +504,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         <?php include 'partials/_footer.php'; ?>
     </footer>
 
-    <?php include 'partials/_marks_modal.php'; ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <?php 
+    include 'partials/_marks_modal.php'; 
+    ?>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -521,7 +522,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 -->
-
     <script>
     function convNum(number) {
         number = number ? number : 0;
@@ -549,10 +549,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
-            document.getElementById("committee_markingLabel").innerText = name;
             element_id = e.currentTarget.id;
-            assigned_id.value = element_id;
-            tot_marks("committee_marking", "disp_total");
+            $.ajax({
+                type: "GET",
+                url: `studentdetails.php?tid=${element_id}&id=<?php echo $student_id;?>`,
+                dataType: "html",
+                success: function(data) {
+                    $("#committee_marking").html(jQuery(data).find('#committee_marking').html());
+                    $("#assigned_id").val(element_id);
+                    $("#committee_markingLabel").text(name);
+                    tot_marks("committee_marking", "disp_total");
+                }
+            })
         })
     })
 
@@ -564,10 +572,18 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
-            document.getElementById("supervisor_markingLabel").innerText = name;
             element_id = e.currentTarget.id;
-            supervisor_assigned_id.value = element_id;
-            tot_marks("supervisor_marking", "sup_disp_total");
+            $.ajax({
+                type: "GET",
+                url: `studentdetails.php?sid=${element_id}&id=<?php echo $student_id;?>`,
+                dataType: "html",
+                success: function(data) {
+                    $("#supervisor_marking").html(jQuery(data).find('#supervisor_marking').html());
+                    $("#supervisor_assigned_id").val(element_id);
+                    $("#supervisor_markingLabel").text(name);
+                    tot_marks("supervisor_marking", "sup_disp_total");
+                }
+            })
         })
     })
     deletes = document.getElementsByClassName('delete');
