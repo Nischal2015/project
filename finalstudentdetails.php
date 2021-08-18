@@ -49,13 +49,14 @@
                 <div class="col-md-12"><?php include 'partials/_studentinfo.php'; ?></div>
             </div>
             <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
-                <div class="mb-4 row">
-                    <div class="text-muted d-flex justify-content-end col-md-7">
-                        <div class="btn-group" aria-label="Basic example" role="group"><a
-                                href="studentdetails.php?id=<?php echo $student_id; ?>"
-                                class="border border-1 btn border-primary btn-outline-primary" role="button">MidTerm</a>
-                            <a href="finalstudentdetails.php?id=<?php echo $student_id; ?>" class="btn btn-primary"
-                                role="button" activez>FinalTerm</a></div>
+                <div class="row mb-4">
+                    <div class="col-md-7 d-flex justify-content-end text-muted">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a role="button" href="studentdetails.php?id=<?php echo $student_id;?>"
+                                class="btn btn-outline-primary border border-primary border-1">MidTerm</a>
+                            <a role="button" href="finalstudentdetails.php?id=<?php echo $student_id;?>" class="btn btn-primary"
+                                active>FinalTerm</a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -223,11 +224,137 @@
             </div>
         </div>
     </main>
-    <footer><?php include 'partials/_footer.php'; ?></footer>
-    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"></script>
-    <?php include 'partials/_marks_modal_final.php'; ?><script>
-    function convNum(a){return a=a||0}function tot_marks(a,b){input=Array.from(document.querySelectorAll("#"+a+" input")),fil_input=input.slice(1,input.length),fil_input.forEach(a=>{a.addEventListener("input",()=>{sum=0;for(let a=0;a<input.length;a++)sum+=convNum(parseInt(input[a].value));document.getElementById(b).innerText=sum})})}comaddEdits=document.getElementsByClassName("comaddEd"),Array.from(comaddEdits).forEach(a=>{a.addEventListener("click",a=>{supervisor_assigned_id.value=null,committee_assigned_id.value=null,external_assigned_id.value=null,tr=a.currentTarget.parentNode.parentNode,name=tr.getElementsByTagName("td")[1].innerText,document.getElementById("committee_markingLabel").innerText=name,element_id=a.currentTarget.id,committee_assigned_id.value=element_id,tot_marks("committee_marking","com_disp_total")})}),extaddEdits=document.getElementsByClassName("extaddEd"),Array.from(extaddEdits).forEach(a=>{a.addEventListener("click",a=>{supervisor_assigned_id.value=null,committee_assigned_id.value=null,external_assigned_id.value=null,tr=a.currentTarget.parentNode.parentNode,name=tr.getElementsByTagName("td")[1].innerText,document.getElementById("external_markingLabel").innerText=name,element_id=a.currentTarget.id,external_assigned_id.value=element_id,tot_marks("external_marking","ext_disp_total")})}),supaddEdits=document.getElementsByClassName("supaddEd"),Array.from(supaddEdits).forEach(a=>{a.addEventListener("click",a=>{committee_assigned_id.value=null,external_assigned_id.value=null,supervisor_assigned_id.value=null,tr=a.currentTarget.parentNode.parentNode,name=tr.getElementsByTagName("td")[1].innerText,document.getElementById("supervisor_markingLabel").innerText=name,element_id=a.currentTarget.id,supervisor_assigned_id.value=element_id,tot_marks("supervisor_marking","sup_disp_total")})}),deletes=document.getElementsByClassName("delete"),Array.from(deletes).forEach(a=>{a.addEventListener("click",a=>{action=a.currentTarget.id.substr(0,2),element_id=a.currentTarget.id.substr(2),console.log(window.location.search.split("&")[0]),console.log(element_id),"sd"==action?confirm("Are you sure you want to delete the record?")&&(window.location=`./finalstudentdetails.php${window.location.search.split("&")[0]}&sdelete=${element_id}`):"ed"===action?confirm("Are you sure you want to delete the record?")&&(window.location=`./finalstudentdetails.php${window.location.search.split("&")[0]}&edelete=${element_id}`):"cd"===action&&confirm("Are you sure you want to delete the record?")&&(window.location=`./finalstudentdetails.php${window.location.search.split("&")[0]}&cdelete=${element_id}`)})});
+
+    <footer>
+        <?php include 'partials/_footer.php'; ?>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
+
+    <?php include 'partials/_marks_modal_final.php'; ?>
+
+    <script>
+    function convNum(number) {
+        number = number ? number : 0;
+        return number;
+    }
+
+    function tot_marks(modal_id, id_name) {
+        input = Array.from(document.querySelectorAll("#" + modal_id + " input"))
+        fil_input = input.slice(1, input.length);
+        fil_input.forEach((element) => {
+            element.addEventListener("input", (e) => {
+                sum = 0;
+                for (let i = 0; i < input.length; i++) {
+                    sum = sum + convNum(parseInt(input[i].value));
+                }
+                document.getElementById(id_name).innerText = sum;
+            })
+        })
+    }
+    comaddEdits = document.getElementsByClassName("comaddEd");
+    Array.from(comaddEdits).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            supervisor_assigned_id.value = null;
+            committee_assigned_id.value = null;
+            external_assigned_id.value = null;
+            tr = e.currentTarget.parentNode.parentNode;
+            name = tr.getElementsByTagName("td")[1].innerText;
+            element_id = e.currentTarget.id;
+            $.ajax({
+                type: "GET",
+                url: `finalstudentdetails.php?cid=${element_id}&id=<?php echo $student_id;?>`,
+                dataType: "html",
+                success: function(data) {
+                    $("#committee_marking").html(jQuery(data).find('#committee_marking').html());
+                    $("#committee_assigned_id").val(element_id);
+                    $("#committee_markingLabel").text(name);
+                    tot_marks("committee_marking", "com_disp_total");
+                }
+            })
+        })
+    })
+
+    extaddEdits = document.getElementsByClassName("extaddEd");
+    Array.from(extaddEdits).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            supervisor_assigned_id.value = null;
+            committee_assigned_id.value = null;
+            external_assigned_id.value = null;
+            tr = e.currentTarget.parentNode.parentNode;
+            name = tr.getElementsByTagName("td")[1].innerText;
+            element_id = e.currentTarget.id;
+            $.ajax({
+                type: "GET",
+                url: `finalstudentdetails.php?eid=${element_id}&id=<?php echo $student_id;?>`,
+                dataType: "html",
+                success: function(data) {
+                    $("#external_marking").html(jQuery(data).find('#external_marking').html());
+                    $("#external_assigned_id").val(element_id);
+                    $("#external_markingLabel").text(name);
+                    tot_marks("external_marking", "ext_disp_total");
+                }
+            })
+        })
+    })
+
+    supaddEdits = document.getElementsByClassName("supaddEd");
+    Array.from(supaddEdits).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            committee_assigned_id.value = null;
+            external_assigned_id.value = null;
+            supervisor_assigned_id.value = null;
+            tr = e.currentTarget.parentNode.parentNode;
+            name = tr.getElementsByTagName("td")[1].innerText;
+            element_id = e.currentTarget.id;
+            $.ajax({
+                type: "GET",
+                url: `finalstudentdetails.php?sid=${element_id}&id=<?php echo $student_id;?>`,
+                dataType: "html",
+                success: function(data) {
+                    $("#supervisor_marking").html(jQuery(data).find('#supervisor_marking').html());
+                    $("#supervisor_assigned_id").val(element_id);
+                    $("#supervisor_markingLabel").text(name);
+                    tot_marks("supervisor_marking", "sup_disp_total");
+                }
+            })
+        })
+    })
+
+    deletes = document.getElementsByClassName('delete');
+    Array.from(deletes).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            action = e.currentTarget.id.substr(0,2);
+            element_id = e.currentTarget.id.substr(2, );
+            console.log(window.location.search.split('&')[0]);
+            console.log(element_id);
+            if (action == "sd") {
+                if (confirm("Are you sure you want to delete the record?")) {
+                    window.location = `./finalstudentdetails.php${window.location.search.split('&')[0]}&sdelete=${element_id}`;
+                }
+            } else if (action === "ed") {
+                if (confirm("Are you sure you want to delete the record?")) {
+                    window.location = `./finalstudentdetails.php${window.location.search.split('&')[0]}&edelete=${element_id}`;
+                }
+            } else if (action === "cd") {
+                if (confirm("Are you sure you want to delete the record?")) {
+                    window.location = `./finalstudentdetails.php${window.location.search.split('&')[0]}&cdelete=${element_id}`;
+                }
+            }
+        })
+    })
     </script>
     
 </body>
