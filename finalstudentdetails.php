@@ -218,7 +218,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                             <a role="button" href="studentdetails.php?id=<?php echo $student_id;?>"
                                 class="btn btn-outline-primary border border-primary border-1">MidTerm</a>
                             <a role="button" href="finalstudentdetails.php?id=<?php echo $student_id;?>" class="btn btn-primary"
-                                activez>FinalTerm</a>
+                                active>FinalTerm</a>
                         </div>
                     </div>
                 </div>
@@ -303,9 +303,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
             </form>
 
             <div class="row">
-                <!-- Left hand table -->
                 <div class="col-md-6">
-                    <!-- Table for supervisor -->
                     <div class="card mb-4 mt-1">
                         <div class="card-header">
                             <strong>Supervisor</strong>
@@ -441,8 +439,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                         </div>
                     </div>
                 </div>
-
-                <!-- Table for committee members -->
                 <div class="col-md-6">
                     <div class="card mb-4 mt-1">
                         <div class="card-header">
