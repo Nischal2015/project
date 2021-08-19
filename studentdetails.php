@@ -331,9 +331,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = e($row['assigned_id']);
-                                                $sql1 = "SELECT `total` FROM `mid_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $sql1 = "SELECT * FROM `mid_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result1=mysqli_query($conn, $sql1);
                                                 $row1=mysqli_fetch_assoc($result1);
+                                                $val1 = NULL;
+                                                $val2 = NULL;
+                                                $val3 = NULL;
+                                                $val4 = NULL;
+                                                $val5 = NULL;
+                                                $tot = NULL;
+                                                if($row1 != NULL){
+                                                    $val1 = $row1['par1'];
+                                                    $val2 = $row1['par2'];
+                                                    $val3 = $row1['par3'];
+                                                    $val4 = $row1['par4'];
+                                                    $val5 = $row1['par5'];
+                                                    $tot = $row1['total'];
+                                                }
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
@@ -399,9 +413,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = e($row['assigned_id']);
-                                                $sql2 = "SELECT `total` FROM `mid_external` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $sql2 = "SELECT * FROM `mid_external` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result2=mysqli_query($conn, $sql2);
                                                 $row2=mysqli_fetch_assoc($result2);
+                                                $vl1 = NULL;
+                                                $vl2 = NULL;
+                                                $vl3 = NULL;
+                                                $vl4 = NULL;
+                                                $vl5 = NULL;
+                                                $vl6 = NULL;
+                                                $vl7 = NULL;
+                                                $vl8 = NULL;
+                                                $agg = NULL;
+                                                if($row2 != NULL){
+                                                    $vl1 = $row2['par1'];
+                                                    $vl2 = $row2['par2'];
+                                                    $vl3 = $row2['par3'];
+                                                    $vl4 = $row2['par4'];
+                                                    $vl5 = $row2['par5'];
+                                                    $vl6 = $row2['par6'];
+                                                    $vl7 = $row2['par7'];
+                                                    $vl8 = $row2['par8'];
+                                                    $agg = $row2['total'];
+                                                }
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>

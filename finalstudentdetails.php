@@ -7,6 +7,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
 }
 ?>
 
+
 <!doctype html>
 <html lang="en">
 
@@ -17,6 +18,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <meta name="description" content="Displays the details of student in final thesis defense">
     <!-- Font awesome pack -->
     <script src="https://kit.fontawesome.com/0212f0c4e4.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>  
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -37,7 +39,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
     <?php require 'partials/_function.php'; ?>
 
     <main class="p-2 mt-1" style="min-height: 800px">
+  
         <?php
+        // if (isset($_POST['teacherID'])) {
+        //     $clicked_teacher = $_POST['teacherID'];
+        //     echo "<script>console.log('milan')</script>";
+        // }
+        // else{
+        //     echo "<script>console.log('shrestha')</script>";
+        // }
         $student_id = $_GET['id'];
         if (isset($_GET['sdelete'])) {
             $assigned_id_1 = e($_GET['sdelete']);
@@ -340,9 +350,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = e($row['assigned_id']);
-                                                $sql4 = "SELECT `total` FROM `final_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $sql4 = "SELECT * FROM `final_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result4=mysqli_query($conn, $sql4);
                                                 $row4=mysqli_fetch_assoc($result4);
+                                                $v1 = NULL;
+                                                $v2 = NULL;
+                                                $v3 = NULL;
+                                                $v4 = NULL;
+                                                $v5 = NULL;
+                                                $tot = NULL;
+                                                if($row4 != NULL){
+                                                    $v1 = $row4['par1'] ?? "";
+                                                    $v2 = $row4['par2'] ?? "";
+                                                    $v3 = $row4['par3'] ?? "";
+                                                    $v4 = $row4['par4'] ?? "";
+                                                    $v5 = $row4['par5'] ?? "";
+                                                    $tot = $row4['total'] ?? "";
+                                                }
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
@@ -408,9 +432,33 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = e($row['assigned_id']);
-                                                $sql2 = "SELECT `total` FROM `final_external` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $sql2 = "SELECT * FROM `final_external` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result2=mysqli_query($conn, $sql2);
                                                 $row2=mysqli_fetch_assoc($result2);
+                                                $var1 = NULL;
+                                                $var2 = NULL;
+                                                $var3 = NULL;
+                                                $var4 = NULL;
+                                                $var5 = NULL;
+                                                $var6 = NULL;
+                                                $var7 = NULL;
+                                                $var8 = NULL;
+                                                $var9 = NULL;
+                                                $var10 = NULL;
+                                                $tot1 = NULL;
+                                                if($row2 != NULL){
+                                                    $var1 = $row2['par1'] ?? "";
+                                                    $var2 = $row2['par2'] ?? "";
+                                                    $var3 = $row2['par3'] ?? "";
+                                                    $var4 = $row2['par4'] ?? "";
+                                                    $var5 = $row2['par5'] ?? "";
+                                                    $var6 = $row2['par6'] ?? "";
+                                                    $var7 = $row2['par7'] ?? "";
+                                                    $var8 = $row2['par8'] ?? "";
+                                                    $var9 = $row2['par9'] ?? "";
+                                                    $var10 = $row2['par10'] ?? "";
+                                                    $tot1 = $row2['total'] ?? "";
+                                                }
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
@@ -477,9 +525,33 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                             $sno = 1;
                                             while($row = mysqli_fetch_assoc($result)) {
                                                 $assigned_id = e($row['assigned_id']);
-                                                $sql1 = "SELECT `total` FROM `final_committee` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $sql1 = "SELECT * FROM `final_committee` WHERE `st_te_assigned_id`='$assigned_id'";
                                                 $result1=mysqli_query($conn, $sql1);
                                                 $row1=mysqli_fetch_assoc($result1);
+                                                // $vr1 = NULL;
+                                                // $vr2 = NULL;
+                                                // $vr3 = NULL;
+                                                // $vr4 = NULL;
+                                                // $vr5 = NULL;
+                                                // $vr6 = NULL;
+                                                // $vr7 = NULL;
+                                                // $vr8 = NULL;
+                                                // $vr9 = NULL;
+                                                // $vr10 = NULL;
+                                                // $tt1 = NULL;
+                                                // if($row1 != NULL){
+                                                //     $vr1 = $row1['par1'] ?? "";
+                                                //     $vr2 = $row1['par2'] ?? "";
+                                                //     $vr3 = $row1['par3'] ?? "";
+                                                //     $vr4 = $row1['par4'] ?? "";
+                                                //     $vr5 = $row1['par5'] ?? "";
+                                                //     $vr6 = $row1['par6'] ?? "";
+                                                //     $vr7 = $row1['par7'] ?? "";
+                                                //     $vr8 = $row1['par8'] ?? "";
+                                                //     $vr9 = $row1['par9'] ?? "";
+                                                //     $vr10 = $row1['par10'] ?? "";
+                                                //     $tt1 = $row1['total'] ?? "";
+                                                // }
                                                 echo'
                                                 <tr>
                                                     <td>'.$sno.'</td>
@@ -502,6 +574,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
                                                 ';
                                                 $sno += 1;
                                             }
+                                            
+            //   ###########################THIS SECTION#####################################
+            //                                 echo "<script type = 'text/javascript'>console.log(element_id)</script>";
+            //                                 // $clicked_teacher='<script type="text/javascript">document.write(element_id);
+            //                                 // </script>';
+            //                                 echo $clicked_teacher ;
+            //                                 echo "<h2>" . $clicked_teacher . "</h2>";
                                         ?>
                                     </tbody>
                                 </table>
@@ -620,6 +699,52 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         })
     })
     </script>
+<script type='text/javascript'>
+    var element_id = 5;
+    com_mem = document.getElementsByClassName('comaddEd');
+    Array.from(com_mem).forEach((element) => {
+        element.addEventListener('click', (e) => {
+            element_id = e.currentTarget.id;
+            element_id = parseInt(element_id.slice(2,element_id.length));
+            //console.log(element_id);
+    //         var userdata = {};
+    // userdata.id = 'teacherID';
+    // userdata.value = element_id;
+    // console.log(userdata);
+    //     $.ajax({
+    //             method: 'POST',
+    //             url: "finalstudentdetails.php",
+    //             data: {userdata:JSON.stringify(userdata)}, 
+    //             success: function(res){
+    //                 //$('.output').html(res);
+    //                 console.log(res);
+    //             }
+    //             });
+        })
+    })
+    $(document).ready(function() {
+
+    $('.comaddEd').click(function() {
+        var teacherID = $(this).attr('id');
+        teacherID = parseInt(teacherID.slice(2,element_id.length));
+        //alert($(this).attr('id'));
+        $.ajax({
+            type: 'POST',
+            data: {'teacherID': teacherID},
+            url: "finalstudentdetails.php",
+            success: function(data)
+            {
+                $('.output').html(data);
+                //$clicked_teacher = teacherID;
+                //console.log(data);
+                console.log(teacherID);
+            }
+        });
+        
+    });
+    });
+    </script>
+        
 </body>
 
 </html>

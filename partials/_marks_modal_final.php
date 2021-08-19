@@ -1,18 +1,93 @@
     <!-- This is the modal for final term -->
     <!-- Committee Modal -->
+    <?php
+$server="remotemysql.com";
+$username="GfYJT7egTF";
+$password="lW1UnyRWzL";
+$database="GfYJT7egTF";
+
+$server="localhost";
+$username="root";
+$password="";
+$database="thes_db";
+
+$conn = mysqli_connect($server, $username, $password, $database);
+
+if (!$conn) {
+	die("Error " . mysqli_connect_error());
+}
+
+?>
     <div class="modal fade" id="committee_marking" aria-labelledby="committee_markingLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <?php
+        // if (isset($_POST['teacherID'])) {
+        //     $top = $_POST['teacherID'];
+        // //     $clicked_teacher = $top;
+        // //     echo "<script>console.log('ajax')</script>";
+        // // }
+        // // else{
+        // //     echo "<script>console.log('shrestha')</script>";
+        // // }
+        // // //echo "The id is: " . $_POST['teacherID'];
+        // $top = NULL;
+        if( $_SERVER['REQUEST_METHOD']=='POST' && isset( $_POST['teacherID'] ) ){
+            ob_clean();
+
+            /* other code presumably to do something with POSTed data */
+
+            /* send some sort of response */
+            echo "<script>console.log('received')</script>";
+            //echo $_POST['teacherID'];
+            $clicked_teacher = $_POST['teacherID'];
+            $top = $clicked_teacher;
+            echo $top;
+
+            exit();
+        }
+        $clicked_teacher = 5;
+            $sql = "SELECT * FROM `final_committee` WHERE `st_te_assigned_id`='$clicked_teacher'";
+            //echo "MIlan".$clicked_teacher;
+            $result=mysqli_query($conn, $sql);
+            
+            $row=mysqli_fetch_assoc($result);
+            //echo var_dump($row);
+            $vr1 = NULL;
+            $vr2 = NULL;
+            $vr3 = NULL;
+            $vr4 = NULL;
+            $vr5 = NULL;
+            $vr6 = NULL;
+            $vr7 = NULL;
+            $vr8 = NULL;
+            $vr9 = NULL;
+            $vr10 = NULL;
+            $tt1 = NULL;
+            if($row != NULL){
+                $vr1 = $row['par1'] ?? "";
+                $vr2 = $row['par2'] ?? "";
+                $vr3 = $row['par3'] ?? "";
+                $vr4 = $row['par4'] ?? "";
+                $vr5 = $row['par5'] ?? "";
+                $vr6 = $row['par6'] ?? "";
+                $vr7 = $row['par7'] ?? "";
+                $vr8 = $row['par8'] ?? "";
+                $vr9 = $row['par9'] ?? "";
+                $vr10 = $row['par10'] ?? "";
+                $tt1 = $row['total'] ?? "";
+            }
+
+        ?>
+        <div class="modal-dialog modal-dialog-scrollable modal-lg output">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="committee_markingLabel"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="finalstudentdetails.php?id=<?php echo $student_id; ?>" method="post">
-                        <input class="comhidden" name="committee_assigned_id" id="committee_assigned_id"
-                            style="display:none;">
+                    <form action="finalstudentdetails.php?id=<?php echo $student_id;?>" method="post">
+                        <input class="comhidden" name="committee_assigned_id" id="committee_assigned_id">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover committee-marks-table" style="width: 100%" ;>
+                            <table class="table table-striped table-hover committee-marks-table" style="width: 100%";>
                                 <colgroup>
                                     <col span="1" style="width: 10%;">
                                     <col span="1" style="width: 50%;">
@@ -34,7 +109,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="quality_of_presentation"
-                                                name="quality_of_presentation" type="number">
+                                                name="quality_of_presentation" type="number" value= "<?php echo $vr1;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -43,7 +118,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="problem_identification"
-                                                name="problem_identification" type="number">
+                                                name="problem_identification" type="number" value= "<?php echo $vr2;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -52,7 +127,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="methodology" name="methodology"
-                                                type="number">
+                                                type="number" value= "<?php echo $vr3;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -61,7 +136,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="literature_review" name="literature_review"
-                                                type="number" />
+                                                type="number" value= "<?php echo $vr4;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -70,7 +145,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="understanding" name="understanding"
-                                                type="number">
+                                                type="number" value= "<?php echo $vr5;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -78,7 +153,7 @@
                                         <td>Answering to questions</td>
                                         <td>10</td>
                                         <td>
-                                            <input class="form-control" id="answers" name="answers" type="number">
+                                            <input class="form-control" id="answers" name="answers" type="number" value= "<?php echo $vr6;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -87,7 +162,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="completeness" name="completeness"
-                                                type="number">
+                                                type="number" value= "<?php echo $vr7;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -95,7 +170,7 @@
                                         <td>Planning of organization of thesis work</td>
                                         <td>10</td>
                                         <td>
-                                            <input class="form-control" id="planning" name="planning" type="number">
+                                            <input class="form-control" id="planning" name="planning" type="number" value= "<?php echo $vr8;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -104,7 +179,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="originality" name="originality"
-                                                type="number">
+                                                type="number" value= "<?php echo $vr9;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -112,7 +187,7 @@
                                         <td>Conclusion, Suggestions and Recommendation</td>
                                         <td>10</td>
                                         <td>
-                                            <input class="form-control" id="consugrec" name="consugrec" type="number">
+                                            <input class="form-control" id="consugrec" name="consugrec" type="number" value= "<?php echo $vr10;?>" >
                                         </td>
                                     </tr>
                                 </tbody>
@@ -132,7 +207,7 @@
                                 <th scope="row"></th>
                                 <td>Total</td>
                                 <td>100</td>
-                                <td id="com_disp_total">0</td>
+                                <td id="com_disp_total"><?php echo $clicked_teacher?></td>
                             </tr>
                         </thead>
                     </table>
@@ -179,7 +254,7 @@
                                         <td>Standard of technical language, expression and format</td>
                                         <td>10</td>
                                         <td>
-                                            <input class="form-control" id="standard" name="standard" type="number">
+                                            <input class="form-control" id="standard" name="standard" type="number" value= "<?php echo $var1;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -189,7 +264,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="research_identification"
-                                                name="research_identification" type="number">
+                                                name="research_identification" type="number" value= "<?php echo $var2;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -198,7 +273,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="research_methodology"
-                                                name="research_methodology" type="number">
+                                                name="research_methodology" type="number" value= "<?php echo $var3;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -207,7 +282,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="data_processing" name="data_processing"
-                                                type="number" />
+                                                type="number" value= "<?php echo $var4;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -215,7 +290,7 @@
                                         <td>Matching and finding with objectives</td>
                                         <td>10</td>
                                         <td>
-                                            <input class="form-control" id="objectives" name="objectives" type="number">
+                                            <input class="form-control" id="objectives" name="objectives" type="number" value= "<?php echo $var5;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -224,7 +299,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="logic_reason" name="logic_reason"
-                                                type="number">
+                                                type="number" value= "<?php echo $var6;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -233,7 +308,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="qua_abstract" name="qua_abstract"
-                                                type="number">
+                                                type="number" value= "<?php echo $var7;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -242,7 +317,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="originality_research"
-                                                name="originality_research" type="number">
+                                                name="originality_research" type="number" value= "<?php echo $var8;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -251,7 +326,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="scope_research" name="scope_research"
-                                                type="number">
+                                                type="number" value= "<?php echo $var9;?>" >
                                         </td>
                                     </tr>
                                     <tr>
@@ -260,7 +335,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="ans_examiner" name="ans_examiner"
-                                                type="number">
+                                                type="number" value= "<?php echo $var10;?>" >
                                         </td>
                                     </tr>
 
@@ -281,7 +356,7 @@
                                 <th scope="row"></th>
                                 <td>Total</td>
                                 <td>100</td>
-                                <td id="ext_disp_total">0</td>
+                                <td id="ext_disp_total"><?php echo $tot1;?></td>
                             </tr>
                         </thead>
                     </table>
@@ -328,7 +403,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="regularity" id="regularity"
-                                                type="number" />
+                                                type="number" value= "<?php echo $v1;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -339,7 +414,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="completeness_degree"
-                                                id="completeness_degree" type="number" />
+                                                id="completeness_degree" type="number" value= "<?php echo $v2;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -349,7 +424,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="understanding_thesis"
-                                                id="understanding_thesis" type="number" />
+                                                id="understanding_thesis" type="number" value= "<?php echo $v3;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -358,7 +433,7 @@
                                         </td>
                                         <td>20</td>
                                         <td>
-                                            <input class="form-control" name="effort" id="effort" type="number" />
+                                            <input class="form-control" name="effort" id="effort" type="number" value= "<?php echo $v4;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -367,7 +442,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="organization" id="organization"
-                                                type="number" />
+                                                type="number" value= "<?php echo $v5;?>" />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -388,7 +463,7 @@
                                 <td>Total</td>
                                 <td>100</td>
                                 <td id="sup_disp_total">
-                                    0
+                                    <?php echo $tot;?>
                                 </td>
                             </tr>
                         </thead>

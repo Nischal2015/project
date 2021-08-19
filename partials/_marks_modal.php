@@ -33,7 +33,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="quality_of_presentation"
-                                                name="quality_of_presentation" type="number">
+                                                name="quality_of_presentation" type="number" value= "<?php echo $vl1;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -42,7 +42,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" id="problem_identification"
-                                                name="problem_identification" type="number">
+                                                name="problem_identification" type="number" value= "<?php echo $vl2;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -51,7 +51,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="methodology" name="methodology"
-                                                type="number">
+                                                type="number" value= "<?php echo $vl3;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -60,7 +60,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="literature_review" name="literature_review"
-                                                type="number" />
+                                                type="number" value= "<?php echo $vl4;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -69,7 +69,7 @@
                                         <td>10</td>
                                         <td>
                                             <input class="form-control" id="understanding" name="understanding"
-                                                type="number">
+                                                type="number" value= "<?php echo $vl5;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -77,7 +77,7 @@
                                         <td>Answering to questions</td>
                                         <td>10</td>
                                         <td>
-                                            <input class="form-control" id="answers" name="answers" type="number">
+                                            <input class="form-control" id="answers" name="answers" type="number" value= "<?php echo $vl6;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -86,7 +86,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" id="completeness" name="completeness"
-                                                type="number">
+                                                type="number" value= "<?php echo $vl7;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -94,7 +94,7 @@
                                         <td>Planning of organization of thesis work</td>
                                         <td>10</td>
                                         <td>
-                                            <input class="form-control" id="planning" name="planning" type="number">
+                                            <input class="form-control" id="planning" name="planning" type="number" value= "<?php echo $vl8;?>" />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -114,7 +114,7 @@
                                 <th scope="row"></th>
                                 <td>Total</td>
                                 <td>100</td>
-                                <td id="disp_total">0</td>
+                                <td id="disp_total"><?php echo $agg;?></td>
                             </tr>
                         </thead>
                     </table>
@@ -161,8 +161,9 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="regularity" id="regularity"
-                                                type="number" />
+                                                type="number" value= "<?php echo $val1;?>" />
                                         </td>
+
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
@@ -172,7 +173,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="completeness_degree"
-                                                id="completeness_degree" type="number" />
+                                                id="completeness_degree" type="number" value= "<?php echo $val2;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -182,7 +183,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="understanding_thesis"
-                                                id="understanding_thesis" type="number" />
+                                                id="understanding_thesis" type="number" value= "<?php echo $val3;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -191,7 +192,7 @@
                                         </td>
                                         <td>20</td>
                                         <td>
-                                            <input class="form-control" name="effort" id="effort" type="number" />
+                                            <input class="form-control" name="effort" id="effort" type="number" value= "<?php echo $val4;?>" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -200,7 +201,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="organization" id="organization"
-                                                type="number" />
+                                                type="number" value= "<?php echo $val5;?>" />
                                         </td>
                                     </tr>
 
@@ -222,7 +223,7 @@
                                 <td>Total</td>
                                 <td>100</td>
                                 <td id="sup_disp_total">
-                                    0
+                                    <?php echo $tot;?>
                                 </td>
                             </tr>
                         </thead>
