@@ -63,7 +63,7 @@
                                 <div class="row">
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2"><select aria-label="Default select example"
-                                                class="form-select" id="Etpost" name="Etpost">
+                                                class="form-select" id="Etpost" name="Etpost" required>
                                                 <option value="" selected>Choose..</option>
                                                 <option value="Dr.">Dr.</option>
                                                 <option value="Mr.">Mr.</option>
@@ -72,17 +72,17 @@
                                     </div>
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2"><input class="form-control" id="Etfname"
-                                                name="Etfname" placeholder="Firstname"> <label
+                                                name="Etfname" placeholder="Firstname" autocomplete="off" required> <label
                                                 for="InputFirstname">Firstname</label></div>
                                     </div>
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2"><input class="form-control" id="Etmname"
-                                                name="Etmname" placeholder="Middlename"> <label
+                                                name="Etmname" placeholder="Middlename" autocomplete="off"> <label
                                                 for="InputMiddlename">Middlename</label></div>
                                     </div>
                                     <div class="col-md-6 pt-2">
                                         <div class="form-floating mb-2"><input class="form-control" id="Etlname"
-                                                name="Etlname" placeholder="Lastname"> <label
+                                                name="Etlname" placeholder="Lastname" autocomplete="off" required> <label
                                                 for="InputLastname">Lastname</label></div>
                                     </div>
                                     <div class="col-md-12"><button class="btn btn-primary" type="submit">Submit</button>

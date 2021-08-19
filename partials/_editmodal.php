@@ -11,15 +11,15 @@
                     <div class="row">
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2"><input class="form-control" id="fnameEdit" name="fnameEdit"
-                                    placeholder="Firstname"> <label for="fnameEdit">Firstname</label></div>
+                                    placeholder="Firstname" required> <label for="fnameEdit">Firstname</label></div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2"><input class="form-control" id="lnameEdit" name="lnameEdit"
-                                    placeholder="Lastname"> <label for="lnameEdit">Lastname</label></div>
+                                    placeholder="Lastname" required> <label for="lnameEdit">Lastname</label></div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2"><input class="form-control" id="rollEdit" name="rollEdit"
-                                    placeholder="Roll No"> <label for="rollEdit">Roll No</label></div>
+                                    placeholder="Roll No" required> <label for="rollEdit">Roll No</label></div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2"><select aria-label="Default select example"
@@ -32,23 +32,23 @@
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2"><select aria-label="Default select example"
-                                    class="form-select" name="departmentEdit" id="departmentEdit">
+                                    class="form-select" name="departmentEdit" id="departmentEdit" required>
                                     <option selected>Choose..</option>
                                     <?php $sql="SELECT * FROM `department`";$result=mysqli_query($conn,$sql);while($row=mysqli_fetch_assoc($result)){$field=e($row['dep_name']);echo '<option value="'.$field.'">'.$field.'</option>';} ?>
                                 </select> <label for="departmentEdit">Department</label></div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2"><input class="form-control" id="yearEdit" name="yearEdit"
-                                    placeholder="Thesis"> <label for="InputRoll">Year</label></div>
+                                    placeholder="Thesis" required> <label for="InputRoll">Year</label></div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2"><input class="form-control" id="thesisEdit"
-                                    name="thesisEdit" placeholder="Thesis"> <label for="InputRoll">Thesis Title</label>
+                                    name="thesisEdit" placeholder="Thesis" required> <label for="InputRoll">Thesis Title</label>
                             </div>
                         </div>
                         <div class="col-md-6 pt-4">
                             <div class="form-floating mb-2"><input class="form-control" id="regdateEdit"
-                                    name="regdateEdit" placeholder="Registration Date" type="date"> <label
+                                    name="regdateEdit" placeholder="Registration Date" type="date" required> <label
                                     for="InputDate">Registration Date</label></div>
                         </div>
                         <div class="col-md-12 py-3"><button class="btn btn-primary" type="submit">Update</button></div>

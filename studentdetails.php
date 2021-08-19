@@ -1,18 +1,14 @@
-<?php $delete=false;session_start();if(!isset($_SESSION['loggedin'])||$_SESSION['loggedin']!=true){header("location: /");exit;} ?>
-<!doctypehtml>
-    <html lang="en">
+<?php
+$delete = false;
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
+	header("location: /");
+	exit;
+}
+?>
 
-    <head>
-        <meta charset="utf-8">
-        <meta content="width=device-width,initial-scale=1" name="viewport">
-        <meta content="Displays the student detail of mid term thesis defense" name="description">
-        <script crossorigin="anonymous" src="https://kit.fontawesome.com/0212f0c4e4.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            crossorigin="anonymous" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC">
-        <title>Details</title>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="styles/style.min.css" rel="stylesheet">
-    </head>
+<!doctype html>
+<html lang="en">
 
 <head>
     <!-- Required meta tags -->
@@ -194,9 +190,12 @@
                     </nav>
                 </div>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12"><?php include 'partials/_studentinfo.php'; ?></div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <?php include 'partials/_studentinfo.php'; ?>
                 </div>
             </div>
             <form action="studentdetails.php?id=<?php echo $student_id; ?>" method="post">
@@ -209,167 +208,291 @@
                                 class="btn btn-outline-primary border border-primary border-1">FinalTerm</a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="mb-4 col-md-3">
-                            <div class="input-group mb-3"><select aria-label="Default select example"
-                                    class="border border-1 border-secondary form-select" name="supervisor">
-                                    <option disabled selected value="">Select supervisor</option><?php $sql="SELECT * from `teacher`";$result=mysqli_query($conn,$sql);while($row=mysqli_fetch_assoc($result)){$teacher=$row['teacher_post'].' '.$row['teacher_fname'].' '.$row['teacher_mname'].' '.e($row['teacher_lname']);echo '
-<option value="'.e($row['teacher_id']).'">'.e($teacher).'</option>';} ?>
-                                </select></div>
-                        </div>
-                        <div class="mb-4 col-md-4">
-                            <div class="dropdown">
-                                <div class="btn-group" style="width:100%"><button
-                                        class="border border-1 border-secondary btn dropdown-toggle"
-                                        aria-expanded="false" data-bs-auto-close="outside" data-bs-toggle="dropdown"
-                                        id="dropdownMenuClickableInside" style="background-color:#fff!important">Select
-                                        committee members</button>
-                                    <ul aria-labelledby="dropdownMenuClickableInside" class="dropdown-menu"><?php $sql="SELECT * FROM `teacher`";$result=mysqli_query($conn,$sql);while($row=mysqli_fetch_assoc($result)){$id=e($row['teacher_id']);$post=e($row['teacher_post']);$fname=e($row['teacher_fname']);$mname=e($row['teacher_mname']);$lname=e($row['teacher_lname']);echo '
-<li class="dropdown-item">
-<div class="col">
-<input type="checkbox" name="committee[]" id=c'.$id.' value='.$id.'>
-<label for=c'.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
-</div>
-</li>';} ?></ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-4 col-md-3">
-                            <div class="input-group mb-3"><select aria-label="Default select example"
-                                    class="border border-1 border-secondary form-select" name="external">
-                                    <option disabled selected value="">Select external</option><?php $sql="SELECT * from `ext_teacher`";$result=mysqli_query($conn,$sql);while($row=mysqli_fetch_assoc($result)){$external=$row['external_post'].' '.$row['external_fname'].' '.$row['external_mname'].' '.$row['external_lname'];echo '
-<option value="'.e($row['external_id']).'">'.e($external).'</option>';} ?>
-                                </select></div>
-                        </div>
-                        <div class="col-md-2"><button class="btn btn-primary" type="submit">Add</button></div>
-                    </div>
-                </form>
+                </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-4 card mt-1">
-                            <div class="card-header"><strong>Supervisor</strong></div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-striped" id="student-marks"
-                                        style="width:100%">
-                                        <colgroup>
-                                            <col span="1" style="width:4%">
-                                            <col span="1" style="width:60%">
-                                            <col span="1" style="width:26%">
-                                            <col span="1" style="width:10%">
-                                        </colgroup>
-                                        <thead>
-                                            <tr>
-                                                <th>S.N.</th>
-                                                <th>Supervisor</th>
-                                                <th>Actions</th>
-                                                <th>Marks</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody><?php $student_id=e($_GET['id']);$sql="SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
-FROM teacher t
-INNER JOIN mid_supervisor_assigned ta
-ON t.teacher_id = ta.assigned_teacher_id
-WHERE ta.assigned_s_id = '$student_id'";$result=mysqli_query($conn,$sql);$sno=1;while($row=mysqli_fetch_assoc($result)){$assigned_id=e($row['assigned_id']);$sql1="SELECT `total` FROM `mid_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";$result1=mysqli_query($conn,$sql1);$row1=mysqli_fetch_assoc($result1);echo'
-<tr>
-<td>'.$sno.'</td>
-<td>'.e($row['teacher_post']).' '.e($row['teacher_fname']).' '.e($row['teacher_mname']).' '.e($row['teacher_lname']).'</td>
-<td>';if(mysqli_num_rows($result1)>0){echo '
-    <button type="button" id=se'.$assigned_id.' class="btn btn-secondary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-pencil fa-xs"></i></button>
-    <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-    </td>
-    <td><strong>'.e($row1['total']).'</strong></td>';}else{echo '
-    <button type="button" id=sa'.$assigned_id.' class="btn btn-primary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-plus fa-xs"></i></button>
-    <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-</td>
-<td>---</td>';}echo '</tr>
-';$sno+=1;} ?></tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <!-- Supervisor Section -->
+                    <div class="col-md-3 mb-4">
+                        <div class="input-group mb-3">
+                            <select name="supervisor" class="form-select border border-secondary border-1"
+                                aria-label="Default select example">
+                                <option value="" selected disabled>Select supervisor</option>
+                                <?php
+                                $sql = "SELECT * from `teacher`";
+                                $result = mysqli_query($conn, $sql);
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    $teacher = $row['teacher_post'] . ' ' . $row['teacher_fname']. ' '.$row['teacher_mname']. ' ' . e($row['teacher_lname']);
+                                    echo '
+                                    <option value="'.e($row['teacher_id']).'">'. e($teacher) . '</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <div class="mb-4 card mt-1">
-                            <div class="card-header"><strong>External</strong></div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-striped" id="student-marks"
-                                        style="width:100%">
-                                        <colgroup>
-                                            <col span="1" style="width:4%">
-                                            <col span="1" style="width:60%">
-                                            <col span="1" style="width:26%">
-                                            <col span="1" style="width:10%">
-                                        </colgroup>
-                                        <thead>
-                                            <tr>
-                                                <th>S.N.</th>
-                                                <th>External</th>
-                                                <th>Actions</th>
-                                                <th>Marks</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody><?php $student_id=$_GET['id'];$sql="SELECT ta.assigned_id, t.external_id, t.external_post, t.external_fname, t.external_mname, t.external_lname
-FROM ext_teacher t
-INNER JOIN mid_external_assigned ta
-ON t.external_id = ta.assigned_ext_id
-WHERE ta.assigned_s_id = '$student_id'";$result=mysqli_query($conn,$sql);$sno=1;while($row=mysqli_fetch_assoc($result)){$assigned_id=e($row['assigned_id']);$sql2="SELECT `total` FROM `mid_external` WHERE `st_te_assigned_id`='$assigned_id'";$result2=mysqli_query($conn,$sql2);$row2=mysqli_fetch_assoc($result2);echo'
-<tr>
-<td>'.$sno.'</td>
-<td>'.e($row['external_post']).' '.e($row['external_fname']).' '.e($row['external_mname']).' '.e($row['external_lname']).'</td>
-<td>';if(mysqli_num_rows($result2)>0){echo '
-    <button type="button" id=ee'.$assigned_id.' class="btn btn-secondary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-pencil fa-xs"></i></button>
-    <button type="button" id=ed'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-</td>
-<td><strong>'.e($row2['total']).'</strong></td>';}else{echo '
-    <button type="button" id=ea'.$assigned_id.' class="btn btn-primary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
-    <button type="button" id=ed'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-</td>
-<td>---</td>';}echo '</tr>
-';$sno+=1;} ?></tbody>
-                                    </table>
-                                </div>
+                    </div>
+                    <!-- Committee Member Section -->
+                    <div class="col-md-4 mb-4">
+                        <!-- Select committee members -->
+                        <div class="dropdown">
+                            <div class="btn-group" style="width:100%;">
+                                <button class="btn dropdown-toggle border border-secondary border-1"
+                                    id="dropdownMenuClickableInside" data-bs-toggle="dropdown"
+                                    data-bs-auto-close="outside" aria-expanded="false"
+                                    style="background-color: #ffffff !important;">
+                                    Select committee members
+                                </button>
+                                <!-- Committe members dropdown -->
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
+                                    <?php
+                                    $sql = "SELECT * FROM `teacher`";
+                                    $result = mysqli_query($conn, $sql);
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        $id = e($row['teacher_id']);
+                                        $post = e($row['teacher_post']);
+                                        $fname = e($row['teacher_fname']);
+                                        $mname = e($row['teacher_mname']);
+                                        $lname = e($row['teacher_lname']);
+                                        echo '
+                                        <li class="dropdown-item">
+                                        <div class="col">
+                                        <input type="checkbox" name="committee[]" id=c'.$id.' value='.$id.'>
+                                        <label for=c'.$id.'>'.$post.' '.$fname.' '.$mname.' '.$lname.'</label>
+                                        </div>
+                                        </li>';
+                                    }
+                                    ?>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="mb-4 card mt-1">
-                            <div class="card-header"><strong>Committee</strong></div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-striped" id="student-marks"
-                                        style="width:100%">
-                                        <colgroup>
-                                            <col span="1" style="width:4%">
-                                            <col span="1" style="width:60%">
-                                            <col span="1" style="width:26%">
-                                            <col span="1" style="width:10%">
-                                        </colgroup>
-                                        <thead>
-                                            <tr>
-                                                <th>S.N.</th>
-                                                <th>Committee Member</th>
-                                                <th>Actions</th>
-                                                <th>Marks</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody><?php $student_id=$_GET['id'];$sql="SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
-FROM teacher t
-INNER JOIN mid_committee_assigned ta
-ON t.teacher_id = ta.assigned_teacher_id
-WHERE ta.assigned_s_id = '$student_id'";$result=mysqli_query($conn,$sql);$sno=1;while($row=mysqli_fetch_assoc($result)){$assigned_id=e($row['assigned_id']);$sql1="SELECT `total` FROM `mid_committee` WHERE `st_te_assigned_id`='$assigned_id'";$result1=mysqli_query($conn,$sql1);$row1=mysqli_fetch_assoc($result1);echo'
-<tr>
-<td>'.$sno.'</td>
-<td>'.e($row['teacher_post']).' '.e($row['teacher_fname']).' '.e($row['teacher_mname']).' '.e($row['teacher_lname']).'</td>
-<td>';if(mysqli_num_rows($result1)>0){echo '<button type="button" id=ce'.$assigned_id.' class="btn btn-secondary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-pencil fa-xs"></i></button>
-    <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-</td>
-<td><strong>'.e($row1['total']).'</strong></td>';}else{echo '<button type="button" id=ca'.$assigned_id.' class="btn btn-primary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
-    <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
-</td>
-<td>---</td>';}echo '</tr>
-';$sno+=1;} ?></tbody>
-                                    </table>
-                                </div>
+
+                    <!-- External Section -->
+                    <div class="col-md-3 mb-4">
+                        <div class="input-group mb-3">
+                            <select name="external" class="form-select border border-secondary border-1"
+                                aria-label="Default select example">
+                                <option value="" selected disabled>Select external</option>
+                                <?php
+                                $sql = "SELECT * from `ext_teacher`";
+                                $result = mysqli_query($conn, $sql);
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    $external = $row['external_post'] . ' ' . $row['external_fname']. ' '.$row['external_mname']. ' ' . $row['external_lname'];
+                                    echo '
+                                    <option value="'.e($row['external_id']).'">'. e($external) . '</option>';
+                                }
+                            ?>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Button for submitting the teacher selected -->
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <!-- Left hand table -->
+                <div class="col-md-6">
+                    <!-- Table for supervisor -->
+                    <div class="card mb-4 mt-1">
+                        <div class="card-header">
+                            <strong>Supervisor</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="student-marks" class="table table-striped table-hover" style="width:100%">
+                                    <colgroup>
+                                        <col span="1" style="width: 4%;">
+                                        <col span="1" style="width: 60%;">
+                                        <col span="1" style="width: 26%;">
+                                        <col span="1" style="width: 10%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Supervisor</th>
+                                            <th>Actions</th>
+                                            <th>Marks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Supervisor table body -->
+                                        <?php
+                                            $student_id = e($_GET['id']);
+                                            $sql = "SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
+                                            FROM teacher t
+                                            INNER JOIN mid_supervisor_assigned ta
+                                            ON t.teacher_id = ta.assigned_teacher_id
+                                            WHERE ta.assigned_s_id = '$student_id'";
+
+                                            $result = mysqli_query($conn, $sql);
+                                            $sno = 1;
+                                            while($row = mysqli_fetch_assoc($result)) {
+                                                $assigned_id = e($row['assigned_id']);
+                                                $sql1 = "SELECT `total` FROM `mid_supervisor` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $result1=mysqli_query($conn, $sql1);
+                                                $row1=mysqli_fetch_assoc($result1);
+                                                echo'
+                                                <tr>
+                                                    <td>'.$sno.'</td>
+                                                    <td>'. e($row['teacher_post']).' ' . e($row['teacher_fname']) . ' ' . e($row['teacher_mname']). ' '.e($row['teacher_lname']) . '</td>
+                                                    <td>';
+                                                    if (mysqli_num_rows($result1) > 0) {
+                                                        echo '
+                                                        <button type="button" id=se'.$assigned_id.' class="btn btn-secondary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-pencil fa-xs"></i></button>
+                                                        <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                        </td>
+                                                        <td><strong>'.e($row1['total']).'</strong></td>';
+                                                    }
+                                                    else {
+                                                        echo '
+                                                        <button type="button" id=sa'.$assigned_id.' class="btn btn-primary btn-sm supaddEd" data-bs-toggle="modal" data-bs-target="#supervisor_marking"><i class="fa fa-plus fa-xs"></i></button>
+                                                        <button type="button" id=sd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td>---</td>';
+                                                    }
+                                                echo '</tr>
+                                                ';
+                                                $sno += 1;
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table for External -->
+                    <div class="card mb-4 mt-1">
+                        <div class="card-header">
+                            <strong>External</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="student-marks" class="table table-striped table-hover" style="width:100%">
+                                    <colgroup>
+                                        <col span="1" style="width: 4%;">
+                                        <col span="1" style="width: 60%;">
+                                        <col span="1" style="width: 26%;">
+                                        <col span="1" style="width: 10%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>External</th>
+                                            <th>Actions</th>
+                                            <th>Marks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $student_id = $_GET['id'];
+                                            $sql = "SELECT ta.assigned_id, t.external_id, t.external_post, t.external_fname, t.external_mname, t.external_lname
+                                            FROM ext_teacher t
+                                            INNER JOIN mid_external_assigned ta
+                                            ON t.external_id = ta.assigned_ext_id
+                                            WHERE ta.assigned_s_id = '$student_id'";
+
+                                            $result = mysqli_query($conn, $sql);
+                                            $sno = 1;
+                                            while($row = mysqli_fetch_assoc($result)) {
+                                                $assigned_id = e($row['assigned_id']);
+                                                $sql2 = "SELECT `total` FROM `mid_external` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $result2=mysqli_query($conn, $sql2);
+                                                $row2=mysqli_fetch_assoc($result2);
+                                                echo'
+                                                <tr>
+                                                    <td>'.$sno.'</td>
+                                                    <td>'. e($row['external_post']).' ' . e($row['external_fname']) . ' ' . e($row['external_mname']). ' '.e($row['external_lname']) . '</td>
+                                                    <td>';
+                                                    if (mysqli_num_rows($result2) > 0) {
+                                                        echo '
+                                                        <button type="button" id=ee'.$assigned_id.' class="btn btn-secondary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-pencil fa-xs"></i></button>
+                                                        <button type="button" id=ed'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td><strong>'.e($row2['total']).'</strong></td>';
+                                                    }
+                                                    else {
+                                                        echo '
+                                                        <button type="button" id=ea'.$assigned_id.' class="btn btn-primary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
+                                                        <button type="button" id=ed'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td>---</td>';
+                                                    }
+                                                echo '</tr>
+                                                ';
+                                                $sno += 1;
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table for committee members -->
+                <div class="col-md-6">
+                    <div class="card mb-4 mt-1">
+                        <div class="card-header">
+                            <strong>Committee</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="student-marks" class="table table-striped table-hover" style="width:100%">
+                                    <colgroup>
+                                        <col span="1" style="width: 4%;">
+                                        <col span="1" style="width: 60%;">
+                                        <col span="1" style="width: 26%;">
+                                        <col span="1" style="width: 10%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>S.N.</th>
+                                            <th>Committee Member</th>
+                                            <th>Actions</th>
+                                            <th>Marks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $student_id = $_GET['id'];
+                                            $sql = "SELECT ta.assigned_id, t.teacher_id, t.teacher_post, t.teacher_fname, t.teacher_mname, t.teacher_lname
+                                            FROM teacher t
+                                            INNER JOIN mid_committee_assigned ta
+                                            ON t.teacher_id = ta.assigned_teacher_id
+                                            WHERE ta.assigned_s_id = '$student_id'";
+
+                                            $result = mysqli_query($conn, $sql);
+                                            $sno = 1;
+                                            while($row = mysqli_fetch_assoc($result)) {
+                                                $assigned_id = e($row['assigned_id']);
+                                                $sql1 = "SELECT `total` FROM `mid_committee` WHERE `st_te_assigned_id`='$assigned_id'";
+                                                $result1=mysqli_query($conn, $sql1);
+                                                $row1=mysqli_fetch_assoc($result1);
+                                                echo'
+                                                <tr>
+                                                    <td>'.$sno.'</td>
+                                                    <td>'. e($row['teacher_post']).' ' . e($row['teacher_fname']) . ' ' . e($row['teacher_mname']). ' ' .e($row['teacher_lname']) . '</td>
+                                                    <td>';
+                                                    if (mysqli_num_rows($result1) > 0) {
+                                                        echo '<button type="button" id=ce'.$assigned_id.' class="btn btn-secondary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-pencil fa-xs"></i></button>
+                                                        <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td><strong>'.e($row1['total']).'</strong></td>';
+                                                    }
+                                                    else {
+                                                        echo '<button type="button" id=ca'.$assigned_id.' class="btn btn-primary btn-sm addEd" data-bs-toggle="modal" data-bs-target="#committee_marking"><i class="fa fa-plus fa-xs"></i></button>
+                                                        <button type="button" id=cd'.$assigned_id.' class="delete btn btn-danger btn-sm"><i class="fa fa-trash-o fa-xs"></i></button>
+                                                    </td>
+                                                    <td>---</td>';
+                                                    }
+                                                echo '</tr>
+                                                ';
+                                                $sno += 1;
+                                            }
+                                        ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -405,23 +528,16 @@ WHERE ta.assigned_s_id = '$student_id'";$result=mysqli_query($conn,$sql);$sno=1;
         return number;
     }
 
-        function tot_marks(e, t) {
-            input = Array.from(document.querySelectorAll("#" + e + " input")), fil_input = input.slice(1, input.length),
-                fil_input.forEach(e => {
-                    e.addEventListener("input", e => {
-                        sum = 0;
-                        for (let e = 0; e < input.length; e++) sum += convNum(parseInt(input[e].value));
-                        document.getElementById(t).innerText = sum
-                    })
-                })
-        }
-        addEdits = document.getElementsByClassName("addEd"), Array.from(addEdits).forEach(e => {
-            e.addEventListener("click", e => {
-                supervisor_assigned_id.value = null, assigned_id.value = null, tr = e.currentTarget
-                    .parentNode.parentNode, name = tr.getElementsByTagName("td")[1].innerText, document
-                    .getElementById("committee_markingLabel").innerText = name, element_id = e
-                    .currentTarget.id, assigned_id.value = element_id, tot_marks("committee_marking",
-                        "disp_total")
+    function tot_marks(modal_id, id_name) {
+        input = Array.from(document.querySelectorAll("#" + modal_id + " input"))
+        fil_input = input.slice(1, input.length);
+        fil_input.forEach((element) => {
+            element.addEventListener("input", (e) => {
+                sum = 0;
+                for (let i = 0; i < input.length; i++) {
+                    sum = sum + convNum(parseInt(input[i].value));
+                }
+                document.getElementById(id_name).innerText = sum;
             })
         })
     }
@@ -498,4 +614,4 @@ WHERE ta.assigned_s_id = '$student_id'";$result=mysqli_query($conn,$sql);$sno=1;
     </script>
 </body>
 
-    </html>
+</html>
