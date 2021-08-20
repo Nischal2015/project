@@ -67,7 +67,7 @@
                                     <td>10</td>
                                     <td>
                                         <input class="form-control" id="quality_of_presentation"
-                                            name="quality_of_presentation" type="number" value=<?php echo $p1;?>>
+                                            name="quality_of_presentation" type="number"  min="0" max="10" required value=<?php echo $p1;?>>
                                     </td>
                                 </tr>
                                 <tr>
@@ -76,7 +76,7 @@
                                     <td>20</td>
                                     <td>
                                         <input class="form-control" id="problem_identification"
-                                            name="problem_identification" type="number" value=<?php echo $p2;?>>
+                                            name="problem_identification" type="number" min="0" max="20" required value=<?php echo $p2;?>>
                                     </td>
                                 </tr>
                                 <tr>
@@ -84,7 +84,7 @@
                                     <td>Methodology/Approach</td>
                                     <td>10</td>
                                     <td>
-                                        <input class="form-control" id="methodology" name="methodology" type="number"
+                                        <input class="form-control" id="methodology" name="methodology" type="number" min="0" max="10" required
                                             value=<?php echo $p3;?>>
                                     </td>
                                 </tr>
@@ -94,7 +94,7 @@
                                     <td>10</td>
                                     <td>
                                         <input class="form-control" id="literature_review" name="literature_review"
-                                            type="number" value=<?php echo $p4;?>>
+                                            type="number" min="0" max="10" required value=<?php echo $p4;?>>
                                     </td>
                                 </tr>
                                 <tr>
@@ -103,7 +103,7 @@
                                     <td>10</td>
                                     <td>
                                         <input class="form-control" id="understanding" name="understanding"
-                                            type="number" value=<?php echo $p5;?>>
+                                            type="number" min="0" max="10" required value=<?php echo $p5;?>>
                                     </td>
                                 </tr>
                                 <tr>
@@ -111,7 +111,7 @@
                                     <td>Answering to questions</td>
                                     <td>10</td>
                                     <td>
-                                        <input class="form-control" id="answers" name="answers" type="number"
+                                        <input class="form-control" id="answers" name="answers" type="number" min="0" max="10" required
                                             value=<?php echo $p6;?>>
                                     </td>
                                 </tr>
@@ -120,7 +120,7 @@
                                     <td>Completeness of thesis work</td>
                                     <td>20</td>
                                     <td>
-                                        <input class="form-control" id="completeness" name="completeness" type="number"
+                                        <input class="form-control" id="completeness" name="completeness" type="number" min="0" max="20" required
                                             value=<?php echo $p7;?>>
                                     </td>
                                 </tr>
@@ -129,7 +129,7 @@
                                     <td>Planning of organization of thesis work</td>
                                     <td>10</td>
                                     <td>
-                                        <input class="form-control" id="planning" name="planning" type="number"
+                                        <input class="form-control" id="planning" name="planning" type="number" min="0" max="10" required
                                             value=<?php echo $p8;?>>
                                     </td>
                                 </tr>
@@ -222,7 +222,7 @@
                                         <td>Regularity of works</td>
                                         <td>20</td>
                                         <td>
-                                            <input class="form-control" name="regularity" id="regularity" type="number"
+                                            <input class="form-control" name="regularity" id="regularity" type="number" min="0" max="20" required
                                                 value=<?php echo $p1;?>>
                                         </td>
                                     </tr>
@@ -234,7 +234,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="completeness_degree"
-                                                id="completeness_degree" type="number" value=<?php echo $p2;?>>
+                                                id="completeness_degree" type="number" min="0" max="20" required value=<?php echo $p2;?>>
                                         </td>
                                     </tr>
                                     <tr>
@@ -244,7 +244,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="understanding_thesis"
-                                                id="understanding_thesis" type="number" value=<?php echo $p3;?>>
+                                                id="understanding_thesis" type="number" min="0" max="20" required value=<?php echo $p3;?>>
                                         </td>
                                     </tr>
                                     <tr>
@@ -253,7 +253,7 @@
                                         </td>
                                         <td>20</td>
                                         <td>
-                                            <input class="form-control" name="effort" id="effort" type="number"
+                                            <input class="form-control" name="effort" id="effort" type="number" min="0" max="20" required
                                                 value=<?php echo $p4;?>>
                                         </td>
                                     </tr>
@@ -263,7 +263,7 @@
                                         <td>20</td>
                                         <td>
                                             <input class="form-control" name="organization" id="organization"
-                                                type="number" value=<?php echo $p5;?>>
+                                                type="number" min="0" max="20" required value=<?php echo $p5;?>>
                                         </td>
                                     </tr>
 

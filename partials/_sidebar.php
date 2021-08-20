@@ -1,108 +1,56 @@
-<!-- Sidebar starts here -->
-<div class="offcanvas offcanvas-start sidebar-nav bg-white text-white shadow" id="sidebar"
+<div class="bg-white offcanvas offcanvas-start shadow sidebar-nav text-white" id="sidebar"
     aria-labelledby="sidebarLabel">
     <div class="offcanvas-body p-0">
         <nav class="navbar-white">
             <ul class="navbar-nav side-link">
                 <li>
-                    <div class="m-2" id="sidebar-pic">
-                        <img src="images/tu.png" alt="tu_image" class="img-fluid rounded-circle d-block">
-                    </div>
+                    <div class="m-2" id="sidebar-pic"><img alt="tu_image" class="d-block img-fluid rounded-circle"
+                            src="images/tu.png"></div>
                 </li>
-                <li class="nav-item main-link">
-                    <a href="dashboard.php" class="nav-link px-3 sidebar-link">
-                        <span class="pe-2"><i class="material-icons">
-                                space_dashboard</i>
-                        </span>
-                        <span>Dashboard</span>
-                    </a>
+                <li class="nav-item main-link"><a class="nav-link px-3 sidebar-link" href="dashboard.php"><span
+                            class="pe-2"><i class="material-icons">space_dashboard</i> </span><span>Dashboard</span></a>
                 </li>
-                <li class="collapsed main-link" data-bs-toggle="collapse" data-bs-target="#Teacher"
-                    aria-expanded="false" aria-controls="Teacher" id="second">
-                    <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#Teacher" role="button"
-                        aria-expanded="false" aria-controls="Teacher">
-                        <span class="pe-2"><i class="material-icons">
-                                supervisor_account
-                            </i></span>
-                        <span>Teacher</span>
-                        <span class="right-icon ms-auto"><i class="material-icons">
-                                chevron_right
-                            </i></span>
-                    </a>
-                    <div class="collapse sidebar-collapse ps-4" aria-labelledby="second" data-bs-parent="#sidebar"
-                        id="Teacher">
-                        <ul class="navbar-nav ps-4">
-                            <li class="nav-item">
-                                <a href="addExternal.php" class="nav-link ">
-                                    <span class="title">
-                                        Add External
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="addInternal.php" class="nav-link ">
-                                    <span class="title">
-                                        Add Internal
-                                    </span>
-                                </a>
-                            </li>
+                <li class="main-link collapsed" aria-controls="Teacher" aria-expanded="false" data-bs-target="#Teacher"
+                    data-bs-toggle="collapse" id="second"><a class="nav-link px-3 sidebar-link" href="#Teacher"
+                        aria-controls="Teacher" aria-expanded="false" data-bs-toggle="collapse" role="button"><span
+                            class="pe-2"><i class="material-icons">supervisor_account </i></span><span>Teacher</span>
+                        <span class="ms-auto right-icon"><i class="material-icons">chevron_right</i></span></a>
+                    <div class="ps-4 collapse sidebar-collapse" id="Teacher" aria-labelledby="second"
+                        data-bs-parent="#sidebar">
+                        <ul class="ps-4 navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="addExternal.php"><span class="title">Add
+                                        External</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="addInternal.php"><span class="title">Add
+                                        Internal</span></a></li>
                         </ul>
                     </div>
                 </li>
-                <li class="collapsed main-link" data-bs-toggle="collapse" data-bs-target="#student"
-                    aria-expanded="false" aria-controls="student" id="third">
-                    <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#student" role="button"
-                        aria-expanded="false" aria-controls="student">
-                        <span class="pe-2"><i class="material-icons">
-                                people
-                            </i></span>
-                        <span>Student</span>
-                        <span class="right-icon ms-auto"><i class="material-icons">
-                                chevron_right
-                            </i></span>
-                    </a>
-                    <div class="collapse sidebar-collapse ps-4" aria-labelledby="third" data-bs-parent="#sidebar"
-                        id="student">
-                        <ul class="navbar-nav ps-4">
-                            <li class="nav-item">
-                                <a href="addstudent.php" class="nav-link ">
-                                    <span class="title">
-                                        Add student
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="allstudents.php" class="nav-link ">
-                                    <span class="title">
-                                        All Students
-                                    </span>
-                                </a>
-                            </li>
+                <li class="main-link collapsed" aria-controls="student" aria-expanded="false" data-bs-target="#student"
+                    data-bs-toggle="collapse" id="third"><a class="nav-link px-3 sidebar-link" href="#student"
+                        aria-controls="student" aria-expanded="false" data-bs-toggle="collapse" role="button"><span
+                            class="pe-2"><i class="material-icons">people </i></span><span>Student</span> <span
+                            class="ms-auto right-icon"><i class="material-icons">chevron_right</i></span></a>
+                    <div class="ps-4 collapse sidebar-collapse" id="student" aria-labelledby="third"
+                        data-bs-parent="#sidebar">
+                        <ul class="ps-4 navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="addstudent.php"><span class="title">Add
+                                        student</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="allstudents.php"><span class="title">All
+                                        Students</span></a></li>
                         </ul>
                     </div>
                 </li>
-                <li class="collapsed main-link" data-bs-toggle="collapse" data-bs-target="#department"
-                    aria-expanded="false" aria-controls="department" id="fou">
-                    <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#department" role="button"
-                        aria-expanded="false" aria-controls="department">
-                        <span class="pe-2"><i class="material-icons">
-                                business
-                            </i></span>
-                        <span>Departments</span>
-                        <span class="right-icon ms-auto"><i class="material-icons">
-                                chevron_right
-                            </i></span>
-                    </a>
-                    <div class="collapse sidebar-collapse ps-4" aria-labelledby="fou" data-bs-parent="#sidebar"
-                        id="department">
-                        <ul class="navbar-nav ps-4">
-                            <li class="nav-item">
-                                <a href="alldepartments.php" class="nav-link ">
-                                    <span class="title">
-                                        Add Departments
-                                    </span>
-                                </a>
-                            </li>
+                <li class="main-link collapsed" aria-controls="department" aria-expanded="false"
+                    data-bs-target="#department" data-bs-toggle="collapse" id="fou"><a
+                        class="nav-link px-3 sidebar-link" href="#department" aria-controls="department"
+                        aria-expanded="false" data-bs-toggle="collapse" role="button"><span class="pe-2"><i
+                                class="material-icons">business </i></span><span>Departments</span> <span
+                            class="ms-auto right-icon"><i class="material-icons">chevron_right</i></span></a>
+                    <div class="ps-4 collapse sidebar-collapse" id="department" aria-labelledby="fou"
+                        data-bs-parent="#sidebar">
+                        <ul class="ps-4 navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="alldepartments.php"><span class="title">Add
+                                        Departments</span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -110,4 +58,3 @@
         </nav>
     </div>
 </div>
-<!-- Sidebar ends here -->
