@@ -86,9 +86,9 @@
                                     <form action="index.php" class="bg-light p-3 rounded-3" method="post">
                                         <div class="mb-3"><label class="form-label" for="username">Username</label>
                                             <input class="form-control" id="username" name="username"
-                                                aria-describedby="emailHelp"></div>
+                                                aria-describedby="emailHelp" autocomplete="off" required></div>
                                         <div class="mb-3"><label class="form-label" for="password">Password</label>
-                                            <input class="form-control" id="password" name="password" type="password">
+                                            <input class="form-control" id="password" name="password" type="password" required>
                                         </div><button class="btn btn-primary" type="submit">Login</button>
                                     </form>
                                 </div>

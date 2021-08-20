@@ -50,15 +50,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="marksDetailsModalLabel"><strong>Marks
-<<<<<<< HEAD
-                        Details<?php echo ' ('.e($row['student_fname']).' '.e($row['student_lname']).')' ?></strong>
-                </h5><button class="btn-close" data-bs-dismiss="modal" type="button" aria-label="Close"></button>
-=======
                         Details<?php echo ' ('.e($row['student_fname']). ' ' .e($row['student_lname']).')'?></strong>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
->>>>>>> 76a699ea0b40307128bfeb91353777e7e7c8d9c5
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
