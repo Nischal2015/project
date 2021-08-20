@@ -1,1 +1,1 @@
-<?php $server="localhost";$username="root";$password="";$database="thes_db";$conn=mysqli_connect($server,$username,$password,$database);if(!$conn){die("Error ".mysqli_connect_error());} ?>
+<?php $server="localhost";$username="id17419324_thesis_database";$password="Jcc9kL!]3ivk33^@";$database="id17419324_thes_db";$conn=mysqli_connect($server,$username,$password,$database);if(!$conn){die("Error ".mysqli_connect_error());} ?>

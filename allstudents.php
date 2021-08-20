@@ -67,38 +67,13 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php 
-                                        if (isset($_GET['year'])) {
-                                            $year = e($_GET['year']);
-                                            $sql = "SELECT * from `students` WHERE `student_year`='$year'";
-                                        }
-                                        else{
-                                            $sql = "SELECT * FROM `students`";
-                                        }
-                                        $result = mysqli_query($conn, $sql);
-                                        while($row = mysqli_fetch_assoc($result)) {
-                                            echo '
-                                            <tr>
-                                                <td>'. e($row['student_roll']) .'</td>
-                                                <td>'. e($row['student_fname']) . ' ' . e($row['student_lname']) . '</td>
-                                                <td>'. $row['student_dep'] .'</td>
-                                                <td>'. e($row['student_thesis']) .'</td>
-                                                <td>'. e($row['student_regdate']). '</td>
-                                                <td>
-                                                    <button type="button" class="edit btn btn-secondary btn-sm" id=e'. e($row['student_id']) .'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal">
-                                                    <i class="fa fa-pencil"></i>
-                                                    </button>
-                                                    <button type="button" class="delete btn btn-danger btn-sm" id=d'. e($row['student_id']) .' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i>
-                                                    </button>
-                                                    <a role="button" href="studentdetails.php?id='. e($row['student_id']) .'" class="information btn btn-warning btn-sm" id='. e($row['student_id']) .' title="Details" style="padding: 4px 5px !important;">	
-                                                    <i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>';
-                                        }
-                                        ?>
-                                    </tbody>
+                                    <tbody><?php if(isset($_GET['year'])){$year=e($_GET['year']);$sql="SELECT * from `students` WHERE `student_year`='$year'";}else{$sql="SELECT * FROM `students`";}$result=mysqli_query($conn,$sql);while($row=mysqli_fetch_assoc($result)){echo '
+<tr><td>'.e($row['student_roll']).'</td><td>'.e($row['student_fname']).' '.e($row['student_lname']).'</td>
+<td>'.$row['student_dep'].'</td><td>'.e($row['student_thesis']).'</td><td>'.e($row['student_regdate']).'</td><td>
+<button type="button" class="edit btn btn-secondary btn-sm" id=e'.e($row['student_id']).'  data-bs-placement="bottom" title="Edit" data-bs-toggle="modal" data-bs-target="#studentEditModal"><i class="fa fa-pencil"></i></button>
+<button type="button" class="delete btn btn-danger btn-sm" id=d'.e($row['student_id']).' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="fa fa-trash-o"></i></button>
+<a role="button" href="studentdetails.php?id='.e($row['student_id']).'" class="information btn btn-warning btn-sm" id='.e($row['student_id']).' title="Details" style="padding: 4px 5px !important;"><i class="fa fa-info-circle fa-lg" style="color: #ffffff !important;"></i></a>
+</td></tr>';} ?></tbody>
                                     <tfoot>
                                         <tr>
                                             <th>Roll</th>
@@ -124,33 +99,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"></script>
     <script>
-    $(document).ready(function() {
-        $('#student-list').DataTable();
-    });
-    infos = document.getElementsByClassName("information"), Array.from(infos).forEach(e => {
-        e.addEventListener("click", e => {
-            tr = e.currentTarget.parentNode.parentNode, console.log(tr), name = tr.getElementsByTagName(
-                "td")[0].innerText
-        })
-    }), deletes = document.getElementsByClassName("delete"), Array.from(deletes).forEach(e => {
-        e.addEventListener("click", e => {
-            element_id = e.currentTarget.id.substr(1), console.log(element_id), confirm(
-                "Are you sure you want to delete the record?") && (window.location =
-                `./allstudents.php?delete=${element_id}`)
-        })
-    }), edits = document.getElementsByClassName("edit"), Array.from(edits).forEach(e => {
-        e.addEventListener("click", e => {
-            element_id = e.currentTarget.id.substr(1), tr = e.currentTarget.parentNode.parentNode,
-                item = tr.getElementsByTagName("td"), roll = item[0].innerText, fname = item[1]
-                .innerText.split(" ")[0], lname = item[1].innerText.split(" ")[1], department = item[2]
-                .innerText, console.log(department), thesis = item[3].innerText, regdate = item[4]
-                .innerText, rollEdit.value = roll, fnameEdit.value = fname, lnameEdit.value = lname,
-                thesisEdit.value = thesis, regdateEdit.value = regdate, document.getElementById(
-                    "departmentEdit").value = department, snoEdit.value = element_id
-        })
-    });
+    $(document).ready(function(){$("#student-list").DataTable()}),infos=document.getElementsByClassName("information"),Array.from(infos).forEach(a=>{a.addEventListener("click",a=>{tr=a.currentTarget.parentNode.parentNode,console.log(tr),name=tr.getElementsByTagName("td")[0].innerText})}),deletes=document.getElementsByClassName("delete"),Array.from(deletes).forEach(a=>{a.addEventListener("click",a=>{element_id=a.currentTarget.id.substr(1),console.log(element_id),confirm("Are you sure you want to delete the record?")&&(window.location=`./allstudents.php?delete=${element_id}`)})}),edits=document.getElementsByClassName("edit"),Array.from(edits).forEach(a=>{a.addEventListener("click",a=>{element_id=a.currentTarget.id.substr(1),tr=a.currentTarget.parentNode.parentNode,item=tr.getElementsByTagName("td"),roll=item[0].innerText,fname=item[1].innerText.split(" ")[0],lname=item[1].innerText.split(" ")[1],department=item[2].innerText,console.log(department),thesis=item[3].innerText,regdate=item[4].innerText,rollEdit.value=roll,fnameEdit.value=fname,lnameEdit.value=lname,thesisEdit.value=thesis,regdateEdit.value=regdate,document.getElementById("departmentEdit").value=department,snoEdit.value=element_id})});
     </script>
-    
 </body>
 
 </html>
