@@ -504,11 +504,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true) {
         <?php include 'partials/_footer.php'; ?>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
     <?php 
     include 'partials/_marks_modal.php'; 
     ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

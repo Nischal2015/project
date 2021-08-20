@@ -272,6 +272,7 @@
             external_assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
+            document.getElementById("committee_marking").innerText = name;
             element_id = e.currentTarget.id;
             $.ajax({
                 type: "GET",
@@ -295,6 +296,7 @@
             external_assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
+            document.getElementById("external_marking").innerText = name;
             element_id = e.currentTarget.id;
             $.ajax({
                 type: "GET",
@@ -318,6 +320,7 @@
             supervisor_assigned_id.value = null;
             tr = e.currentTarget.parentNode.parentNode;
             name = tr.getElementsByTagName("td")[1].innerText;
+            $("#supervisor_markingLabel").text(name);
             element_id = e.currentTarget.id;
             $.ajax({
                 type: "GET",
